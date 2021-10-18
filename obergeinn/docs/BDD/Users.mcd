@@ -1,0 +1,23 @@
+is linked to, 0N survey, 11 sondage_response
+survey: status, response, nb_responses
+associate to, 01 event, 11 survey
+measure_unit: unit
+use, 0N measure_unit, 11 need
+
+sondage_response: choice
+organize, 11 event, 0N user
+event: title, description, adress, date
+require, 0N event, 11 need
+need: name, quantity
+
+answered by, 01 user, 11 sondage_response
+linked to, 11 participation, 0N user
+participation: status
+linked to2, 0N event, 11 participation
+associate, 11 need, 0N type
+
+user: pseudo, firstname, lastname, email, image, role
+is assigned, 0N user, 11 assignation
+assignation: quantity
+is assigned2, 0N need, 11 assignation
+type: name
