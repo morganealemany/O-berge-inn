@@ -1,0 +1,258 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenement X - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container show"></div>
+    <div class="row">
+
+        {# Title section #}
+
+        <section class="title col-12 col-lg-12 text-center mb-5">
+        {#redirect to eventlist not dashboard #}  
+          <a class="d-flex align-self-end ms-4 color-four text-decoration-none link"href="{{ path('dashboard') }}">Retour</a>
+            <h1 class="text-uppercase fw-bold">{{event.title}}</h1>
+            <h3 id="by-pseudo"class="fw-bold color-three mb-5">BY {{event.user.pseudo}}</h3>
+            
+            {# Description #}
+
+            <div class="accordion d-inline-block" id="accordion">
+                <div class="accordion-item bg-one">
+                <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" id="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                   Description
+                </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                    <div class="accordion-body">
+                    <p class="color-four"> {{event.description}} </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        {# Adress section #}
+
+        <section class="adress col-12 col-lg-7 order-lg-1 text-center d-flex">
+            <img src="https://www.freecountrymaps.com/map/free/france/combs-la-ville-map-france-349075991.png" alt="carte interactive" class="ms-5 me-2 border rounded-3">
+            <div class="d-flex flex-column justify-content-center">
+                <h2 class="fs-1 mb-5 color-one">Adresse</h2>
+                <p class="align-self-start fs-4">{{event.adress}}</p>
+                <p class="align-self-start fs-4">Date :
+
+            {# we have create a condition for display the Date of the event if it's defined, else show "ND" for "non définie"#}
+                {{ event.date ? event.date|date('d-m-Y') : 'ND' }}
+
+                  </p>
+            </div>
+        </section>
+
+        {# Survey section #}
+
+        <section class="survey col-12 col-lg-6 order-lg-3 text-center mt-5 mb-5 d-flex align-items-center">
+            <div class="border bg-light d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
+                <h2 class="fs-1 mb-5 color-one">Sondage</h2>
+                <div class="survey-list">
+                    <div class="form-check d-flex fs-4 justify-content-around">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheck1">
+                        <label class="form-check-label" for="flexCheck1">
+                            15/10/2021
+                        </label>
+                        <div class="progress align-self-center">
+                            <div class="progress">
+                                <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check d-flex fs-4 justify-content-around">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
+                        <label class="form-check-label" for="flexCheck2">
+                            25/10/2021
+                        </label>
+                        <div class="progress align-self-center">
+                            <div class="progress">
+                                <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check d-flex fs-4 justify-content-around">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheck3">
+                        <label class="form-check-label" for="flexCheck3">
+                            30/10/2021
+                        </label>
+                        <div class="progress align-self-center">
+                            <div class="progress">
+                                <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+
+
+
+
+     {#   <div class="row col-5">
+  <h4 class="fw-bold text-center mt-3"></h4>
+  <form class=" bg-white px-4" action="">
+    <p class="fw-bold">How satisfied are you with our product?</p>
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="radio" name="exampleForm" id="radioExample1" />
+      <label class="form-check-label" for="radioExample1">
+        Option 1
+      </label>
+    </div>
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="radio" name="exampleForm" id="radioExample2" />
+      <label class="form-check-label" for="radioExample2">
+        Option 2
+      </label>
+    </div>
+    <div class="form-check mb-2">
+      <input class="form-check-input" type="radio" name="exampleForm" id="radioExample3" />
+      <label class="form-check-label" for="radioExample3">
+        Option 3
+      </label>
+    </div>
+  </form>
+  <div class="text-end">
+    <button type="button" class="btn btn-primary">Submit</button>
+  </div>
+</div>  #}
+
+
+
+
+        {# Need section #}
+
+        <section class=" need col-12 col-lg-5 order-lg-2 d-flex justify-content-center flex-column align-items-center mb-5">
+        
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-lg button-needs mb-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Liste des besoins
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="staticBackdropLabel">Liste des besoins</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="post" class="modal-body">
+
+                        {# For every needs of the current event #}
+                        {% for need in event.need %}
+
+                        <div class="form-check d-flex fs-4">
+                            <input class="form-check-input-modal me-2" type="checkbox" value="" id="flexCheck{{need.id}}"
+                            
+                            {# We retrieve all quantities which are already assigned #}
+                            {% set totalAssignations = 0 %}
+                            {% for assignation in need.assignations %}
+                                {# We add them up #}
+                                {% set totalAssignations = totalAssignations + assignation.quantity %}
+                                {# If the difference between the quantity needed and the quantity already assigned is null or negative #}
+                                {% if need.quantity - totalAssignations <= 0 %}
+                                {# disabled the checkbox to avoid another assignation #}
+                                    {{"disabled"}}
+                                {% endif %}
+                            {% endfor %}
+                             
+                            >
+                            <label class="form-check-label" for="flexCheck{{need.id}}">
+
+                            {{need.quantity}} {{need.measureUnit.unit}} {{need.name}}                        
+                            
+                            </label>
+                            <input class="ms-2 fs-6 checkbox-need" type="number" name="quantity-assignees{{need.id}}" hidden>
+                            {# {{ dump(need.id)}} #}
+                        </div>
+                        {% endfor %}
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn button-close" data-bs-dismiss="modal">Fermer</button>
+                        <input type="submit" class="btn button-validate button-validate-need-assignees" ></input>
+                    </div>
+                    </form>
+                    <div class="ms-4">
+                        <h5 class="fw-bold">Ce que vous devez apporter</h5>
+                        {% for need in event.need %}
+                            {% for assignation in app.user.assignations %}
+                                {% if need.id == assignation.need.id %}
+                                    <ul>
+                                    <li>{{assignation.quantity}} {{assignation.need.measureUnit.unit}} {{assignation.need.name}}</li>
+                                    </ul>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="ms-4">
+                        <h5 class="fw-bold">Qui amène quoi?</h5>
+                        {% for need in event.need %}
+                            {% for assignation in need.assignations %}
+                            <ul>
+                                <li> <em class="fw-bold color-two">{{assignation.user.pseudo}} </em> apporte {{assignation.quantity}} {{assignation.need.measureUnit.unit}} {{assignation.need.name}} </p>
+                            </ul>
+                            {% endfor %}
+                        {% endfor %}
+                    </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{needsPercent}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                {{needsPercent}}%
+                </div>
+            </div>
+        </section>
+
+        {# Guest section #}
+
+        <section class="guest col-12 col-lg-6 order-lg-4 text-center d-flex align-items-center justify-content-center">
+            <div class="border rounded-3 d-flex flex-column align-items-center">
+                <h2 class="fs-1 mt-5 mb-5 color-one">Invités</h2>
+
+                <div class="guest-list d-flex flex-wrap justify-content-center mb-5">
+                
+                {% for participation in event.participation %}
+                    {# Only guests who have accepted the invitation will be displayed here #}
+                    {% if participation.status == true %}
+                        <div>
+
+                            {# If the user have no image for his avatar, displayed a generic image #}
+                            {% if participation.user.image %}
+                                <img alt="icon" src="{{ asset('uploads/' ~ participation.user.image)}}" class="rounded-circle" >
+                            {% else %}
+                                <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}">
+                            {% endif %}
+                            <p>{{participation.user.pseudo}}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                </div>
+            </div>
+        </section>
+
+        {# Participation section #}
+
+        <section class="participation col-12 col-lg-12 order-lg-5 text-center d-flex justify-content-evenly mt-5">
+            <div class="text-success fw-bold fs-3">
+                <a href="{{ path('event_accept-participate', {'id': event.id}) }}"> <i class="bi bi-hand-thumbs-up-fill text-success btn fs-1 ms-4 me-3"></i></a>
+                <p>Je participe</p>
+            </div>
+            {# <div class="text-danger fw-bold fs-3">
+                <a href="{{ path('event_deny-participate', {'id': event.id}) }}"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
+                <p>Je ne participe pas</p>        
+            </div> #}
+        </section>
+    </div>
+</div>
+{% endblock %}

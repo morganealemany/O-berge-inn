@@ -1,0 +1,74 @@
+    {% extends 'base.html.twig' %}
+
+    {% block title %}Tableau de bord{% endblock %}
+
+    {% block body %}
+    <main class="container ">
+  
+        {# Title section #} 
+
+        <section class="title col-12 col-lg-12 text-center mb-5">
+            <a class="d-flex align-self-end ms-4 color-four text-decoration-none link"href="{{ path('home')}}">Retour</a>
+            <h1 class="text-uppercase fw-bold">Tableau de bord</h1>
+            <h3 class="fw-bold">Bienvenue {{app.user.pseudo}}</h3>
+        
+        </section>
+
+        {# Events list section #}
+
+        <section class="event-list col-12 col-lg-12 text-center mt-5 mb-5 d-flex align-items-center">
+            <div class="border d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
+                <a class="bi bi-plus-lg align-self-end me-5 mb-5 fs-3 color-four link" href="{{path('event_create')}}" title="Créer un évènement"></a>
+                <div>
+                    <h2 class="fs-1 mb-5 color-three">Mes prochains événements</h2>
+                    <table class="table fs-3">
+                        <thead>
+                            <tr>
+                            <th scope="col">Evenement</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Ville</th>
+                            <th scope="col">Organisateur</th>
+                            <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for event in app.user.event|slice(0, 3)%}    
+                         
+                            <tr>
+                                <th scope="row">{{event.title}}</th>
+                                <td>{{event.date ? event.date|date('d-m-Y')}}</td>
+                                {# Use the twig filter 'split' to cut the adress #}
+                                {% set adressData = event.adress|split(' ')%}
+                                {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
+                                <td>{{(adressData|last)|capitalize}}</td>
+                                <td>{{event.user.pseudo}}</td>
+                                <td><a href="{{ path('event_show', {'id': event.id}) }}"><i class="bi bi-eye-fill color-three"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                 {#}   {% endfor %} #}
+                        {% for participation in app.user.participation|slice(0, 3) %}    
+                            {% set event = participation.event %}
+                            <tr>
+                                <th scope="row">{{event.title}}</th>
+                                <td>{{event.date ? event.date|date('d-m-Y')}}</td>
+                                {# Use the twig filter 'split' to cut the adress #}
+                                {% set adressData = event.adress|split(' ')%}
+                                {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
+                                <td>{{(adressData|last)|capitalize}}</td>
+                                <td>{{event.user.pseudo}}</td>
+                                <td><a href="{{ path('event_show', {'id': event.id}) }}"><i class="bi bi-eye-fill color-three"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table> 
+                </div>
+                    <a class="color-four align-self-end me-5 link" href="{{path('event_index')}}">Tous mes événements</a>   
+            </div>
+        </section>
+
+  </main>  
+    {% endblock %}
+
+
+    

@@ -1,0 +1,10 @@
+{{ form_start(eventView) }}
+    {{ form_row(eventView.title) }}
+        {{ form_row(eventView.adress) }}
+        {{ form_row(eventView.description) }}
+        {{ form_row(eventView.date) }}
+        <button class="btn button_inscription">{{ button_label|default('Save') }}</button>
+    {{ form_end(eventView) }}
+
+    
+

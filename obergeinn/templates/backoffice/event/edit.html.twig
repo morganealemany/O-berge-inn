@@ -1,0 +1,18 @@
+{% extends "backoffice/layout.html.twig" %}
+{% form_theme eventView 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Editer un évènement
+{% endblock %}
+
+
+{% block content %}
+    <div class="d-flex flex-column align-items-center color-one ">
+    <h1 class="color-one text-uppercase fw-bold mb-5">Editer un évenement</h1>
+
+    {{ include('backoffice/event/_form.html.twig', {'button_label': 'Editer'}) }}
+
+    {{ include('backoffice/event/_delete_form.html.twig') }}
+
+    </div>
+
+{% endblock %}

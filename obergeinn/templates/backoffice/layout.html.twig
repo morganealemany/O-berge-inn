@@ -1,0 +1,57 @@
+{% set currentRoute = app.request.get('_route') %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<section class="row">
+{# Nav menu #}
+    <p>
+        <a href="{{ path('backoffice_admin_index') }}" class="color-four ms-4 link">Retour</a>
+    </p>
+    <div class="col-sm-12 col-md-12 col-lg-2 me-5 mb-5"> 
+                <div class="container-fluid d-flex flex-column flex-shrink-0 p-3 bg-one border-three" style="width: 280px; height:100%">
+                    <h1 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto fs-2 color-three">
+                        Administration
+                    </h1>
+                    <hr>
+                    <ul class="nav nav-pills flex-column mb-auto fs-4 color-two">
+                    <li class="nav-item ">
+                        <a href="{{ path('backoffice_admin_index') }}" class="nav-link-custom color-two {{ currentRoute == 'backoffice_admin_index' ? ' active' : '' }} rounded " aria-current="page">
+                        <i class="bi bi-house-door me-2"></i>                        
+                        Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('backoffice_user_index') }}" class="nav-link-custom color-two {{ currentRoute == 'backoffice_user_index' ? ' active' : '' }} rounded">
+                        <i class="bi bi-person me-2"></i>
+                        Utilisateurs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('backoffice_event_index')}}" class="nav-link-custom color-two {{ currentRoute == 'backoffice_event_index' ? ' active' : '' }} rounded">
+                        <i class="bi bi-journal-richtext me-2"></i>
+                        Evenements
+                        </a>
+                    </li>
+                    </ul>
+                    <hr>
+                </div>
+
+{# 
+        <div class="btn-group-vertical" role="group" aria-label="Button group with nested dropdown">
+            <a href="{{ path('backoffice_admin_index') }}" class="btn btn-primary">Accueil</a>
+            <a href="{{ path('backoffice_user_index') }}" class="btn btn-primary">Utilisateurs</a>
+            <a href="{{ path('backoffice_event_index')}}" class="btn btn-primary">Evenements</a>
+        </div> #}
+    </div>
+
+{# Main content #}
+    <div class="col-sm-12 col-md-12 col-lg-9 text-center fs-2 color-one ms-5"> 
+
+
+        {% block content %}{% endblock %} 
+
+    
+</section>
+
+{% endblock %}

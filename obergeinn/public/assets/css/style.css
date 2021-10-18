@@ -1,0 +1,379 @@
+/* ===== Color and background definition ====== */
+html {
+    --color-one: #060644;
+    --color-two: #744eaa;
+    --color-three: #92fcd8;
+    --color-four: #fcd779;
+    --color-five: #750101;
+}
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--color-two);
+}
+/* ============= Home ============== */
+.logo {
+    width: 550px;
+}
+.accroche {
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-one);
+}
+.emphase {
+    color: var(--color-three);
+}
+.button_inscription {
+    color: var(--color-one);
+    background-color: var(--color-three);
+    border-color: var(--color-three);
+}
+.button_inscription:hover {
+    color: var(--color-three);
+    background-color: var(--color-one);
+    border-color: var(--color-one);
+}
+.button_connexion:hover {
+    color: var(--color-four);
+    background-color: var(--color-one);
+    border-color: var(--color-one);
+}
+.button_connexion {
+    color: var(--color-one);
+    background-color: var(--color-four);
+    border-color: var(--color-four);
+}
+footer > div > a {
+    font-family: 'Raleway', sans-serif;
+    color:var(--color-four);
+    text-decoration: none;
+}
+.link:hover {
+    color: var(--color-one);
+}
+
+/* ============= Event details ============== */
+.color-one {
+    color: var(--color-one);
+}
+.color-four {
+    color: var(--color-four);
+}
+.color-two {
+    color: var(--color-two);
+}
+
+/* Title section */
+.title {
+    font-family: 'Raleway', sans-serif;
+}
+.title > h1 {
+    color: var(--color-one);
+}
+.title > h3 {
+    color: var(--color-four);
+}
+#by-pseudo {
+    color: var(--color-three);
+}
+
+/* Adress section */
+.adress > img {
+    max-width: 500px;
+}
+
+/* Survey section */
+.survey > div {
+    width: 400px;
+}
+.survey > div > h3 {
+    color: var(--color-one);
+}
+.survey-list {
+    width: 400px;
+}
+.form-check-input:checked {
+    background-color: var(--color-four);
+    border-color: var(--color-four);
+}
+.progress {
+    width: 75px;
+}
+.progress-bar {
+    background-color: var(--color-four);
+    color: var(--color-one);
+}
+
+/* Need section */
+.need > a {
+    color: var(--color-three);
+}
+.need > .progress {
+    width: 200px;
+    height: 50px;
+}
+
+.button-needs {
+    color: var(--color-one);
+    background-color: var(--color-three);
+    border-color: var(--color-three);
+}
+
+.button-close {
+    color: var(--color-one);
+    background-color: var(--color-four);
+    border-color: var(--color-four);
+}
+
+.button-validate {
+    color: var(--color-one);
+    background-color: var(--color-three);
+    border-color: var(--color-three);
+}
+
+/* Guest section */
+.guest > div {
+    background-color: var(--color-four);
+    border-color: var(--color-four);
+    width: 500px;
+}
+.guest img {
+    width: 75px;
+}
+.guest-list div {
+    width:200px;
+}
+
+/* Participation section */
+.participation p {
+    font-size: 1em;
+}
+
+/* ============= Login ============== */
+
+.login {
+    width: 30%;
+}
+.button-connexion {
+    color: var(--color-one);
+    background-color: var(--color-three);
+    border-color: var(--color-three);
+}
+
+.deconnexion {
+    color: var(--color-four);
+}
+
+/* ============= Event list ============== */
+.event-list > div{
+    width: 900px;
+}
+
+.color-three {
+    color: var(--color-three);
+}
+
+/* ============= Presentation ============== */
+
+.avatar {
+    width: 200px;
+}
+
+.li-logo {
+    width: 130px;
+}
+
+/* ============= All-event ============== */
+
+.searchbar {
+    justify-content: flex-end;
+}
+
+.button-filter {
+    color: var(--color-one);
+    background-color: var(--color-four);
+    border-color: var(--color-four);
+}
+
+
+.button-filter:hover{
+    color: var(--color-four);
+    background-color: var(--color-one);
+    border-color: var(--color-one);
+
+}
+
+
+.button-search {
+    color: var(--color-one);
+    background-color: var(--color-three);
+    border-color: var(--color-three);
+    margin-bottom : 50;
+}
+
+.button-search:hover {
+
+    color: var(--color-three);
+    background-color: var(--color-one);
+    border-color: var(--color-one);
+}
+
+.navigation-event {
+
+    display: inline-flex;
+}
+
+.addInput {
+    color: var(--color-four);
+    background-color: var(--color-two);
+    border-color: var(--color-two);
+    margin-bottom : 50;
+}
+
+/* ============= Profil ============== */
+
+.img-profil {
+    width: 8%;
+}
+
+.button_edit_profil {
+    width: 10rem;
+    color: var(--color-one);
+    background-color: var(--color-four);
+    border-color: var(--color-four);
+}
+
+.button_edit_profil:hover {
+    color: var(--color-four);
+    background-color: var(--color-one);
+    border-color: var(--color-one);
+}
+
+.button_edit_password {
+    width: 10rem;
+    color: var(--color-one);
+    background-color: var(--color-three);
+    border-color: var(--color-three);
+}
+.button_edit_password:hover {
+    color: var(--color-three);
+    background-color: var(--color-one);
+    border-color: var(--color-one);
+}
+
+.button_delete {
+    width: 10rem;
+    color: var(--color-four);
+    background-color: var(--color-five);
+    border-color: var(--color-one);
+}
+
+.button_delete:hover {
+    color: var(--color-four);
+    background-color: var(--color-one);
+    border-color: var(--color-one);
+}
+
+.profile-button {
+    display: flex;
+    justify-content: space-around;
+    place-items: center;
+
+} 
+/* ============= Mailer ============== */
+
+
+.select-input {
+    width: 18%;
+}
+
+.titleMailer {
+    text-align: center;
+}
+
+
+
+/* ============= Backoffice/ADMIN ============== */
+
+
+.card-color {
+
+    background-color: #060644;
+}
+
+.button_admin {
+    color: var(--color-one);
+    background-color: var(--color-three);
+    border-color: var(--color-three);
+}
+.button_admin:hover {
+    color: var(--color-three);
+    background-color: var(--color-two);
+    border-color: var(--color-one);
+}
+
+.display_grid {
+    display: grid;
+}
+/* ============= Formulaires admin ============== */
+
+.bg-one {
+    background-color: var(--color-one);
+}
+
+.bg-two {
+    background-color: var(--color-two);
+}
+
+.bg-three {
+    background-color: var(--color-three);
+}
+
+.bg-four {
+    background-color: var(--color-four);
+}
+
+.border-three {
+    border: 1px solid var(--color-three);
+}
+
+.nav-link-custom {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--color-four);
+    text-decoration: none;
+}
+
+.nav-link-custom:hover, .active {
+    background-color: var(--color-four);
+    color: var(--color-one);
+}
+
+.form-check-input {
+    background-color: var(--color-four);
+}
+
+.form-checked-input:checked {
+    background-color: var(--color-three);
+}
+
+.menu-item:hover {
+    background-color: var(--color-four);
+    color: var(--color-one);
+}
+
+.accordion {
+    width: 20rem;
+}
+
+/* button.accordion-button:not(.collapsed), button.accordion-button {
+    color: var(--color-one);
+    background-color: var(--color-four);
+} */
+
+#accordion-button:not(.collapsed), #accordion-button {
+    color: var(--color-one);
+    background-color: var(--color-four);
+}
+
+.bi-eye-fill:hover {
+    color: var(--color-one);
+}

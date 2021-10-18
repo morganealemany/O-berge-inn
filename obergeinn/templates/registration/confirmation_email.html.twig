@@ -1,0 +1,12 @@
+<h1>Bonjour</h1>
+
+<img src="{{ asset('assets/images/logo1.png') }}" alt="">
+<p>
+    Afin d'activer votre compte O'Berge'Inn, merci de confirmer votre adresse email en cliquant sur ce lien: <br><br>
+    <a href="{{ signedUrl }}">Je confirme mon email</a> <br>
+    Ce lien expirera dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+</p>
+
+<p>
+    A bientôt sur O'Berge'Inn!
+</p>

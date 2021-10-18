@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block title %}Modification du Profil{% endblock %}
+
+{% block body %}
+
+
+<div class="d-flex flex-column align-items-center color-one ">
+
+    <a class="d-flex align-self-baseline ms-4 color-four text-decoration-none link"href="{{ path('user_index')}}">Retour</a>
+
+    <h1 class="mb-5">Modification du Profil</h1>
+
+ {{ form_start(form) }}
+        {{ form_row(form.pseudo) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.image)}}
+
+          <button type="submit" class="btn button_inscription">Valider</button>
+    {{ form_end(form) }}
+    
+{% endblock %}

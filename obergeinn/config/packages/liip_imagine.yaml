@@ -1,0 +1,20 @@
+# See dos how to configure the bundle: https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html
+liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root:
+                    - "%kernel.project_dir%/public/uploads"
+    # valid drivers options include "gd" or "gmagick" or "imagick"
+    resolvers:
+        default:
+            web_path:
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: media/cache
+    filter_sets:
+        cache: ~
+        carre:
+            cache: default
+            quality: 75
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }

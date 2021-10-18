@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}Hello SearchController!{% endblock %} #}
+
+{% block body %}
+<main class="container">
+    <section class="title col-12 col-lg-12 text-center mb-5">
+        <a class="d-flex align-self-end ms-4 color-four text-decoration-none"href="{{ path('event_index')}}">Retour</a>
+        <h2 class="color-one text-uppercase fw-bold">Résultats de la recherche</h2>
+        <div class="border d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
+
+            <table class="table fs-3">
+                <thead>
+                    <tr>
+                    <th scope="col">Evenement</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Organisateur</th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="myevent" class="organizer">
+
+                    {% for event in results %}
+                    <th scope="row">{{event.title}}</th>
+                        <td>{{event.date ? event.date|date('d-m-Y')}}</td>
+                        {# Use the twig filter 'split' to cut the adress #}
+                        {% set adressData = event.adress|split(' ')%}
+                        {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
+                        <td>{{(adressData|last)|capitalize}}</td>
+                        <td>{{event.user.pseudo}}</td>
+                        <td><a href="{{ path('event_show', {'id': event.id}) }}"><i class="bi bi-eye-fill"></i></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}
