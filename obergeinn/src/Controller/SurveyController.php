@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Survey;
 use App\Entity\SurveyResponses;
-use App\Form\SurveyResponsesType;
 use App\Form\SurveyType;
 use App\Repository\SurveyRepository;
 use DateTime;
@@ -65,7 +64,6 @@ class SurveyController extends AbstractController
             // SurveyResponses creation (limit 3)
             // Transform the string given by the input into a DateTime instance
             $firstDate = DateTime::createFromFormat('Y-m-d',$_POST['survey']['response1']);
-            
             $surveyResponses1 = new SurveyResponses();
             $surveyResponses1->setResponse($firstDate);
             $surveyResponses1->setSurvey($survey);

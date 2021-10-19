@@ -49,6 +49,9 @@ footer > div > a {
 .link:hover {
     color: var(--color-one);
 }
+.button-link:hover {
+    background-color: var(--color-four);
+}
 
 /* ============= Event details ============== */
 .color-one {
@@ -389,4 +392,5 @@ footer > div > a {
 }
 .survey-list {
     width: 80%;
+    background-color: rgba(6,6,68,0.30);
 }
