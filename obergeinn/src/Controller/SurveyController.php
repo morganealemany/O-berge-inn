@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/sondage", name="survey_")
+ * @Route("/sondage", name="survey_", requirements={"id": "\d+"})
  */
 class SurveyController extends AbstractController
 {
@@ -95,6 +95,54 @@ class SurveyController extends AbstractController
         return $this->render('survey/create.html.twig', [
             'formView' => $form->createView()
         ]);
+    }
     
+    /**
+     * Method to delete a survey from its id
+     * 
+     * @Route("/{id}/supprimer", name="delete")
+     *
+     * @param integer $id
+     * @return Response
+     */
+    public function delete(int $id, SurveyRepository $surveyRepository): Response
+    {
+        $survey = $surveyRepository->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($survey);
+        $em->flush();
+
+        $this->addFlash('warning', 'Le sondage pour l\'événement ' . $survey->getEvent()->getTitle() . ' a bien été supprimé.');
+
+        return $this->redirectToRoute('survey_index');
+    }
+
+    /**
+     * Method allowing the activation or desactivation of the survey
+     *
+     * @Route("/{id}/activer", name="activate")
+     * 
+     * @param integer $id
+     * @param SurveyRepository $surveyRepository
+     * @return Response
+     */
+    public function activate(int $id, SurveyRepository $surveyRepository): Response
+    {
+        $survey = $surveyRepository->find($id);
+
+        if ($survey->getStatus() == 1) {
+            $em = $this->getDoctrine()->getManager();
+            $survey->setStatus(0);
+        }
+        else {
+            $em = $this->getDoctrine()->getManager();
+            $survey->setStatus(1);
+        }
+
+        $em->flush();
+
+        return $this->redirectToRoute('survey_index');
     }
 }
+

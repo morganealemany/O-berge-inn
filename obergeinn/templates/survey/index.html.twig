@@ -39,20 +39,20 @@
             {% if survey.status == 1 %}
                 <td class="color-three fw-bold">Actif</td>
                 <td class="text-center">
-                    <a class="text-decoration-none" href="" title="Désactiver">
+                    <a class="text-decoration-none" href="{{path('survey_activate', {'id': survey.id})}}" title="Désactiver">
                         <i class="bi bi-pause me-4 color-four fs-2"></i>
                     </a>
-                    <a href="" title="Supprimer">
+                    <a href="{{path('survey_delete', {'id': survey.id})}}" title="Supprimer">
                         <i class="bi bi-x-lg color-five"></i>
                     </a>
                 </td>
             {% else %}
                 <td class="color-four fw-bold">Inactif</td>
                 <td class="text-center">
-                    <a class="text-decoration-none" href="" title="Activer">
+                    <a class="text-decoration-none" href="{{path('survey_activate', {'id': survey.id})}}" title="Activer">
                         <i class="bi bi-power me-4 color-three fs-2"></i>
                     </a>
-                    <a href="" title="Supprimer">
+                    <a href="{{path('survey_delete', {'id': survey.id})}}" title="Supprimer">
                         <i class="bi bi-x-lg color-five"></i>
                     </a>
                 </td>
