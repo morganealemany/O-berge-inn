@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% form_theme formView 'bootstrap_5_layout.html.twig' %}
+
+
+{% block body %}
+
+{{ form_start (formView) }}
+{# {{form_row(formView.response)}}
+{{form_row(formView.response2)}}
+{{form_row(formView.response3)}} #}
+
+{# {{form_row(formView.save)}} #}
+
+
+
+{{ form_end (formView) }}
+{% endblock %}
