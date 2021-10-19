@@ -60,6 +60,9 @@ footer > div > a {
 .color-two {
     color: var(--color-two);
 }
+.color-five {
+    color: var(--color-five);
+}
 
 /* Title section */
 .title {
@@ -376,4 +379,14 @@ footer > div > a {
 
 .bi-eye-fill:hover {
     color: var(--color-one);
+}
+
+/* ============= Survey ============== */
+.survey-content {
+    width: 30rem;
+    padding: 2rem;
+    border: 2px solid var(--color-four);
+}
+.survey-list {
+    width: 80%;
 }

@@ -29,7 +29,7 @@ class SurveyType extends AbstractType
         $builder
             ->add('status', HiddenType::class)
             ->add('event', null, [
-                'label' => 'Evenement',
+                'label' => 'Pour quel événement?',
                 // Filter the events to show only where the user connected is the organizer
                 'query_builder' => function(EventRepository $eventRepository) {
                     $qb = $eventRepository->createQueryBuilder('e');
@@ -43,24 +43,20 @@ class SurveyType extends AbstractType
             ->add('response1', DateType::class, [
                 'mapped' => false,
                 'widget' => 'single_text',
-                'label' => 'Premier choix de date'
+                'label' => 'Premier choix'
             ])
             ->add('response2', DateType::class, [
                 'mapped' => false,
                 'widget' => 'single_text',
-                'label' => 'Deuxième choix de date'
+                'label' => 'Deuxième choix'
 
             ])
             ->add('response3', DateType::class, [
                 'mapped' => false,
                 'widget' => 'single_text',
-                'label' => 'Troisième choix de date'
+                'label' => 'Troisième choix'
 
-            ])            
-            ->add('save', SubmitType::class, [
-                'label' => 'Valider'
-            ])
-
+            ])       
         ;
     }
 

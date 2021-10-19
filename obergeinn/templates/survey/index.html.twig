@@ -3,5 +3,37 @@
 {% block title %}Hello SurveyController!{% endblock %}
 
 {% block body %}
+<div class="survey-table d-flex justify-content-center">
+    <table class="survey-list table table-striped bg-one fs-3">
+    <thead class="color-four">
+        <tr>
+            <th scope="col">Evenement</th>
+            <th scope="col">Choix 1</th>
+            <th scope="col">Choix 2</th>
+            <th scope="col">Choix 3</th>
+            <th scope="col">Actif/Inactif</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for survey in surveyList %}
+        {# {{dump(survey.surveyResponses)}} #}
+        <tr style="color:white">
+            <th scope="row">{{survey.event.title}}</th>
+            {% for responses in survey.surveyResponses %}
+                <td>{{responses.response|date('d-m-Y')}}</td>
+            {% endfor %}
+
+            {% if survey.status == 1 %}
+                <td class="color-three fw-bold">Actif</td>
+            {% else %}
+                <td class="color-five fw-bold">Inactif</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
 
 {% endblock %}

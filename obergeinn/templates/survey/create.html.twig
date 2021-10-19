@@ -4,15 +4,16 @@
 
 
 {% block body %}
-
-{{ form_start (formView) }}
-{# {{form_row(formView.response)}}
-{{form_row(formView.response2)}}
-{{form_row(formView.response3)}} #}
-
-{# {{form_row(formView.save)}} #}
-
-
-
-{{ form_end (formView) }}
+<div class="d-flex justify-content-center">
+    <div class="survey-content d-flex flex-column align-items-center color-four bg-one rounded text-center">
+        <h1 class="fw-bold">Créer un sondage</h1>
+        <h4 class="mb-5 color-three">Pour choisir la date de l'événement</h4>
+        <div style="color:white" class="fw-bold">
+            {{ form_start (formView) }}
+                {{form_widget(formView)}}
+    <button type="submit" class="btn button_inscription mt-5">Valider</button>
+            {{ form_end (formView) }}
+        </div>
+    </div>
+</div>
 {% endblock %}
