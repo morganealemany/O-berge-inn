@@ -174,7 +174,7 @@ class EventController extends AbstractController
      * 
      * Method allowing user to accept an event invitation
      * 
-     * @Route("/details/{id}/accept-participate", name="accept-participate", requirements={"id": "\d+"})
+     * @Route("/details/{id}/accept-participate", name="accept", requirements={"id": "\d+"})
      *
      * @return void
      */
@@ -197,6 +197,44 @@ class EventController extends AbstractController
             }
         }
         return $this->redirectToRoute('event_show', [
+            'id' => $id,
+        ]);
+    }
+
+    /**
+     * 
+     * Method allowing user to deny an event invitation
+     * 
+     * @Route("/details/{id}/refuser", name="deny", requirements={"id": "\d+"})
+     *
+     * @return void
+     */
+    public function eventParticipationDeny(int $id, EventRepository $eventRepository) 
+    {
+        $event = $eventRepository->find($id);
+        $em = $this->getDoctrine()->getManager();
+
+        $userConnectedParticipation = $this->getUser()->getParticipation();
+
+        // We remove the user assignations for the current event
+        foreach ($this->getUser()->getAssignations() as $assignation) {
+            if ($assignation->getNeed()->getEvent() == $event) {
+                $em->remove($assignation);
+                $em->flush();
+            }
+        }
+        // We remove the user participation for the current event
+        foreach ($userConnectedParticipation as $userParticipation) {
+
+            if ($event->getId() === $userParticipation->getEvent()->getId()) {
+                $em->remove($userParticipation);
+                $em->flush();
+
+                $this->addFlash('warning', 'Vous ne participez plus à l\'événement ' . $event->getTitle() .'.');
+            }
+        }
+
+        return $this->redirectToRoute('dashboard', [
             'id' => $id,
         ]);
     }

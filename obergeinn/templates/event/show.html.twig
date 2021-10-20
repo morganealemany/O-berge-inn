@@ -152,9 +152,26 @@
                         </div>
                         {% endfor %}
 
+
+
+
                     <div class="modal-footer">
-                        <button type="button" class="btn button-close" data-bs-dismiss="modal">Fermer</button>
-                        <input type="submit" class="btn button-validate button-validate-need-assignees" ></input>
+                        <p class="text-center color-five"
+                        {% for participation in app.user.participation %}
+                            {% if participation.event == event and participation.status == true %}
+                                hidden
+                            {% endif %}
+                        {% endfor %}
+                                ><i class="bi bi-exclamation-triangle-fill"></i> Tu ne peux pas t'assigner de besoins si tu ne confirmes pas ta présence à l'événement.</p>
+                                <button type="button" class="btn button-close" data-bs-dismiss="modal">Fermer</button>
+                                <input type="submit" class="btn button-validate button-validate-need-assignees"
+                                {% for participation in app.user.participation %}
+                            {% if participation.event == event and participation.status == false %}
+                                hidden
+                            {% endif %}
+                        {% endfor %}></input>
+                               
+                                        
                     </div>
                     </form>
                     <div class="ms-4">
@@ -218,17 +235,55 @@
         </section>
 
         {# Participation section #}
+        <section class="participation col-12 col-lg-12 order-lg-5 text-center d-flex justify-content-evenly mt-5">
 
+            {# Pour chaque participation de l'utilisateur connecté #}
+            {% for participation in app.user.participation %}
+            
+                {# On vérifie si l'event de la participation correspond à l'event en cours #}
+                {% if participation.event == event and participation.status == false %}
+
+                    <div class="text-success fw-bold fs-3">
+                        <a href="{{path('event_accept', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de participer à cet évènement ?');"> <i class="bi bi-hand-thumbs-up-fill text-success btn fs-1 ms-4 me-3"></i></a>
+                        <p>Je participe</p>
+                    </div>
+            
+                    <div class="text-danger fw-bold fs-3">
+                        <a href="" onclick="return confirm('Es-tu sûr de ne pas participer à cet évènement ?');"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
+                        <p>Je ne participe pas</p>        
+                    </div> 
+
+                {% elseif participation.event == event and participation.status == true %}
+                    <div class="text-danger fw-bold fs-3">
+                        <a href="{{path('event_deny', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de ne pas participer à cet évènement ?');"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
+                        <p>Je ne participe plus</p>        
+                    </div> 
+                    
+                {% endif %}
+            {% endfor %} 
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{# 
         <section class="participation col-12 col-lg-12 order-lg-5 text-center d-flex justify-content-evenly mt-5">
             <div class="text-success fw-bold fs-3">
                 <a href="{{ path('event_accept-participate', {'id': event.id}) }}"> <i class="bi bi-hand-thumbs-up-fill text-success btn fs-1 ms-4 me-3"></i></a>
                 <p>Je participe</p>
             </div>
-            {# <div class="text-danger fw-bold fs-3">
+            <div class="text-danger fw-bold fs-3">
                 <a href="{{ path('event_deny-participate', {'id': event.id}) }}"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
                 <p>Je ne participe pas</p>        
-            </div> #}
+            </div>
         </section>
     </div>
 </div>
-{% endblock %}
+{% endblock %} #}
