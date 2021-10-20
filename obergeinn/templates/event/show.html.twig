@@ -49,29 +49,55 @@
         </section>
 
         {# Survey section #}
-        {# TODO faire que les invités puissent voter pour la date (unique) qui leur convient 
-           TODO checkbox -> method survey_choice/create puis ajouter survey_responses/nb_responses 
-           TODO affichage dans l'index des sondages du nombre de réponses (barre de complétion?)
-           TODO + barre de complétion sur affichage event BONUS#}
+                     
         <section class="survey col-12 col-lg-6 order-lg-3 text-center mt-5 mb-5 d-flex align-items-center">
             <div class="border bg-light d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
-                <h2 class="fs-1 mb-5 color-one">Sondage</h2>
                 <div class="survey-list">
+              
+                {# If a survey exists for this event, display the survey#}
                 {% if event.survey %}
+                <h2 class="fs-1 mt-2 mb-3 color-one">Sondage</h2>
+
+                    {% set dateChoiceNumber = 1 %}
                     {% for responses in event.survey.surveyResponses %}
-                        <div class="form-check d-flex fs-4 justify-content-around">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheck1">
-                            <label class="form-check-label" for="flexCheck1">
-                                {{responses.response|date('d-M-Y')}}
-                            </label>
-                            <div class="progress align-self-center">
-                                <div class="progress">
-                                    <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                    </div>
-                                </div>
+
+                        <form action="{{path('survey_answered', {'id': event.id})}}" method="post" class="form-check d-flex flex-column align-items-center fs-4 justify-content-around ps-0">
+                            <div>
+                                <input class="form-check-input" type="checkbox" value="{{responses.response|date('d-M-Y')}}" id="flexCheck1" name="dateChoice{{dateChoiceNumber}}" 
+
+                                {% for choices in responses.surveyChoices %}
+                                    {# If the user connected has already answered the survey #}
+                                    {% if choices.user == app.user %}
+                                    {# Checked the checkboxes#}
+                                        checked
+                                    {% endif %}
+                                {% endfor %}
+                                >
+                                <label class="form-check-label" for="flexCheck1">
+                                    {{responses.response|date('d-M-Y')}}
+                                </label>
                             </div>
-                        </div>
+                                {# <div class="progress align-self-center">
+                                    <div class="progress">
+                                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div> #}
+                                {% set dateChoiceNumber = dateChoiceNumber + 1 %}
                     {% endfor %}
+                                <input type="submit" value="Valider" class="button_inscription mt-2 mb-2" 
+
+                                {% for responses in event.survey.surveyResponses %}
+                                    {% for choices in responses.surveyChoices %}
+                                        {# If the user connected has already answered the survey #}
+                                        {% if choices.user == app.user %}
+                                            {# Hide the submit button #}
+                                            hidden
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                >
+                            </form>     
                 {% endif %}    
                 </div>
             </div>

@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Survey;
+use App\Entity\SurveyChoice;
 use App\Entity\SurveyResponses;
 use App\Form\SurveyType;
+use App\Repository\EventRepository;
 use App\Repository\SurveyRepository;
+use App\Repository\SurveyResponsesRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -143,6 +146,87 @@ class SurveyController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('survey_index');
+    }
+
+
+    /**
+     * Methods dealing the answered for the survey for an event by his id
+     *
+     * @Route("/{id}/reponse", name="answered")
+     * 
+     * @return Response
+     */
+    public function answered(int $id, EventRepository $eventRepository): Response
+    {
+        $event = $eventRepository->find($id);
+
+        // We have to retrieve the survey_responses data into an array to use it
+        $responsesList = [];
+        foreach ($event->getSurvey()->getSurveyResponses() as $responses) {
+           array_push($responsesList, $responses);
+        }
+
+        // For each choice we are checking if it exists before saving it on the DB
+        if (isset($_POST['dateChoice1'])) {
+            $choice1= filter_input(INPUT_POST, 'dateChoice1', FILTER_DEFAULT);
+            $surveyChoice1 = new SurveyChoice();
+            $em = $this->getDoctrine()->getManager();
+            $surveyChoice1->setUser($this->getUser());
+            $surveyChoice1->setChoice(1);
+            $surveyChoice1->setSurveyResponses($responsesList[0]);
+            $em->persist($surveyChoice1);
+
+            // We have to increment the nb_responses into the table survey_responses
+            $surveyResponses1 = $responsesList[0];
+
+            $totalResponses = $surveyResponses1->getNbResponses();
+
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponses1->setNbResponses($totalResponses +1);
+        }
+        if (isset($_POST['dateChoice2'])) {
+            $choice2= filter_input(INPUT_POST, 'dateChoice2', FILTER_DEFAULT);
+            $surveyChoice2 = new SurveyChoice();
+            $em = $this->getDoctrine()->getManager();
+            $surveyChoice2->setUser($this->getUser());
+            $surveyChoice2->setChoice(2);
+            $surveyChoice2->setSurveyResponses($responsesList[1]);
+            $em->persist($surveyChoice2);
+
+            // We have to increment the nb_responses into the table survey_responses
+            $surveyResponses2 = $responsesList[1];
+
+            $totalResponses = $surveyResponses2->getNbResponses();
+
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponses2->setNbResponses($totalResponses +1);
+        }
+        if (isset($_POST['dateChoice3'])) {
+            $choice3= filter_input(INPUT_POST, 'dateChoice3', FILTER_DEFAULT);
+            $surveyChoice3 = new SurveyChoice();
+            $em = $this->getDoctrine()->getManager();
+            $surveyChoice3->setUser($this->getUser());
+            $surveyChoice3->setChoice(3);
+            $surveyChoice3->setSurveyResponses($responsesList[2]);
+            $em->persist($surveyChoice3);
+
+            // We have to increment the nb_responses into the table survey_responses
+            
+            $surveyResponses3 = $responsesList[2];
+
+            $totalResponses = $surveyResponses3->getNbResponses();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $surveyResponses3->setNbResponses($totalResponses +1);
+        }
+        $em->flush();
+
+        $this->addFlash('success', 'Vos choix pour le sondage ont bien été pris en compte');
+        
+        return $this->redirectToRoute('event_show', [
+            'id' => $id
+        ]);
     }
 }
 
