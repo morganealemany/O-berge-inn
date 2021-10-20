@@ -28,12 +28,28 @@
         </tr>
     </thead>
     <tbody>
+    {# {{dump(totalGuestsList)}}
+    {{dump(totalConfirmedGuestsList)}} #}
 
     {% for survey in surveyList %}
+    {# {{dump(survey.event.participation)}} #}
         <tr style="color:white">
             <th scope="row">{{survey.event.title}}</th>
             {% for responses in survey.surveyResponses %}
-                <td>{{responses.response|date('d-m-Y')}}</td>
+                <td>{{responses.response|date('d-m-Y')}} 
+                {# If the total number of confirmedGuests is up to 0 #}
+                {# {{dump(responses.nbResponses)}} #}
+                {% if totalConfirmedGuestsList[survey.event.title] > 0 %}
+                    <p class="text-center">
+                        {{((responses.nbResponses * 100) / totalConfirmedGuestsList[survey.event.title])|number_format(0) }} %
+                    </p>
+                </td>
+                {# Else display default 0 percent for each choice of the survey#}
+                {% else %}
+                    <p class="text-center">
+                        0 %
+                    </p>
+                {% endif %}
             {% endfor %}
 
             {% if survey.status == 1 %}

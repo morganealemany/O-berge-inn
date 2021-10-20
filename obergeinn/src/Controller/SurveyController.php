@@ -37,9 +37,47 @@ class SurveyController extends AbstractController
                 array_push($currentSurveyList, $survey);
             };
         }
-        dump($currentSurveyList);
+
+        // We have to retrieve the total number of guests invited 
+        $totalGuestsList = [];
+        // And the total number of guests who confirmed
+        $totalConfirmedGuestsList = [];
+        foreach ($currentSurveyList as $survey) {
+            $totalGuests = 0;
+            $totalConfirmedGuests = 0;
+            foreach ($survey->getEvent()->getParticipation() as $participation) {
+                $totalGuests = $totalGuests +1;
+                if ($participation->getStatus() == true) {
+                    $totalConfirmedGuests = $totalConfirmedGuests +1;
+                }
+            }
+            $totalGuestsList[$survey->getEvent()->getTitle()] = $totalGuests;
+            $totalConfirmedGuestsList[$survey->getEvent()->getTitle()] = $totalConfirmedGuests;
+            // dump($totalGuestsList);
+        }
+
+        // // We will calculate the percent oof responses for each choices
+        // foreach ($currentSurveyList as $survey) {
+        //     foreach ($survey->getSurveyResponses() as $responses) {
+        //         // If the total number of confirmedGuests is up to 0 
+        //         $percentsList = [];
+        //         if ($totalConfirmedGuestsList[$survey->getEvent()->getTitle()] > 0) 
+        //         {
+        //             $responsesDecimalPercent = (($responses->getNbResponses()*100)/$totalConfirmedGuestsList[$survey->getEvent()->getTitle()]);
+
+        //             $responsesDecimalPercentFormat = number_format($responsesDecimalPercent, 0);
+        //             // dump($responsesDecimalPercentFormat);
+        //         }
+        //         // dump($responses);
+        //     }
+        //     $percentsList[$responses->getId()] = $responsesDecimalPercentFormat;
+
+        //     dump($percentsList);
+        // }
         return $this->render('survey/index.html.twig', [
             'surveyList' => $currentSurveyList,
+            'totalGuestsList' => $totalGuestsList,
+            'totalConfirmedGuestsList' => $totalConfirmedGuestsList,
         ]);
     }
 
