@@ -39,12 +39,7 @@
             <div class="d-flex flex-column justify-content-center">
                 <h2 class="fs-1 mb-5 color-one">Adresse</h2>
                 <p class="align-self-start fs-4">{{event.adress}}</p>
-                <p class="align-self-start fs-4">Date :
-
-            {# we have create a condition for display the Date of the event if it's defined, else show "ND" for "non définie"#}
-                {{ event.date ? event.date|date('d-m-Y') : 'ND' }}
-
-                  </p>
+                
             </div>
         </section>
 
@@ -54,8 +49,8 @@
             <div class="border bg-light d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
                 <div class="survey-list">
               
-                {# If a survey exists for this event, display the survey#}
-                {% if event.survey %}
+                {# If a survey exists for this event, display the survey #}
+                {% if event.survey and event.survey.status == true %}
                 <h2 class="fs-1 mt-2 mb-3 color-one">Sondage</h2>
 
                     {% set dateChoiceNumber = 1 %}
@@ -97,7 +92,13 @@
                                     {% endfor %}
                                 {% endfor %}
                                 >
-                            </form>     
+                            </form> 
+
+                {% else %}
+                <p class="fs-4 mt-3">Date :
+                {# we have create a condition for display the Date of the event if it's defined, else show "ND" for "non définie"#}
+                {{ event.date ? event.date|date('d-m-Y') : 'NC' }}
+                </p>                
                 {% endif %}    
                 </div>
             </div>
