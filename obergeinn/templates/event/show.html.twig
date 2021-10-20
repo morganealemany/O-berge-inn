@@ -148,12 +148,8 @@
                             
                             </label>
                             <input class="ms-2 fs-6 checkbox-need" type="number" name="quantity-assignees{{need.id}}" hidden>
-                            {# {{ dump(need.id)}} #}
                         </div>
                         {% endfor %}
-
-
-
 
                     <div class="modal-footer">
                         <p class="text-center color-five"
@@ -213,12 +209,10 @@
                 <h2 class="fs-1 mt-5 mb-5 color-one">Invités</h2>
 
                 <div class="guest-list d-flex flex-wrap justify-content-center mb-5">
-                
+
                 {% for participation in event.participation %}
-                    {# Only guests who have accepted the invitation will be displayed here #}
                     {% if participation.status == true %}
                         <div>
-
                             {# If the user have no image for his avatar, displayed a generic image #}
                             {% if participation.user.image %}
                                 <img alt="icon" src="{{ asset('uploads/' ~ participation.user.image)}}" class="rounded-circle" >
@@ -227,9 +221,21 @@
                             {% endif %}
                             <p>{{participation.user.pseudo}}</p>
                         </div>
-                    {% endif %}
+                        {# If the connected user is the event organizer, display the inactive guests too #}
+                    {% elseif participation.status == false and app.user == event.user %}
+                        <div>
+                            {# If the user have no image for his avatar, displayed a generic image #}
+                            {% if participation.user.image %}
+                                <img alt="icon" src="{{ asset('uploads/' ~ participation.user.image)}}" class="rounded-circle" >
+                            {% else %}
+                                <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}">
+                            {% endif %}
+                            <p><i class="bi bi-x-lg color-five"></i>{{participation.user.pseudo}}</p>
+                        </div>
+                    {% endif %}              
+                    
                 {% endfor %}
-
+              
                 </div>
             </div>
         </section>
