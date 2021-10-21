@@ -7,6 +7,8 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -17,26 +19,31 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("events:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("events:read")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("events:read")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("events:read")
      */
     private $adress;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups("events:read")
      */
     private $date;
 
@@ -49,7 +56,6 @@ class Event
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updated_at;
-
 
     /**
      * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="event", orphanRemoval=true)

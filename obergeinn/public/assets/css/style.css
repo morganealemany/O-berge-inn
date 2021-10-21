@@ -394,3 +394,10 @@ footer > div > a {
     width: 80%;
     background-color: rgba(6,6,68,0.30);
 }
+
+/* ============= Map ============== */
+
+#map {
+    width : 50%;
+    height : 400;
+}

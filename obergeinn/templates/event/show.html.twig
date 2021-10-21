@@ -35,10 +35,12 @@
         {# Adress section #}
 
         <section class="adress col-12 col-lg-7 order-lg-1 text-center d-flex">
-            <img src="https://www.freecountrymaps.com/map/free/france/combs-la-ville-map-france-349075991.png" alt="carte interactive" class="ms-5 me-2 border rounded-3">
+
+        <div id="map"></div>
+            {# <img src="https://www.freecountrymaps.com/map/free/france/combs-la-ville-map-france-349075991.png" alt="carte interactive" class="ms-5 me-2 border rounded-3"> #}
             <div class="d-flex flex-column justify-content-center">
                 <h2 class="fs-1 mb-5 color-one">Adresse</h2>
-                <p class="align-self-start fs-4">{{event.adress}}</p>
+                <p id="adress" class="align-self-start fs-4" data-adress="{{event.adress}}">{{event.adress}}</p>
                 
             </div>
         </section>
