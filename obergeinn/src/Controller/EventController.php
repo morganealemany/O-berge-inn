@@ -111,7 +111,7 @@ class EventController extends AbstractController
         if ($totalNeedsQuantity <= 0) {
             $needsPercent = 0;
         } else {
-            $needsPercent = ($totalAssignatedNeedsQuantity*100)/$totalNeedsQuantity;
+            $needsPercent = number_format(($totalAssignatedNeedsQuantity*100)/$totalNeedsQuantity,0);
         }
 
 

@@ -110,7 +110,7 @@
             const marker = L.marker([destinationCoordinates[1],destinationCoordinates[0]]).addTo(map);
             
             // Then use the current position coordinates transfered in parameters and link the itinerary from the current position and the destination
-            marker.bindPopup('<a target="_blank" href="https://www.google.com/maps/dir/' + destinationCoordinates[1] + ','  + destinationCoordinates[0] + '/' + latitude + ',' + longitude + '" ><h3>Go!</h3></a>');
+            marker.bindPopup('<a target="_blank" href="https://www.google.com/maps/dir/' + latitude + ','  + longitude + '/' + destinationCoordinates[1] + ',' + destinationCoordinates[0] + '" ><h3>Go!</h3></a>');
         })
     },
 }
