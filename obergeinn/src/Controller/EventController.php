@@ -157,6 +157,7 @@ class EventController extends AbstractController
         // which are injected in the object $event
         $form->handleRequest($request);
         $event->setUser($this->getUser());
+        $event->setStatus(1);
         // 5th stage : we check if we are in the case of submission of form before saving
         if ($form->isSubmitted()) {
             
