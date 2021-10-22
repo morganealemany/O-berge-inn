@@ -8,7 +8,10 @@
     </body>
 
     {% block javascripts %}
-        <script src="{{ asset('assets/js/app.js') }}"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>     
+        <script src="{{ asset('assets/js/app.js')}}"></script>   
         <script src="{{ asset('assets/js/component/filter.js') }}"></script>
         <script src="{{ asset('assets/js/component/cloneInput.js') }}"></script>
         <script src="{{ asset('assets/js/component/needForm.js') }}"></script>

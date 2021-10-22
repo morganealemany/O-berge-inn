@@ -82,9 +82,18 @@ footer > div > a {
 }
 
 /* Adress section */
-.adress > img {
-    max-width: 500px;
+.adress-text {
+    width: 70%;
+    border-top: 2px solid var(--color-three);
 }
+
+/* ============= Map ============== */
+
+#map {
+    width : 70%;
+    height : 300;
+}
+
 
 /* Survey section */
 .survey > div {
@@ -394,3 +403,4 @@ footer > div > a {
     width: 80%;
     background-color: rgba(6,6,68,0.30);
 }
+
