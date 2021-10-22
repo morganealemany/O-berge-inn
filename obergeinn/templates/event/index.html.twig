@@ -84,13 +84,13 @@
                                     <td>{{(adressData|last)|capitalize}}</td>
                                     <td>{{event.user.pseudo}}</td>
                                     <td>
-                                        <a href="{{ path('event_show', {'id': event.id}) }}"><i class="bi bi-eye-fill color-three"></i></a>
-                                        <a href=""><i class="bi bi-pencil-square color-four"></i></a>
-                                        <a href="{{ path('event_archiving', {'id': event.id}) }}"><i class="bi bi-archive-fill 
+                                        <a href="{{ path('event_show', {'id': event.id}) }}" title="Voir"><i class="bi bi-eye-fill color-three"></i></a>
+                                        <a href="" title=""><i class="bi bi-pencil-square color-four"></i></a>
+                                        <a href="{{ path('event_archiving', {'id': event.id}) }}" title="
                                         {% if (event.status == 0) %}
-                                            {{'color-one'}}
+                                            {{'Archiver"><i class="bi bi-archive-fill color-one'}}
                                         {% else %}
-                                            {{'color-five'}}
+                                            {{'Sortir de l\'archive"><i class="bi bi-archive-fill color-five'}}
                                         {% endif %}
                                         
                                         "></i></a>
