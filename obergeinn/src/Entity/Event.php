@@ -72,6 +72,11 @@ class Event
      */
     private $needs;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Survey::class, mappedBy="event", cascade={"persist", "remove"})
+     */
+    private $survey;
+
     public function __construct()
     {
         $this->participation = new ArrayCollection();
@@ -240,6 +245,23 @@ class Event
     public function getNeeds(): Collection
     {
         return $this->needs;
+    }
+
+    public function getSurvey(): ?Survey
+    {
+        return $this->survey;
+    }
+
+    public function setSurvey(Survey $survey): self
+    {
+        // set the owning side of the relation if necessary
+        if ($survey->getEvent() !== $this) {
+            $survey->setEvent($this);
+        }
+
+        $this->survey = $survey;
+
+        return $this;
     }
 
 }

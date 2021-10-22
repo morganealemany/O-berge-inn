@@ -39,94 +39,70 @@
             <div class="d-flex flex-column justify-content-center">
                 <h2 class="fs-1 mb-5 color-one">Adresse</h2>
                 <p class="align-self-start fs-4">{{event.adress}}</p>
-                <p class="align-self-start fs-4">Date :
-
-            {# we have create a condition for display the Date of the event if it's defined, else show "ND" for "non définie"#}
-                {{ event.date ? event.date|date('d-m-Y') : 'ND' }}
-
-                  </p>
+                
             </div>
         </section>
 
         {# Survey section #}
-
+                     
         <section class="survey col-12 col-lg-6 order-lg-3 text-center mt-5 mb-5 d-flex align-items-center">
             <div class="border bg-light d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
-                <h2 class="fs-1 mb-5 color-one">Sondage</h2>
                 <div class="survey-list">
-                    <div class="form-check d-flex fs-4 justify-content-around">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheck1">
-                        <label class="form-check-label" for="flexCheck1">
-                            15/10/2021
-                        </label>
-                        <div class="progress align-self-center">
-                            <div class="progress">
-                                <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                </div>
+              
+                {# If a survey exists for this event, display the survey #}
+                {% if event.survey and event.survey.status == true %}
+                <h2 class="fs-1 mt-2 mb-3 color-one">Sondage</h2>
+
+                    {% set dateChoiceNumber = 1 %}
+                    {% for responses in event.survey.surveyResponses %}
+
+                        <form action="{{path('survey_answered', {'id': event.id})}}" method="post" class="form-check d-flex flex-column align-items-center fs-4 justify-content-around ps-0">
+                            <div>
+                                <input class="form-check-input" type="checkbox" value="{{responses.response|date('d-M-Y')}}" id="flexCheck1" name="dateChoice{{dateChoiceNumber}}" 
+
+                                {% for choices in responses.surveyChoices %}
+                                    {# If the user connected has already answered the survey #}
+                                    {% if choices.user == app.user %}
+                                    {# Checked the checkboxes#}
+                                        checked
+                                    {% endif %}
+                                {% endfor %}
+                                >
+                                <label class="form-check-label" for="flexCheck1">
+                                    {{responses.response|date('d-M-Y')}}
+                                </label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-check d-flex fs-4 justify-content-around">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
-                        <label class="form-check-label" for="flexCheck2">
-                            25/10/2021
-                        </label>
-                        <div class="progress align-self-center">
-                            <div class="progress">
-                                <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-check d-flex fs-4 justify-content-around">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheck3">
-                        <label class="form-check-label" for="flexCheck3">
-                            30/10/2021
-                        </label>
-                        <div class="progress align-self-center">
-                            <div class="progress">
-                                <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                {# <div class="progress align-self-center">
+                                    <div class="progress">
+                                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div> #}
+                                {% set dateChoiceNumber = dateChoiceNumber + 1 %}
+                    {% endfor %}
+                                <input type="submit" value="Valider" class="button_inscription mt-2 mb-2" 
+
+                                {% for responses in event.survey.surveyResponses %}
+                                    {% for choices in responses.surveyChoices %}
+                                        {# If the user connected has already answered the survey #}
+                                        {% if choices.user == app.user %}
+                                            {# Hide the submit button #}
+                                            hidden
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                >
+                            </form> 
+
+                {% else %}
+                <p class="fs-4 mt-3">Date :
+                {# we have create a condition for display the Date of the event if it's defined, else show "ND" for "non définie"#}
+                {{ event.date ? event.date|date('d-m-Y') : 'NC' }}
+                </p>                
+                {% endif %}    
                 </div>
             </div>
         </section> 
-
-
-
-
-     {#   <div class="row col-5">
-  <h4 class="fw-bold text-center mt-3"></h4>
-  <form class=" bg-white px-4" action="">
-    <p class="fw-bold">How satisfied are you with our product?</p>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="radio" name="exampleForm" id="radioExample1" />
-      <label class="form-check-label" for="radioExample1">
-        Option 1
-      </label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="radio" name="exampleForm" id="radioExample2" />
-      <label class="form-check-label" for="radioExample2">
-        Option 2
-      </label>
-    </div>
-    <div class="form-check mb-2">
-      <input class="form-check-input" type="radio" name="exampleForm" id="radioExample3" />
-      <label class="form-check-label" for="radioExample3">
-        Option 3
-      </label>
-    </div>
-  </form>
-  <div class="text-end">
-    <button type="button" class="btn btn-primary">Submit</button>
-  </div>
-</div>  #}
-
-
-
 
         {# Need section #}
 
@@ -172,13 +148,26 @@
                             
                             </label>
                             <input class="ms-2 fs-6 checkbox-need" type="number" name="quantity-assignees{{need.id}}" hidden>
-                            {# {{ dump(need.id)}} #}
                         </div>
                         {% endfor %}
 
                     <div class="modal-footer">
-                        <button type="button" class="btn button-close" data-bs-dismiss="modal">Fermer</button>
-                        <input type="submit" class="btn button-validate button-validate-need-assignees" ></input>
+                        <p class="text-center color-five"
+                        {% for participation in app.user.participation %}
+                            {% if participation.event == event and participation.status == true %}
+                                hidden
+                            {% endif %}
+                        {% endfor %}
+                                ><i class="bi bi-exclamation-triangle-fill"></i> Tu ne peux pas t'assigner de besoins si tu ne confirmes pas ta présence à l'événement.</p>
+                                <button type="button" class="btn button-close" data-bs-dismiss="modal">Fermer</button>
+                                <input type="submit" class="btn button-validate button-validate-need-assignees"
+                                {% for participation in app.user.participation %}
+                            {% if participation.event == event and participation.status == false %}
+                                hidden
+                            {% endif %}
+                        {% endfor %}></input>
+                               
+                                        
                     </div>
                     </form>
                     <div class="ms-4">
@@ -220,12 +209,10 @@
                 <h2 class="fs-1 mt-5 mb-5 color-one">Invités</h2>
 
                 <div class="guest-list d-flex flex-wrap justify-content-center mb-5">
-                
+
                 {% for participation in event.participation %}
-                    {# Only guests who have accepted the invitation will be displayed here #}
                     {% if participation.status == true %}
                         <div>
-
                             {# If the user have no image for his avatar, displayed a generic image #}
                             {% if participation.user.image %}
                                 <img alt="icon" src="{{ asset('uploads/' ~ participation.user.image)}}" class="rounded-circle" >
@@ -234,25 +221,75 @@
                             {% endif %}
                             <p>{{participation.user.pseudo}}</p>
                         </div>
-                    {% endif %}
+                        {# If the connected user is the event organizer, display the inactive guests too #}
+                    {% elseif participation.status == false and app.user == event.user %}
+                        <div>
+                            {# If the user have no image for his avatar, displayed a generic image #}
+                            {% if participation.user.image %}
+                                <img alt="icon" src="{{ asset('uploads/' ~ participation.user.image)}}" class="rounded-circle" >
+                            {% else %}
+                                <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}">
+                            {% endif %}
+                            <p><i class="bi bi-x-lg color-five"></i>{{participation.user.pseudo}}</p>
+                        </div>
+                    {% endif %}              
+                    
                 {% endfor %}
-
+              
                 </div>
             </div>
         </section>
 
         {# Participation section #}
+        <section class="participation col-12 col-lg-12 order-lg-5 text-center d-flex justify-content-evenly mt-5">
 
+            {# Pour chaque participation de l'utilisateur connecté #}
+            {% for participation in app.user.participation %}
+            
+                {# On vérifie si l'event de la participation correspond à l'event en cours #}
+                {% if participation.event == event and participation.status == false %}
+
+                    <div class="text-success fw-bold fs-3">
+                        <a href="{{path('event_accept', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de participer à cet évènement ?');"> <i class="bi bi-hand-thumbs-up-fill text-success btn fs-1 ms-4 me-3"></i></a>
+                        <p>Je participe</p>
+                    </div>
+            
+                    <div class="text-danger fw-bold fs-3">
+                        <a href="" onclick="return confirm('Es-tu sûr de ne pas participer à cet évènement ?');"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
+                        <p>Je ne participe pas</p>        
+                    </div> 
+
+                {% elseif participation.event == event and participation.status == true %}
+                    <div class="text-danger fw-bold fs-3">
+                        <a href="{{path('event_deny', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de ne pas participer à cet évènement ?');"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
+                        <p>Je ne participe plus</p>        
+                    </div> 
+                    
+                {% endif %}
+            {% endfor %} 
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{# 
         <section class="participation col-12 col-lg-12 order-lg-5 text-center d-flex justify-content-evenly mt-5">
             <div class="text-success fw-bold fs-3">
                 <a href="{{ path('event_accept-participate', {'id': event.id}) }}"> <i class="bi bi-hand-thumbs-up-fill text-success btn fs-1 ms-4 me-3"></i></a>
                 <p>Je participe</p>
             </div>
-            {# <div class="text-danger fw-bold fs-3">
+            <div class="text-danger fw-bold fs-3">
                 <a href="{{ path('event_deny-participate', {'id': event.id}) }}"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
                 <p>Je ne participe pas</p>        
-            </div> #}
+            </div>
         </section>
     </div>
 </div>
-{% endblock %}
+{% endblock %} #}

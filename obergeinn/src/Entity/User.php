@@ -90,12 +90,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $assignations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SurveyChoice::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $surveyChoices;
+
     public function __construct()
     {
         $this->event = new ArrayCollection();
         $this->participation = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
         $this->assignations = new ArrayCollection();
+        $this->surveyChoices = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -371,6 +377,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($assignation->getUser() === $this) {
                 $assignation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SurveyChoice[]
+     */
+    public function getSurveyChoices(): Collection
+    {
+        return $this->surveyChoices;
+    }
+
+    public function addSurveyChoice(SurveyChoice $surveyChoice): self
+    {
+        if (!$this->surveyChoices->contains($surveyChoice)) {
+            $this->surveyChoices[] = $surveyChoice;
+            $surveyChoice->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurveyChoice(SurveyChoice $surveyChoice): self
+    {
+        if ($this->surveyChoices->removeElement($surveyChoice)) {
+            // set the owning side to null (unless already changed)
+            if ($surveyChoice->getUser() === $this) {
+                $surveyChoice->setUser(null);
             }
         }
 

@@ -49,6 +49,9 @@ footer > div > a {
 .link:hover {
     color: var(--color-one);
 }
+.button-link:hover {
+    background-color: var(--color-four);
+}
 
 /* ============= Event details ============== */
 .color-one {
@@ -59,6 +62,9 @@ footer > div > a {
 }
 .color-two {
     color: var(--color-two);
+}
+.color-five {
+    color: var(--color-five);
 }
 
 /* Title section */
@@ -376,4 +382,15 @@ footer > div > a {
 
 .bi-eye-fill:hover {
     color: var(--color-one);
+}
+
+/* ============= Survey ============== */
+.survey-content {
+    width: 30rem;
+    padding: 2rem;
+    border: 2px solid var(--color-four);
+}
+.survey-list {
+    width: 80%;
+    background-color: rgba(6,6,68,0.30);
 }
