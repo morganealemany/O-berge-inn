@@ -43,7 +43,7 @@
                                 {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
                                 <td>{{(adressData|last)|capitalize}}</td>
                                 <td>{{event.user.pseudo}}</td>
-                                <td><a href="{{ path('event_show', {'id': event.id}) }}"><i class="bi bi-eye-fill color-three"></i></a></td>
+                                <td><a href="{{ path('event_show', {'id': event.id}) }}" title="Voir"><i class="bi bi-eye-fill color-three"></i></a></td>
                             </tr>
                         {% endfor %}
                  {#}   {% endfor %} #}
