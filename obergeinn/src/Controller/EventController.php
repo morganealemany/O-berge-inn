@@ -238,4 +238,29 @@ class EventController extends AbstractController
             'id' => $id,
         ]);
     }
+
+    /**
+     * Method dealing the arhiving of an event
+     * 
+     * @Route("/{id}/archiver", name="archiving")
+     *
+     * @param integer $id
+     * @return Response
+     */
+    public function archiving(int $id, EventRepository $eventRepository): Response
+    {
+        $event = $eventRepository->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        if ($event->getStatus() == 1) {
+            $event->setStatus(0);
+            $this->addFlash('warning', 'L\'événement ' . $event->getTitle() . ' a bien été archivé');
+        } else {
+            $event->setStatus(1);
+            $this->addFlash('warning', 'L\'événement ' . $event->getTitle() . ' a bien été sorti des archives');
+        }
+        $em->flush();
+
+        return $this->redirectToRoute('event_index');
+    }
 }
