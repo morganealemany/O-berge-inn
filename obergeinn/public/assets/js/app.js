@@ -12,7 +12,7 @@
         filter.init();
         needForm.init();
         app.displayInputNeedsInModal();
-        app.displayMapForEvent();
+        app.getGeolocalisation();
         
     },
 
@@ -48,11 +48,32 @@
         }       
     },
     
+
+    /**
+     * Method retrieving the localisation of the user connected
+     */
+    getGeolocalisation: function() 
+    {
+        if ("geolocation" in navigator) {
+            console.log('la géolocalisation est disponible')
+            
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log(position.coords.latitude, position.coords.longitude);
+                app.displayMapForEvent(position.coords.latitude, position.coords.longitude);
+                });
+        } else {
+            console.log('la géolocalisation est indisponible')
+        };
+
+    },
+
+
     /**
      * Method allowed the display of an event map
      */
-    displayMapForEvent: function()
+    displayMapForEvent: function(latitude, longitude)
     {
+        // First we will transfom the adress of the event into coordinates
         // ========= MapBox Search API ==============
         // Select the event adress from the DOM
         const address = document.querySelector('#adress').innerHTML;
@@ -78,15 +99,18 @@
             // console.log(fullCoordinates);
             // console.log(destinationCoordinates);
 
-            // Creation of the map
+
+            // Then we have to create a map
             const map = L.map('map').setView([destinationCoordinates[1],destinationCoordinates[0]], 12);
             L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                 maxZoom: 20
             }).addTo(map);
 
+            // And a marker for the adress of the event
             const marker = L.marker([destinationCoordinates[1],destinationCoordinates[0]]).addTo(map);
-
-            marker.bindPopup('<a target="_blank" href="http://maps.google.com/?q=' + destinationCoordinates[1] + ','  + destinationCoordinates[0] + '" >Go Google Maps!</a>');
+            
+            // Then use the current position coordinates transfered in parameters and link the itinerary from the current position and the destination
+            marker.bindPopup('<a target="_blank" href="https://www.google.com/maps/dir/' + destinationCoordinates[1] + ','  + destinationCoordinates[0] + '/' + latitude + ',' + longitude + '" ><h3>Go!</h3></a>');
         })
     },
 }
