@@ -31,20 +31,20 @@
 
                 {#User Icon with dropdown #}
 
-                <button class="btn dropdown-toggle icon color-four fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">  
+                <button class="btn header-dropdown-toggle dropdown-toggle icon color-four fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">  
                 
                 {# If the connected user has an image use it to generate thumbnail avatar #}
                 {% if app.user.image %}
-                    <img alt="icon" src="{{ asset('uploads/' ~ app.user.image)}}" class="rounded-circle" >
+                    <img alt="icon" src="{{ asset('uploads/' ~ app.user.image)}}" class="header-user-icon rounded-circle" >
                 {% else %} {# Else use the default user icon for thumbnail #}
-                    <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}">
+                    <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}" class="header-user-icon">
                 {% endif %}
-                    {{ app.user.pseudo }}
+                    <div class="name-user-connected">{{ app.user.pseudo }}</div>
                 </button>
 
                     {#dropdown#}
 
-                <ul class="dropdown-menu bg-one fw-bold" aria-labelledby="dropdownMenuButton1">
+                <ul class="header-dropdown-menu dropdown-menu bg-one fw-bold" aria-labelledby="dropdownMenuButton1">
                     <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('user_index')}}">Profil</a></li>
                     <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('dashboard')}}">Tableau de bord</a></li>
                     <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('event_index')}}">Evènements</a></li>
@@ -60,9 +60,9 @@
         {% else %}
             <div class="d-flex align-self-start">
 
-                <a href="{{ path('app_register') }}" class="btn d-sm-none d-lg-block button_inscription">Inscription</a> 
+                <a href="{{ path('app_register') }}" class="btn header-button_inscription button_inscription">Inscription</a> 
            
-                <a href="{{ path('app_login') }}" class="btn d-sm-none d-lg-block ms-4 me-3 button_connexion">Connexion</a>
+                <a href="{{ path('app_login') }}" class="btn header-button_connexion ms-4 me-3 button_connexion">Connexion</a>
             </div>
         {% endif %}
 

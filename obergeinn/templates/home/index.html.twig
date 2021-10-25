@@ -4,33 +4,29 @@
 
 {% block body %}
 
-<main class="container">
-  <div class="row">
-         <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center mb-5 mt-5">
-            {# Situation #}
-            <img src="{{ asset('assets/images/situation.png')}}" alt="" class="border border-white border-5 rounded">
-         </div>
-        <div class="col-12 col-lg-6 d-flex flex-column justify-content-center">
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="col-6 text-center fs-2 accroche">
-                    <p class="fw-bold">Tu as déjà vécu ce genre de situation ?</p>
-                    <p class="fw-bold">Facilite toi la vie avec <span class="emphase"> O’Berge’Inn !<span></p>
-                    <p class="fw-bold">Inscris-toi et</p>
-                </div>
+<main class="home-container">
+    <div class=" publicity d-flex justify-content-center align-items-center mb-5 mt-5">
+    {# Situation #}
+    <img src="{{ asset('assets/images/situation.png')}}" alt="" class="border border-white border-5 rounded">
+    </div>
+    <div class="publicity-text d-flex flex-column justify-content-center">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="accroche">
+                <p class="fw-bold">Tu as déjà vécu ce genre de situation ?</p>
+                <p class="fw-bold">Facilite toi la vie avec <span class="emphase"> O’Berge’Inn !<span></p>
+                <p class="fw-bold">Inscris-toi et</p>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="col-6 text-center">
-                    <a href="{{ path('app_register')}}"class="btn mt-5 mb-5 fs-4 fw-bold button_inscription">
-                        Organise ton 1er événement!
-                    </a>
-                    <a href="{{ path('app_login') }}" class="btn button_connexion">
-                        Connexion
-                    </a>
-                </div>
-            </div>
-
         </div>
-  </div>
+        <div class="home-buttons">
+            <a href="{{ path('app_register')}}"class="btn mt-5 mb-5 fw-bold home-button_inscription button_inscription">
+                Organise ton 1er événement!
+            </a>
+            <a href="{{ path('app_login') }}" class="btn home-button_connexion button_connexion">
+                Connexion
+            </a>
+        </div>
+
+    </div>
 </main>
 
 
