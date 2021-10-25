@@ -20,6 +20,9 @@ const filter = {
         document.querySelectorAll('.invited-events').forEach(function(element) {
             element.addEventListener('click', filter.handleClickOnInvitedEvents);
         });
+        document.querySelectorAll('.archived-events').forEach(function(element) {
+            element.addEventListener('click', filter.handleClickOnArchivedEvents);
+        })
     },
  
     handleClickOnAllEvents: function(evt) {
@@ -32,6 +35,10 @@ const filter = {
  
     handleClickOnInvitedEvents: function(evt) {
         filter.showOnlyEventsInvited();
+    },
+
+    handleClickOnArchivedEvents: function(evt) {
+        filter.showOnlyEventsArchived();
     },
 
     /**
@@ -72,6 +79,21 @@ const filter = {
                 // Else, if the selected element don't contain the class organizer 
                 // Remove the class hidden for show it
                 event.classList.remove('visually-hidden');
+            }
+        }
+    },
+
+    /**
+     * Method allowing the display of only the archived events
+     */
+    showOnlyEventsArchived: function() {
+        const allEvents = document.querySelectorAll('#myevent');
+        console.log(allEvents);
+        for (const event of allEvents) {
+            if(event.classList.contains('archived')){
+                event.classList.remove('visually-hidden');
+            } else {
+                event.classList.add('visually-hidden');
             }
         }
     },

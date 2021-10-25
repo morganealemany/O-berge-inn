@@ -42,6 +42,7 @@ class EventCreateType extends AbstractType
             ])
 
             ->add('need', CollectionType::class, [
+                'label' => 'Besoin(s)',
                 'entry_type' => NeedType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,

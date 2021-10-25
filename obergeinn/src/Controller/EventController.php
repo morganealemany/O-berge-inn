@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Form\EventCreateType;
 use App\Entity\Assignation;
 use App\Entity\Need;
+use App\Form\EventType;
 use App\Repository\EventRepository;
 use App\Repository\MeasureUnitRepository;
 use App\Repository\NeedRepository;
@@ -183,6 +184,35 @@ class EventController extends AbstractController
             'formView' => $form->createView()
         ]);
     }
+
+/**
+     * @Route("/{id}/modifier", name="edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Event $event): Response
+    {
+        $form = $this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           
+            $this->getDoctrine()->getManager()->flush();
+
+            // Message flash
+            $this->addFlash('success', 'L\'événement ' . $event->getTitle() . ' a bien été mis à jour');
+
+            return $this->redirectToRoute('event_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('event/edit.html.twig', [
+            'event' => $event,
+            'formView' => $form,
+        ]);
+    }
+
+
+
+
+
      /**
      * 
      * Method allowing user to accept an event invitation

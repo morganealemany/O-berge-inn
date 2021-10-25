@@ -27,6 +27,9 @@
                 <li><a class="dropdown-item all-events" href="#">Tous les évènements</a></li>
                 <li><a class="dropdown-item organized-events" href="#">Evènements organisés</a></li>
                 <li><a class="dropdown-item invited-events" href="#">Evènements invités</a></li>
+                <li>
+                <a class="dropdown-item archived-events" href="#">Evènements archivés</a>
+                </li>
             </ul>
             </div>
 
@@ -66,9 +69,17 @@
                             
                             {# If the user connected is the organizer of the event #}
                             {% if app.user == event.user %}
-                                <tr id="myevent" class="organizer">
+                                <tr id="myevent" class="organizer
+                                {% if event.status == 0 %}
+                                archived
+                                {% endif %}
+                                ">
                             {% else %}
-                                <tr id="myevent" class="invited">
+                                <tr id="myevent" class="invited
+                                {% if event.status == 0 %}
+                                archived
+                                {% endif %}
+                                ">
                             {% endif %}
                                     <th scope="row"
 
@@ -85,7 +96,7 @@
                                     <td>{{event.user.pseudo}}</td>
                                     <td>
                                         <a href="{{ path('event_show', {'id': event.id}) }}" title="Voir"><i class="bi bi-eye-fill color-three"></i></a>
-                                        <a href="" title=""><i class="bi bi-pencil-square color-four"></i></a>
+                                        <a href="{{ path('event_edit', {'id' : event.id}) }}" title="Modifier"><i class="bi bi-pencil-square color-four"></i></a>
                                         <a href="{{ path('event_archiving', {'id': event.id}) }}" title="
                                         {% if (event.status == 0) %}
                                             {{'Archiver"><i class="bi bi-archive-fill color-one'}}
