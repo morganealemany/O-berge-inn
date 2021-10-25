@@ -9,14 +9,52 @@ html {
 body {
     font-family: 'Raleway', sans-serif;
     background-color: var(--color-two);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
 }
 /* ============= Home ============== */
+
+.header-dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
+.header-user-icon {
+    width: 5rem;
+}
+/* TODO gérer le dropdown et affichage menu en mobile*/
+.home-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.home-button_connexion {
+    width: 10rem;
+    align-self:center;
+}
+.home-button_inscription {
+    font-size: 2rem;
+}
 .logo {
     width: 550px;
 }
 .accroche {
     font-family: 'Raleway', sans-serif;
     color: var(--color-one);
+    font-size: 2rem;
+    text-align: center;
 }
 .emphase {
     color: var(--color-three);
@@ -52,6 +90,44 @@ footer > div > a {
 .button-link:hover {
     background-color: var(--color-four);
 }
+
+@media screen and (max-width: 1200px) {
+    .home-container {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .publicity > img {
+        width: 70%;
+    }
+    .accroche {
+        font-size: 3rem;
+    }
+    .home-buttons {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .home-button_connexion {
+        font-size: 2rem;
+        width: 15rem;
+    }
+    .header-button_inscription, .header-button_connexion {
+        font-size: 2rem;
+    }
+    .header-user-icon {
+        width: 7rem;
+    }
+    .name-user-connected {
+        display: none;
+    }
+    .dropdown-menu {
+        width: 100% !important;
+    }
+    
+
+}
+
 
 /* ============= Event details ============== */
 .color-one {

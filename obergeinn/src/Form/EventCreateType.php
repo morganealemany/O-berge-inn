@@ -35,12 +35,14 @@ class EventCreateType extends AbstractType
                 'label' => 'Description'
             ])
             ->add('date', DateTimeType::class, [
+                'required' => false,
                 'label' => 'Date',
                 'widget'=> 'single_text',
                 'input' => 'datetime_immutable',
             ])
 
             ->add('need', CollectionType::class, [
+                'label' => 'Besoin(s)',
                 'entry_type' => NeedType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,

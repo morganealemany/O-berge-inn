@@ -55,18 +55,17 @@
     getGeolocalisation: function() 
     {
         if ("geolocation" in navigator) {
-            console.log('la géolocalisation est disponible')
+            // console.log('la géolocalisation est disponible')
             
             navigator.geolocation.getCurrentPosition(function(position) {
-                console.log(position.coords.latitude, position.coords.longitude);
+                // console.log(position.coords.latitude, position.coords.longitude);
                 app.displayMapForEvent(position.coords.latitude, position.coords.longitude);
                 });
         } else {
-            console.log('la géolocalisation est indisponible')
+            // console.log('la géolocalisation est indisponible')
         };
 
     },
-
 
     /**
      * Method allowed the display of an event map

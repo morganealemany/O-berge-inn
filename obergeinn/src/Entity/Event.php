@@ -83,6 +83,11 @@ class Event
      */
     private $survey;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->participation = new ArrayCollection();
@@ -266,6 +271,18 @@ class Event
         }
 
         $this->survey = $survey;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

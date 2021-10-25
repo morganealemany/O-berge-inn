@@ -6,10 +6,12 @@ use App\Entity\Event;
 use App\Form\EventCreateType;
 use App\Entity\Assignation;
 use App\Entity\Need;
+use App\Form\EventType;
 use App\Repository\EventRepository;
 use App\Repository\MeasureUnitRepository;
 use App\Repository\NeedRepository;
 use App\Repository\TypeRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,17 +34,28 @@ class EventController extends AbstractController
      */
     public function index(EventRepository $eventRepository): Response
     {
+        // Manage the archiving of all the events according to the current date and the event date 
+        $eventList = $eventRepository->findAll();
 
+        foreach ($eventList as $event) {
+
+            // Recover current date and event date
+            $todayDate = new DateTimeImmutable();
+            $eventDate = $event->getDate();
+
+            // To compare it.
+            if (isset($eventDate) && $eventDate < $todayDate) {
+                if ($event->getStatus() == 0) {
+                    //event already archived
+                } else {
+                    $em = $this->getDoctrine()->getManager();
+                    $event->setStatus(0);
+                    $em->flush();
+                }
+            }
+        }
         return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
-            // 'events' => $eventRepository->findAll()
-            // In the page which list all the events of a user, we will transmit the new event created?
-            // We will have to use a loop (boucle) for in event/index.html.twig like this:
-            // <ul>
-            //      {% for event in events %}
-            //      <li>{{ event.title }} </li>
-            //      {% endfor %}
-            // </ul>
         ]);
     }
 
@@ -145,6 +158,7 @@ class EventController extends AbstractController
         // which are injected in the object $event
         $form->handleRequest($request);
         $event->setUser($this->getUser());
+        $event->setStatus(1);
         // 5th stage : we check if we are in the case of submission of form before saving
         if ($form->isSubmitted()) {
             
@@ -170,6 +184,35 @@ class EventController extends AbstractController
             'formView' => $form->createView()
         ]);
     }
+
+/**
+     * @Route("/{id}/modifier", name="edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Event $event): Response
+    {
+        $form = $this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+           
+            $this->getDoctrine()->getManager()->flush();
+
+            // Message flash
+            $this->addFlash('success', 'L\'événement ' . $event->getTitle() . ' a bien été mis à jour');
+
+            return $this->redirectToRoute('event_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('event/edit.html.twig', [
+            'event' => $event,
+            'formView' => $form,
+        ]);
+    }
+
+
+
+
+
      /**
      * 
      * Method allowing user to accept an event invitation
@@ -237,5 +280,30 @@ class EventController extends AbstractController
         return $this->redirectToRoute('dashboard', [
             'id' => $id,
         ]);
+    }
+
+    /**
+     * Method dealing the arhiving of an event
+     * 
+     * @Route("/{id}/archiver", name="archiving")
+     *
+     * @param integer $id
+     * @return Response
+     */
+    public function archiving(int $id, EventRepository $eventRepository): Response
+    {
+        $event = $eventRepository->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        if ($event->getStatus() == 1) {
+            $event->setStatus(0);
+            $this->addFlash('warning', 'L\'événement ' . $event->getTitle() . ' a bien été archivé');
+        } else {
+            $event->setStatus(1);
+            $this->addFlash('warning', 'L\'événement ' . $event->getTitle() . ' a bien été sorti des archives');
+        }
+        $em->flush();
+
+        return $this->redirectToRoute('event_index');
     }
 }

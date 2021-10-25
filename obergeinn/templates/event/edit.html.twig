@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% form_theme formView 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+
+<div class="d-flex flex-column align-items-center color-one ">
+    <h1>Modifier l'événement {{event.title}}</h1>
+
+    {{ form_start(formView) }}
+        {{ form_row(formView.title) }}
+        {{ form_row(formView.adress) }}
+        {{ form_row(formView.description) }}
+        {{ form_row(formView.date) }}
+
+    <button type="submit" class="btn button_inscription text-center">Valider</button>
+
+    {{ form_end(formView) }}
+    
+</div>
+
+{% endblock %}
