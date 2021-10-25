@@ -19,46 +19,57 @@
     </head>
 
     {#Logo picture #}
-    <header class="d-flex justify-content-between pb-5">
+    <header class="d-flex flex-column pb-5">
+        <div class="d-flex justify-content-around">
 
-        <h1> 
-            <a href="{{ path('home')}}"><img src="{{ asset('assets/images/logo1.png')}}" alt="logo o'berge'inn" class="logo"></a>
-        </h1>
-
-        <div class="dropdown">
-
-        {% if app.user.username is defined %}
-
-                {#User Icon with dropdown #}
-
-                <button class="btn header-dropdown-toggle dropdown-toggle icon color-four fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">  
-                
-                {# If the connected user has an image use it to generate thumbnail avatar #}
+            {# <div>  #}
+                <a href="{{ path('home')}}" class="link-logo d-flex justify-content-center"><img src="{{ asset('assets/images/logo1.png')}}" alt="logo o'berge'inn" class="logo"></a>
+            {# </div> #}
+        {% if app.user is defined %}
+            <div class="d-flex flex-column justify-content-center align-items-center">
+             {# If the connected user has an image use it to generate thumbnail avatar #}
                 {% if app.user.image %}
-                    <img alt="icon" src="{{ asset('uploads/' ~ app.user.image)}}" class="header-user-icon rounded-circle" >
+                    <img alt="icon" src="{{ asset('uploads/' ~ app.user.image)}}" class="header-user-icon rounded-circle" title="Vous êtes connecté en tant que {{app.user.pseudo}}" >
                 {% else %} {# Else use the default user icon for thumbnail #}
-                    <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}" class="header-user-icon">
+                    <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}" class="header-user-icon" title="Vous êtes connecté en tant que {{app.user.pseudo}}">
                 {% endif %}
-                    <div class="name-user-connected">{{ app.user.pseudo }}</div>
-                </button>
+                    <p class="name-user-connected">Bienvenue {{ app.user.pseudo }}</p>
+            </div>
+        {% endif %}
+        </div>
 
-                    {#dropdown#}
+        {% if app.user is defined %}
 
-                <ul class="header-dropdown-menu dropdown-menu bg-one fw-bold" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('user_index')}}">Profil</a></li>
-                    <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('dashboard')}}">Tableau de bord</a></li>
-                    <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('event_index')}}">Evènements</a></li>
-                    <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('mailer')}}">Invitations</a></li>
-                    <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('survey_index')}}">Sondages</a></li>
+        <nav>
+            <div class="container-nav">
+                <label for="mobile">☰</label>
+                <input type="checkbox" id="mobile" role="button">
+                <ul>
+                    <li><a href="{{ path('dashboard')}}">Tableau de bord</a></li>
+                    <li class="drop-down"><a href="#">Evénements</a>
+                        <ul class="under">
+                            <li><a href="{{ path('event_index')}}">Tous mes événements</a></li>
+                            <li><a href="{{ path('mailer')}}">Invitations</a></li>
+                            <li><a href="{{ path('survey_index')}}">Sondages</a></li>
+                        </ul>
+                    </li>
                     {% if is_granted('ROLE_ADMIN') %}
     
-                     <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('backoffice_admin_index')}}">Admin</a></li> 
-                    
+                    <li><a href="{{ path('backoffice_admin_index')}}">Admin</a></li> 
+         
                     {% endif %}
-                    <li><a class="menu-item dropdown-item color-four fw-bold" href="{{ path('app_logout')}}">Déconnexion</a></li>
+                    <li class="drop-down"><a href="#">Profil</a>
+                        <ul class="under">
+                            <li><a href="{{ path('user_index')}}">Mon profil</a></li>
+                            <li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
+                        </ul>
+                    </li>
                 </ul>
+            </div>
+        </nav>
+
         {% else %}
-            <div class="d-flex align-self-start">
+            <div class="d-flex justify-content-center">
 
                 <a href="{{ path('app_register') }}" class="btn header-button_inscription button_inscription">Inscription</a> 
            
