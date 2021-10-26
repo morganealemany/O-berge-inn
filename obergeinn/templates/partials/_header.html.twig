@@ -23,22 +23,23 @@
         <div class="d-flex justify-content-around">
 
             {# <div>  #}
-                <a href="{{ path('home')}}" class="link-logo d-flex justify-content-center"><img src="{{ asset('assets/images/logo1.png')}}" alt="logo o'berge'inn" class="logo"></a>
+                <a href="{{ path('home')}}" class="link-logo d-flex justify-content-center"><div class="logo"></div></a>
             {# </div> #}
-        {% if app.user is defined %}
+            {# {{dump(app.user)}} #}
+        {% if app.user.firstname is defined %}
             <div class="d-flex flex-column justify-content-center align-items-center">
              {# If the connected user has an image use it to generate thumbnail avatar #}
-                {% if app.user.image %}
+                {% if app.user.image is defined %}
                     <img alt="icon" src="{{ asset('uploads/' ~ app.user.image)}}" class="header-user-icon rounded-circle" title="Vous êtes connecté en tant que {{app.user.pseudo}}" >
                 {% else %} {# Else use the default user icon for thumbnail #}
                     <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}" class="header-user-icon" title="Vous êtes connecté en tant que {{app.user.pseudo}}">
                 {% endif %}
                     <p class="name-user-connected">Bienvenue {{ app.user.pseudo }}</p>
             </div>
-        {% endif %}
+        {# {% endif %} #}
         </div>
 
-        {% if app.user is defined %}
+        {# {% if app.user is defined %} #}
 
         <nav>
             <div class="container-nav">
@@ -61,7 +62,7 @@
                     <li class="drop-down"><a href="#">Profil</a>
                         <ul class="under">
                             <li><a href="{{ path('user_index')}}">Mon profil</a></li>
-                            <li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
+                            <li><a id="deconnection" href="{{ path('app_logout')}}">Déconnexion</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -69,11 +70,11 @@
         </nav>
 
         {% else %}
-            <div class="d-flex justify-content-center">
+            <div class="header-buttons">
 
                 <a href="{{ path('app_register') }}" class="btn header-button_inscription button_inscription">Inscription</a> 
            
-                <a href="{{ path('app_login') }}" class="btn header-button_connexion ms-4 me-3 button_connexion">Connexion</a>
+                <a href="{{ path('app_login') }}" class="btn header-button_connexion button_connexion">Connexion</a>
             </div>
         {% endif %}
 

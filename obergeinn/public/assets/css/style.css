@@ -25,17 +25,31 @@ main {
 footer {
     flex-shrink: 0;
 }
+footer > div {
+    display: flex;
+    flex-direction: column;
+}
 /* ============= Navbar ============= */
+header > div {
+    height: 200px;
+}
 nav{
     width: 100%;
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--color-four);
     position: sticky;
     top: 0px;
 }
 .container-nav{
     position: absolute;
     width: 100%;
+}
+.link-logo {
+    width: 50%;
+}
+.logo {
+    width: 150%;
+    background: no-repeat center/100px url(../images/obergeinn-petit-modèle.png);
 }
 nav input[type=checkbox]{
     display: none;
@@ -45,12 +59,13 @@ nav label{
     width: 100%;
     padding: 10px 0px;
     text-align: center;
-    background-color: white;
+    background-color: var(--color-four);
+    font-weight: bold;
+    color: var(--color-one);
 }
 nav ul{
     display: none;
     list-style-type: none;
-    background-color: var(--color-one);
     padding-left: 0;
 }
 nav input[type=checkbox]:checked + ul{
@@ -62,30 +77,47 @@ nav ul li{
     text-align: center;
 }
 nav > div > ul > li > a{
-    color: white;
+    color: var(--color-four);
+    font-weight: bold;
 }
 nav a{
     display: block;
     text-decoration: none;
     color: black;
     padding: 10px 0px;
+    background-color: var(--color-one);
 }
 .under{
     display: flex;
     flex-flow: column wrap;
     z-index: 1000;
+    background-color: var(--color-one);
 }
-
 .under li{
     flex: 1 1 auto;
     text-align: left;
 }
 .under a{
     padding: 10px;
-    background-color: RGBa(200,200,200,0.8);
+    background-color: RGBa(252, 215, 121,0.8);
+    color: var(--color-one);
 }
-
+.header-buttons {
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    display: flex;
+}
+.header-button_connexion, .header-button_inscription {
+    margin-left: 2.5em;
+}
+.name-user-connected {
+    display : none;
+}
 @media screen and (min-width: 600px){
+    footer > div {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
     .container-nav{
         position: static;
     }
@@ -101,14 +133,17 @@ nav a{
         position: relative;
     }
     nav > div > ul > li > a{
-        color: black;
+        color:var(--color-one);
+        font-weight: normal;
     }
     nav a{
         border-bottom: 2px solid transparent;
+        background-color: var(--color-four);
     }
     nav a:hover{
-        color: orange;
-        border-bottom: 2px solid gold;
+        color: var(--color-two);
+        border-bottom: 2px solid var(--color-three);
+        font-weight: bold;
     }
     .under{
         display: none;
@@ -122,34 +157,62 @@ nav a{
         flex-flow: column wrap;
     }
     .under a{
+        color: var(--color-one);
         border-bottom: none;
         background-color: white;
     }
     .under a:hover{
         border-bottom: none;
-        background-color: RGBa(200,200,200,0.1);
+        background-color: RGBa(252, 215, 121,0.3);
     }
     .deroulant > a::after{
         content:" ▼";
         font-size: 12px;
     }
+    .header-buttons {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+    #deconnection {
+        background-color: var(--color-five);
+        color: var(--color-four)
+    }
+    #deconnection:hover {
+       background-color: RGBa(117, 1, 1, 0.8);
+    }
+    .name-user-connected {
+        display: block;
+        color: var(--color-four);
+        font-weight: bold;
+    }
+    .logo {
+        width: 150%;
+        background: no-repeat center/90% url(../images/logo1.png);
+    }
 }
-.name-user-connected {
-    color: var(--color-four);
-    font-weight: bold;
+
+@media screen and (min-width: 980px) {
+    .logo {
+        width: 150%;
+        background: no-repeat center/500px url(../images/logo1.png);
+    }
 }
 
 .header-user-icon {
     width: 5rem;
 }
 
-
-
-
 /* ============= Home ============== */
 .home-container {
     display: flex;
     justify-content: space-evenly;
+}
+.home-container > div > img {
+    border: 5px solid white;
+    border-radius: 5%;
+    width: 80%;
+    margin-top: 10px;;
 }
 .home-buttons {
     display: flex;
@@ -161,18 +224,12 @@ nav a{
     align-self:center;
 }
 .home-button_inscription {
-    font-size: 2rem;
-}
-.logo {
-    width: 150%;
-}
-.link-logo {
-    width: 50%;
+    font-size: 1.5rem;
 }
 .accroche {
     font-family: 'Raleway', sans-serif;
     color: var(--color-one);
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: center;
 }
 .emphase {
@@ -210,39 +267,110 @@ footer > div > a {
     background-color: var(--color-four);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
     .home-container {
         display: block;
     }
 }
 
-@media screen and (max-width: 980px) {
-    .publicity > img {
-        width: 70%;
-    }
-    .accroche {
-        font-size: 3rem;
-    }
-    .home-buttons {
-        flex-direction: row;
-        justify-content: space-evenly;
-    }
-    .home-button_connexion {
-        font-size: 2rem;
-        width: 15rem;
-    }
-    .header-button_inscription, .header-button_connexion {
-        font-size: 2rem;
-    }
-    .header-user-icon {
-        width: 4rem;
-    }
-    .name-user-connected {
-        display: none;
-    }
-   
+/* =========== Dashboard ============ */
 
+.card {
+    position:static;
+    margin-bottom: 10px;
+    border: 2px solid var(--color-four);
 }
+.card-header {
+    text-transform: uppercase;
+    color: var(--color-three);
+    font-size: 1.3rem;
+}
+.card-header, .card-footer {
+    background-color: var(--color-one);
+    font-weight: bold;
+}
+.card-footer a {
+    color: var(--color-four);
+}
+.card-body > table {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;;
+}
+.card-body td {
+    border-bottom: 2px solid var(--color-two);
+    padding-right: 15px;
+}
+#events-organized, #survey-active {
+    color: green;
+}
+#events-invited {
+    color: orange;
+}
+#events-archived, #survey-inactive {
+    color: red;
+}
+#events-total, #survey-total {
+    font-weight: bold;
+}
+.access {
+    background-color: var(--color-three);
+    border: 2px solid var(--color-one);
+    color: var(--color-one);
+    font-weight: bold;
+}
+.card-body > img {
+    border: 3px solid var(--color-two);
+    margin: 20px 10px;
+}
+.card .profile-card {
+    color: var(--color-one);
+    font-weight: bold;
+}
+.card .admin-text {
+    font-weight: bold;
+    color: var(--color-two);
+    margin-top: 71px;
+    margin-bottom: 70px;
+}
+.card > .profile-card .access{
+    margin-top: 38px;
+}
+
+@media screen and (min-width: 600px) {
+    #dashboard-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .card {
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+        min-width: 260px;
+        max-width: 261px;
+    }
+    .card-body > .survey-table {
+        margin-top: 30px;
+        margin-bottom: 38px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ============= Event details ============== */
