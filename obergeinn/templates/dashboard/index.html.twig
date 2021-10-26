@@ -19,63 +19,90 @@
         <section id="dashboard-section">
             <div class="card text-center">
                 <div class="card-header">
-                    Tous mes événements
+                    Mes événements
                 </div>
                 <div class="card-body">
                     <table>
                         <tr id="events-organized">
                             <td>Organisés</td>
-                            <td>10</td>
+                            {# Find the number of organized, invited and archived events #}
+                            {% set eventsOrganized = 0 %}
+                            {% set eventsArchived = 0 %}
+                            {% for event in app.user.event %}
+                                {% set eventsOrganized = eventsOrganized + 1 %}
+                                {% if event.status == false %}
+                                {% set eventsArchived = eventsArchived + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                          
+                            <td>{{eventsOrganized}}</td>
                         </tr>
                         <tr id="events-invited">
                             <td>Invités</td>
-                            <td>12</td>
+                            {% set eventsInvited = 0 %}
+                            {% for participation in app.user.participation %}
+                                {% set eventsInvited = eventsInvited + 1 %}
+                                    {% if participation.event.status == false %}
+                                {% set eventsArchived = eventsArchived + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            <td>{{eventsInvited}}</td>
                         </tr>
                         <tr id="events-archived">
                             <td>Archivés</td>
-                            <td>10</td>
+                            <td>{{eventsArchived}}</td>
                         </tr>
                         <tr id="events-total">
                             <td>Total</td>
-                            <td>22</td>
+                            <td>{{eventsOrganized + eventsInvited}}</td>
                         </tr>
 
                     </table>
-                    <a href="#" class="btn access">Accéder à la liste</a>
+                    <a href="{{path('event_index')}}" class="btn access">Accéder à la liste</a>
                 </div>
                 <div class="card-footer text-muted">
                 <p>
-                    <a href=""><i class="bi bi-plus-circle-fill"></i> Créer un nouvel événement</a>
+                    <a href="{{path('event_create')}}"><i class="bi bi-plus-circle-fill"></i> Créer un nouvel événement</a>
                 </p>
                 <p>
-                    <a href=""><i class="bi bi-envelope-fill"></i> Envoyer des invitations</a>
+                    <a href="{{ path('mailer')}}"><i class="bi bi-envelope-fill"></i> Envoyer des invitations</a>
                 </p>
                 </div>
             </div>
             <div class="card text-center">
                 <div class="card-header">
-                    Tous mes sondages
+                    Mes sondages
                 </div>
                 <div class="survey-card card-body">
                     <table class="survey-table">
                         <tr id="survey-active">
                             <td>Actifs</td>
-                            <td>10</td>
+                            {# Find the number of active, inactive survey #}
+                            {% set activeSurvey = 0 %}
+                            {% set inactiveSurvey = 0 %}
+                            {% for event in app.user.event %}
+                                {% if event.survey is not null and event.survey.status == true %}
+                                {% set activeSurvey = activeSurvey + 1 %}
+                                {% elseif event.survey is not null and event.survey.status ==  false %}
+                                {% set inactiveSurvey = inactiveSurvey + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            <td>{{activeSurvey}}</td>
                         </tr>
                         <tr id="survey-inactive">
                             <td>Inactifs</td>
-                            <td>12</td>
+                            <td>{{inactiveSurvey}}</td>
                         </tr>
                         <tr id="survey-total">
                             <td>Total</td>
-                            <td>22</td>
+                            <td>{{activeSurvey + inactiveSurvey}}</td>
                         </tr>
 
                     </table>
-                    <a href="#" class="btn access">Accéder à la liste</a>
+                    <a href="{{ path('survey_index')}}" class="btn access">Accéder à la liste</a>
                 </div>
                 <div class="card-footer text-muted">
-                    <a href=""><i class="bi bi-plus-circle-fill"></i> Créer un nouveau sondage</a>
+                    <a href="{{path('survey_create')}}"><i class="bi bi-plus-circle-fill"></i> Créer un nouveau sondage</a>
                 </div>
             </div>
             <div class="card text-center">
@@ -86,7 +113,7 @@
                     <img src="{{ asset('uploads/' ~ app.user.image)}}" class="rounded-circle" alt="">
                     <p>{{app.user.firstname}} {{app.user.lastname}}</p>
                     <p>{{app.user.email}}</p>
-                    <a href="#" class="btn access">Accéder</a>
+                    <a href="{{ path('user_index')}}" class="btn access">Accéder</a>
                 </div>
             </div>
 
@@ -98,7 +125,7 @@
                 </div>
                 <div class="card-body">
                 <p class="admin-text">Gestion des comptes utilisateurs et des événements.</p>
-                    <a href="#" class="btn access">Accéder</a>
+                    <a href="{{ path('backoffice_admin_index')}}" class="btn access">Accéder</a>
                 </div>
             </div>
 
