@@ -4,22 +4,24 @@
 
 {% block body %}
  
- <main class="container ">
+ <main class="container events ">
   
         {# Title section #} 
 
-        <section class="title col-12 col-lg-12 text-center mb-5">
-            <a class="d-flex align-self-end ms-4 color-four text-decoration-none link"href="{{ path('dashboard')}}">Retour</a>
+        <section class="title text-center mb-5">
+        <button class="button-link d-flex align-self-end ms-4 bg-one rounded p-1">
+            <a class="text-decoration-none link color-four" href="{{ path('dashboard') }}">Retour</a>
+        </button>
             <h1 class="text-uppercase fw-bold">Mes Evenements</h1>
+            <h4><a href=""><i class="bi bi-plus-circle-fill"></i> Créer un nouvel événement</a></h4>
 
         </section>
 
+        <div class="navigation-event">
 
-        <div class="container navigation-event">
+        {# filter input #}
 
-        {#filter input #}
-
-            <div class="">
+            <div>
             <button type="button" class="btn  dropdown-toggle button-filter" data-bs-toggle="dropdown" aria-expanded="false">
                 Filtres
             </button>
@@ -49,18 +51,18 @@
 
          {# Events list section #}
 
-        <section class="event-list col-12 col-lg-12 text-center mt-5 mb-5 d-flex align-items-center">
-            <div class="border d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
+        <section class="event-list text-center d-flex align-items-center">
+            <div class="mx-auto">
                 <div>
                     <h2 class="fs-1 mb-5 color-three">Tous mes évènements</h2>
-                    <table class="table fs-3">
+                    <table class="events-table fs-3">
                         <thead>
                             <tr>
-                            <th scope="col">Evenement</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Ville</th>
-                            <th scope="col">Organisateur</th>
-                            <th scope="col"></th>
+                            <th class="event-title" scope="col">Evenement</th>
+                            <th class="event-date" scope="col">Date</th>
+                            <th class="event-city" scope="col">Ville</th>
+                            <th class="event-organizer" scope="col">Organisateur</th>
+                            <th class="event-actions"scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,25 +83,25 @@
                                 {% endif %}
                                 ">
                             {% endif %}
-                                    <th scope="row"
+                                    <td data-label="Evénement" scope="row" class="table-title
 
                                     {% if (event.status == 0) %}
-                                        class="color-five"
+                                        color-five
                                     {% endif %}
 
-                                    >{{event.title}}</th>
-                                    <td>{{event.date ? event.date|date('d-m-Y')}}</td>
+                                    ">{{event.title}}</td>
+                                    <td data-label="Date">{{event.date ? event.date|date('d-m-Y')}}</td>
                                     {# Use the twig filter 'split' to cut the adress #}
                                     {% set adressData = event.adress|split(' ')%}
                                     {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
-                                    <td>{{(adressData|last)|capitalize}}</td>
-                                    <td>{{event.user.pseudo}}</td>
-                                    <td>
+                                    <td data-label="Ville">{{(adressData|last)|capitalize}}</td>
+                                    <td data-label="Organisateur">{{event.user.pseudo}}</td>
+                                    <td data-label=" ">
                                         <a href="{{ path('event_show', {'id': event.id}) }}" title="Voir"><i class="bi bi-eye-fill color-three"></i></a>
-                                        <a href="{{ path('event_edit', {'id' : event.id}) }}" title="Modifier"><i class="bi bi-pencil-square color-four"></i></a>
+                                        <a href="{{ path('event_edit', {'id' : event.id}) }}" title="Modifier"><i class="bi bi-pencil-square color-two"></i></a>
                                         <a href="{{ path('event_archiving', {'id': event.id}) }}" title="
                                         {% if (event.status == 0) %}
-                                            {{'Archiver"><i class="bi bi-archive-fill color-one'}}
+                                            {{'Archiver"><i class="bi bi-archive-fill color-four'}}
                                         {% else %}
                                             {{'Sortir de l\'archive"><i class="bi bi-archive-fill color-five'}}
                                         {% endif %}
@@ -140,7 +142,6 @@
                         </tbody>
                     </table> 
                 </div>
-                    
             </div>
         </section>
 

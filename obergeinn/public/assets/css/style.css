@@ -1,8 +1,4 @@
-/* TODO gérer le dropdown et affichage menu en mobile
-    TODO gérer couleurs du menu user */
-
-
-/* ===== Color and background definition ====== */
+/* ================== Color and background definition ================ */
 html {
     --color-one: #060644;
     --color-two: #744eaa;
@@ -29,7 +25,7 @@ footer > div {
     display: flex;
     flex-direction: column;
 }
-/* ============= Navbar ============= */
+/* ================================ Navbar =========================== */
 header > div {
     height: 200px;
 }
@@ -207,7 +203,8 @@ nav a{
     width: 5rem;
 }
 
-/* ============= Home ============== */
+/* ============================= Home ================================ */
+
 .home-container {
     display: flex;
     justify-content: space-evenly;
@@ -277,7 +274,7 @@ footer > div > a {
     }
 }
 
-/* =========== Dashboard ============ */
+/* ============================ Dashboard =========================== */
 
 .card {
     position:static;
@@ -359,25 +356,7 @@ footer > div > a {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ============= Event details ============== */
+/* ========================== Event details ========================== */
 .color-one {
     color: var(--color-one);
 }
@@ -486,7 +465,7 @@ footer > div > a {
     font-size: 1em;
 }
 
-/* ============= Login ============== */
+/* ============================= Login ============================== */
 
 .login {
     width: 30%;
@@ -501,10 +480,88 @@ footer > div > a {
     color: var(--color-four);
 }
 
-/* ============= Event list ============== */
-.event-list > div{
-    width: 900px;
+/* =========================== Event list =========================== */
+
+.events h4 a {
+    font-weight: bold;
+    color: var(--color-four);
+    font-size: 1rem;
 }
+.navigation-event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.navigation-event > div > button {
+    margin-bottom: 40px;
+}
+.searchbar {
+    justify-content: center;
+}
+/* .event-list > div{
+    width: 900px;
+} */
+.event-list > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    color: white;
+    padding: 3rem;
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+}
+.event-list h2 {
+    font-weight: bold;
+}
+.events-table {
+    color: white;
+    margin-left: 12px;
+}
+.events-table thead tr {
+    font-size: 2rem;
+}
+.events-table tbody tr .table-title, .events-table tbody tr {
+    border-bottom: 1px solid var(--color-three);
+}
+
+@media (max-width: 700px){
+    .events-table thead {
+    display: none;
+    }
+    .events-table tr{
+    display: block;
+    margin-bottom: 40px;
+    }
+    .events-table td {
+    display: block;
+    text-align: right;
+    }
+    .events-table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    }
+}
+
+@media (min-width: 701px) {
+    .events-table thead tr {
+        border-bottom: 2px solid var(--color-three);
+    }
+    .events-table tbody tr, .events-table tbody tr .table-title {
+        border-bottom: 1px solid RGBa(255,255,255,0.3);
+    }
+    .event-title, .event-date, .event-city, .event-organizer {
+        width: 270px;
+    }
+    .navigation-event {
+        flex-direction: row;
+    }
+    .searchbar {
+        justify-content: flex-end;
+    }
+}
+
 
 .color-three {
     color: var(--color-three);
@@ -522,9 +579,6 @@ footer > div > a {
 
 /* ============= All-event ============== */
 
-.searchbar {
-    justify-content: flex-end;
-}
 
 .button-filter {
     color: var(--color-one);
@@ -554,11 +608,11 @@ footer > div > a {
     background-color: var(--color-one);
     border-color: var(--color-one);
 }
-
+/* 
 .navigation-event {
 
     display: inline-flex;
-}
+} */
 
 .addInput {
     color: var(--color-four);
