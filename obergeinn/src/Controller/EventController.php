@@ -209,10 +209,6 @@ class EventController extends AbstractController
         ]);
     }
 
-
-
-
-
      /**
      * 
      * Method allowing user to accept an event invitation
@@ -293,12 +289,12 @@ class EventController extends AbstractController
     public function archiving(int $id, EventRepository $eventRepository): Response
     {
         $event = $eventRepository->find($id);
-
+        // dd($event->getStatus());
         $em = $this->getDoctrine()->getManager();
         if ($event->getStatus() == 1) {
             $event->setStatus(0);
             $this->addFlash('warning', 'L\'événement ' . $event->getTitle() . ' a bien été archivé');
-        } else {
+        } elseif ($event->getStatus() == 0) {
             $event->setStatus(1);
             $this->addFlash('warning', 'L\'événement ' . $event->getTitle() . ' a bien été sorti des archives');
         }

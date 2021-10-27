@@ -21,7 +21,7 @@
                 <div class="card-header">
                     Mes événements
                 </div>
-                <div class="card-body">
+                <div class="events-card card-body">
                     <table>
                         <tr id="events-organized">
                             <td>Organisés</td>
@@ -58,7 +58,6 @@
                         </tr>
 
                     </table>
-                    <a href="{{path('event_index')}}" class="btn access">Accéder à la liste</a>
                 </div>
                 <div class="card-footer text-muted">
                 <p>
@@ -68,6 +67,7 @@
                     <a href="{{ path('mailer')}}"><i class="bi bi-envelope-fill"></i> Envoyer des invitations</a>
                 </p>
                 </div>
+                    <a href="{{path('event_index')}}" class="btn access">Accéder à la liste</a>
             </div>
             <div class="card text-center">
                 <div class="card-header">
@@ -99,11 +99,11 @@
                         </tr>
 
                     </table>
-                    <a href="{{ path('survey_index')}}" class="btn access">Accéder à la liste</a>
                 </div>
                 <div class="card-footer text-muted">
                     <a href="{{path('survey_create')}}"><i class="bi bi-plus-circle-fill"></i> Créer un nouveau sondage</a>
                 </div>
+                    <a href="{{ path('survey_index')}}" class="btn access">Accéder à la liste</a>
             </div>
             <div class="card text-center">
                 <div class="card-header">
@@ -113,8 +113,8 @@
                     <img src="{{ asset('uploads/' ~ app.user.image)}}" class="rounded-circle" alt="">
                     <p>{{app.user.firstname}} {{app.user.lastname}}</p>
                     <p>{{app.user.email}}</p>
-                    <a href="{{ path('user_index')}}" class="btn access">Accéder</a>
                 </div>
+                    <a href="{{ path('user_index')}}" class="btn access">Accéder</a>
             </div>
 
         {% if is_granted('ROLE_ADMIN') %}
@@ -125,8 +125,8 @@
                 </div>
                 <div class="card-body">
                 <p class="admin-text">Gestion des comptes utilisateurs et des événements.</p>
-                    <a href="{{ path('backoffice_admin_index')}}" class="btn access">Accéder</a>
                 </div>
+                    <a href="{{ path('backoffice_admin_index')}}" class="btn access">Accéder</a>
             </div>
 
         {% endif %}

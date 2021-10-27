@@ -109,6 +109,10 @@ nav a{
 .name-user-connected {
     display : none;
 }
+#deconnection {
+    background-color: var(--color-five);
+    color: var(--color-four);
+}
 @media screen and (min-width: 600px){
     nav {
         /* border-top: 3px solid var(--color-one); */
@@ -134,7 +138,7 @@ nav a{
     }
     nav > div > ul > li > a{
         color:var(--color-one);
-        font-weight: normal;
+        font-size: 1.5rem;
     }
     nav a{
         border-bottom: 2px solid transparent;
@@ -143,7 +147,6 @@ nav a{
     nav a:hover{
         color: var(--color-two);
         border-bottom: 2px solid var(--color-three);
-        font-weight: bold;
     }
     .under{
         display: none;
@@ -173,10 +176,6 @@ nav a{
         display: flex;
         flex-direction: row;
         align-content: center;
-    }
-    #deconnection {
-        background-color: var(--color-five);
-        color: var(--color-four)
     }
     #deconnection:hover {
        background-color: RGBa(117, 1, 1, 0.8);
@@ -319,6 +318,7 @@ footer > div > a {
     border: 2px solid var(--color-one);
     color: var(--color-one);
     font-weight: bold;
+    border-radius: 0em 0em 0.25em 0.25em;
 }
 .card-body > img {
     border: 3px solid var(--color-two);
@@ -337,6 +337,11 @@ footer > div > a {
 .card > .profile-card .access{
     margin-top: 38px;
 }
+.survey-card, .events-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 @media screen and (min-width: 600px) {
     #dashboard-section {
@@ -349,10 +354,6 @@ footer > div > a {
         margin-bottom: 40px;
         min-width: 269px;
         max-width: 270px;
-    }
-    .card-body > .survey-table {
-        margin-top: 30px;
-        margin-bottom: 38px;
     }
 }
 
@@ -495,12 +496,17 @@ footer > div > a {
 .navigation-event > div > button {
     margin-bottom: 40px;
 }
+.form-outline > input {
+    border-radius: 0.25em 0em 0em 0.25em;
+}
 .searchbar {
     justify-content: center;
+    position: static;
 }
-/* .event-list > div{
-    width: 900px;
-} */
+.searchbar .btn {
+    position: static;
+    border-radius: 0em 0.25em 0.25em 0em;
+}
 .event-list > div {
     display: flex;
     flex-direction: column;
@@ -510,9 +516,6 @@ footer > div > a {
     padding: 3rem;
     border: 2px solid var(--color-four);
     border-radius: 1%;
-}
-.event-list h2 {
-    font-weight: bold;
 }
 .events-table {
     color: white;
@@ -568,52 +571,40 @@ footer > div > a {
 }
 
 /* ============= Presentation ============== */
-
+/* 
 .avatar {
     width: 200px;
 }
 
 .li-logo {
     width: 130px;
-}
+} */
 
 /* ============= All-event ============== */
-
 
 .button-filter {
     color: var(--color-one);
     background-color: var(--color-four);
     border-color: var(--color-four);
 }
-
-
 .button-filter:hover{
     color: var(--color-four);
     background-color: var(--color-one);
     border-color: var(--color-one);
 
 }
-
-
 .button-search {
     color: var(--color-one);
     background-color: var(--color-three);
     border-color: var(--color-three);
     margin-bottom : 50;
 }
-
 .button-search:hover {
 
     color: var(--color-three);
     background-color: var(--color-one);
     border-color: var(--color-one);
 }
-/* 
-.navigation-event {
-
-    display: inline-flex;
-} */
-
 .addInput {
     color: var(--color-four);
     background-color: var(--color-two);
