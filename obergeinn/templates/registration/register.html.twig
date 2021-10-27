@@ -4,10 +4,10 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-<div class="d-flex flex-column align-items-center color-one">
+{% for flashError in app.flashes('verify_email_error') %}
+    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+{% endfor %}
+<section class="register-form">
     <h1>Inscription</h1>
 
     {{ form_start(registrationForm) }}
@@ -20,8 +20,9 @@
         }) }}
         {{ form_row(registrationForm.image) }}
         {{ form_row(registrationForm.agreeTerms) }}
-
+        <div class="register-button">
         <button type="submit" class="btn button_inscription">Valider</button>
+        </div>
     {{ form_end(registrationForm) }}
-</div>
+</section>
 {% endblock %}

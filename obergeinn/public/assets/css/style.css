@@ -272,6 +272,62 @@ footer > div > a {
         display: block;
     }
 }
+/* ============================ Register =========================== */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.register-form h1 {
+    color: var(--color-three);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.registration-label, registration-label > label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.registration-image input {
+    color: var(--color-one);
+}
+.register-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* ============================= Login ============================== */
+.connexion-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.connexion-form form h1 {
+    color: var(--color-three);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+.login {
+    width: 90%;
+    color: var(--color-four);
+    font-weight: bold;
+}
+.deconnexion {
+    color: var(--color-four);
+}
+@media screen and (min-width: 600px) {
+    .login {
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .login {
+        width: 30%;
+    }
+}
+
+
 
 /* ============================ Dashboard =========================== */
 
@@ -466,21 +522,6 @@ footer > div > a {
     font-size: 1em;
 }
 
-/* ============================= Login ============================== */
-
-.login {
-    width: 30%;
-}
-.button-connexion {
-    color: var(--color-one);
-    background-color: var(--color-three);
-    border-color: var(--color-three);
-}
-
-.deconnexion {
-    color: var(--color-four);
-}
-
 /* =========================== Event list =========================== */
 
 .events h4 a {
@@ -564,24 +605,9 @@ footer > div > a {
         justify-content: flex-end;
     }
 }
-
-
 .color-three {
     color: var(--color-three);
 }
-
-/* ============= Presentation ============== */
-/* 
-.avatar {
-    width: 200px;
-}
-
-.li-logo {
-    width: 130px;
-} */
-
-/* ============= All-event ============== */
-
 .button-filter {
     color: var(--color-one);
     background-color: var(--color-four);
@@ -612,7 +638,7 @@ footer > div > a {
     margin-bottom : 50;
 }
 
-/* ============= Profil ============== */
+/* ======================== Profil ========================= */
 
 .img-profil {
     width: 8%;
@@ -662,7 +688,7 @@ footer > div > a {
     place-items: center;
 
 } 
-/* ============= Mailer ============== */
+/* ============================ Mailer ===================== */
 
 
 .select-input {
@@ -675,7 +701,7 @@ footer > div > a {
 
 
 
-/* ============= Backoffice/ADMIN ============== */
+/* ====================== Backoffice/ADMIN ================= */
 
 
 .card-color {
@@ -731,9 +757,9 @@ footer > div > a {
     color: var(--color-one);
 }
 
-.form-check-input {
+/* .form-check-input {
     background-color: var(--color-four);
-}
+} */
 
 .form-checked-input:checked {
     background-color: var(--color-three);
@@ -762,7 +788,7 @@ footer > div > a {
     color: var(--color-one);
 }
 
-/* ============= Survey ============== */
+/* ======================= Survey =========================== */
 .survey-content {
     width: 30rem;
     padding: 2rem;

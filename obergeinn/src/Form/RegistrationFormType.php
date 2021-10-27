@@ -21,14 +21,31 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('lastname', null, [
                 'label' => 'Nom',
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ]
             ])
             ->add('firstname', null, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ]
             ])
-            ->add('pseudo')
-            ->add('email')
+            ->add('pseudo', null, [
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ]
+            ])
+            ->add('email', null, [
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ]
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'J\'accepte les conditions',
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ],
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -41,6 +58,9 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -76,6 +96,9 @@ class RegistrationFormType extends AbstractType
                         'mimeTypesMessage' => 'Merci de ne choisir que des fichiers .png ou .jpeg',
                     ])
                 ],
+                'row_attr' => [
+                    'class' => 'registration-label registration-image',
+                ]
             ])
         ;
     }
