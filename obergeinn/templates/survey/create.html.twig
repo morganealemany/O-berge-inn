@@ -4,14 +4,20 @@
 
 
 {% block body %}
-<div class="d-flex justify-content-center">
-    <div class="survey-content d-flex flex-column align-items-center color-four bg-one rounded text-center">
+<button class="button-link d-flex align-self-start ms-4 bg-one rounded p-1">
+    <a class="text-decoration-none link color-four" href="{{ path('survey_index') }}">Retour</a>
+</button>
+<div class="survey-create">
+    <section class="survey-form">
         <h1 class="fw-bold">Créer un sondage</h1>
-        <h4 class="mb-5 color-three">Pour choisir la date de l'événement</h4>
+        <h4 class="mb-5 color-three">Choix de la date</h4>
         <div style="color:white" class="fw-bold">
             {{ form_start (formView) }}
                 {{form_widget(formView)}}
-    <button type="submit" class="btn button_inscription mt-5">Valider</button>
+    <div class="survey-create-button">
+        <button type="submit" class="btn button_inscription">Valider
+        </button>
+    </div>
             {{ form_end (formView) }}
         </div>
     </div>

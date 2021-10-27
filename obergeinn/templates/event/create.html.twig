@@ -4,6 +4,10 @@
 
 {% block body %}
 {# Do not forget to add a link in the dashboard in order to display the Event create page #}
+<button class="button-link d-flex align-self-start ms-4 bg-one rounded p-1">
+    <a class="text-decoration-none link color-four" href="{{ path('event_index') }}">Retour</a>
+</button>
+
 <div class="event-create">
     <section class="event-create-form">
         <h1>Créer un évènement</h1>
@@ -20,7 +24,7 @@
             data-prototype="{{ form_widget(formView.need.vars.prototype)|e('html_attr') }}">
             </ul>
             <div class="event-create-buttons">
-                <button type="button" class="btn button_connexion add_item_link" data-collection-holder-class="need">Ajouter un besoin</button>
+                <button type="button" class="btn button_connexion add_item_link" data-collection-holder-class="need"><i class="bi bi-plus-circle-fill"></i> Ajouter un besoin</button>
 
                 <button type="submit" class="btn button_inscription">Valider</button>
             </div>

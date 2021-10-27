@@ -3,81 +3,90 @@
 {% block title %}Hello SurveyController!{% endblock %}
 
 {% block body %}
+<main class="container">
+    <section class="title mb-5">
+    {# <div class="d-flex justify-content-between"> #}
+        <button class="button-link d-flex align-self-end ms-4 bg-one rounded p-1">
+            <a class="text-decoration-none link color-four" href="{{ path('dashboard') }}">Retour</a>
+        </button>
+        {# <a href="{{path('survey_create')}}" class="me-5" title="Créer un sondage">
+            <i class="bi bi-plus-lg fs-3 color-three"></i>
+        </a> #}
+    {# </div> #}
+        <h1>Mes sondages</h1>
+        <h4><a href="{{ path('survey_create') }}"><i class="bi bi-plus-circle-fill"></i> Créer un nouveau sondage </a></h4>
 
-<div class="d-flex justify-content-between">
-    <button class="button-link d-flex align-self-end ms-4 bg-one rounded p-1">
-        <a class="text-decoration-none link color-four" href="{{ path('dashboard') }}">Retour</a>
-    </button>
-    <a href="{{path('survey_create')}}" class="me-5" title="Créer un sondage">
-        <i class="bi bi-plus-lg fs-3 color-three"></i>
-    </a>
-</div>
+    </section>
 
-<h1 class="text-center color-four fw-bold mb-5">Liste de mes sondages</h1>
 
-<div class="survey-table d-flex justify-content-center">
-    <table class="survey-list table table-striped fs-4 rounded">
-    <thead class="color-one">
-        <tr>
-            <th scope="col">Evenement</th>
-            <th scope="col">Choix 1</th>
-            <th scope="col">Choix 2</th>
-            <th scope="col">Choix 3</th>
-            <th scope="col">Actif/Inactif</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {# {{dump(totalGuestsList)}}
-    {{dump(totalConfirmedGuestsList)}} #}
+    <section class="survey-index">
+        <div class="mx-auto">
+            <table class="survey-table fs-3">
+            <thead class="color-one">
+                <tr>
+                    <th class="survey-event" scope="col">Evenement</th>
+                    <th class="survey-choice1" scope="col">Choix 1</th>
+                    <th class="survey-choice2" scope="col">Choix 2</th>
+                    <th class="survey-choice3" scope="col">Choix 3</th>
+                    <th class="survey-status" scope="col">Statut</th>
+                    <th class="survey-actions" scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {# {{dump(totalGuestsList)}}
+            {{dump(totalConfirmedGuestsList)}} #}
+            {% set choice = 0 %}
+            {% for survey in surveyList %}
+            {# {{dump(survey.event.participation)}} #}
+                <tr>
+                    <td data-label="Evénement" class="table-title" scope="row">{{survey.event.title}}</td>
+                    {% for responses in survey.surveyResponses %}
+                    {% set choice = choice + 1 %}
+                        <td data-label="Choix {{choice}}">{{responses.response|date('d-m-Y')}} 
+                        {# If the total number of confirmedGuests is up to 0 #}
+                        {# {{dump(responses.nbResponses)}} #}
+                        {% if totalConfirmedGuestsList[survey.event.title] > 0 %}
+                            <p>
+                                {{((responses.nbResponses * 100) / totalConfirmedGuestsList[survey.event.title])|number_format(0) }} %
+                            </p>
+                        </td>
+                        {# Else display default 0 percent for each choice of the survey#}
+                        {% else %}
+                            <p>
+                                0 %
+                            </p>
+                        {% endif %}
+                    {% endfor %}
 
-    {% for survey in surveyList %}
-    {# {{dump(survey.event.participation)}} #}
-        <tr style="color:white">
-            <th scope="row">{{survey.event.title}}</th>
-            {% for responses in survey.surveyResponses %}
-                <td>{{responses.response|date('d-m-Y')}} 
-                {# If the total number of confirmedGuests is up to 0 #}
-                {# {{dump(responses.nbResponses)}} #}
-                {% if totalConfirmedGuestsList[survey.event.title] > 0 %}
-                    <p class="text-center">
-                        {{((responses.nbResponses * 100) / totalConfirmedGuestsList[survey.event.title])|number_format(0) }} %
-                    </p>
-                </td>
-                {# Else display default 0 percent for each choice of the survey#}
-                {% else %}
-                    <p class="text-center">
-                        0 %
-                    </p>
-                {% endif %}
+                    {% if survey.status == 1 %}
+                        <td data-label="Statut" class="color-three fw-bold">Actif</td>
+                        <td>
+                            <a class="text-decoration-none" href="{{path('survey_activate', {'id': survey.id})}}" title="Désactiver">
+                                <i class="bi bi-pause me-4 color-four fs-2"></i>
+                            </a>
+                            <a href="{{path('survey_delete', {'id': survey.id})}}" title="Supprimer">
+                                <i class="bi bi-x-lg color-five"></i>
+                            </a>
+                        </td>
+                    {% else %}
+                        <td data-label="Statut" class="color-four fw-bold">Inactif</td>
+                        <td>
+                            <a class="text-decoration-none" href="{{path('survey_activate', {'id': survey.id})}}" title="Activer">
+                                <i class="bi bi-power me-4 color-three fs-2"></i>
+                            </a>
+                            <a href="{{path('survey_delete', {'id': survey.id})}}" title="Supprimer">
+                                <i class="bi bi-x-lg color-five"></i>
+                            </a>
+                        </td>
+                    {% endif %}
+
+                </tr>
             {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </section>
+</main>
 
-            {% if survey.status == 1 %}
-                <td class="color-three fw-bold">Actif</td>
-                <td class="text-center">
-                    <a class="text-decoration-none" href="{{path('survey_activate', {'id': survey.id})}}" title="Désactiver">
-                        <i class="bi bi-pause me-4 color-four fs-2"></i>
-                    </a>
-                    <a href="{{path('survey_delete', {'id': survey.id})}}" title="Supprimer">
-                        <i class="bi bi-x-lg color-five"></i>
-                    </a>
-                </td>
-            {% else %}
-                <td class="color-four fw-bold">Inactif</td>
-                <td class="text-center">
-                    <a class="text-decoration-none" href="{{path('survey_activate', {'id': survey.id})}}" title="Activer">
-                        <i class="bi bi-power me-4 color-three fs-2"></i>
-                    </a>
-                    <a href="{{path('survey_delete', {'id': survey.id})}}" title="Supprimer">
-                        <i class="bi bi-x-lg color-five"></i>
-                    </a>
-                </td>
-            {% endif %}
-
-        </tr>
-    {% endfor %}
-    </tbody>
-    </table>
-</div>
 
 {% endblock %}

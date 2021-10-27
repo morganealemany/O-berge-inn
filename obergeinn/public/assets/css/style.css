@@ -6,6 +6,33 @@ html {
     --color-four: #fcd779;
     --color-five: #750101;
 }
+.bg-one {
+    background-color: var(--color-one);
+}
+.bg-two {
+    background-color: var(--color-two);
+}
+.bg-three {
+    background-color: var(--color-three);
+}
+.bg-four {
+    background-color: var(--color-four);
+}
+.color-one {
+    color: var(--color-one);
+}
+.color-two {
+    color: var(--color-two);
+}
+.color-three {
+    color: var(--color-three);
+}
+.color-four {
+    color: var(--color-four);
+}
+.color-five {
+    color: var(--color-five);
+}
 body {
     font-family: 'Raleway', sans-serif;
     background-color: var(--color-two);
@@ -13,11 +40,9 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 main {
     flex: 1 0 auto;
 }
-
 footer {
     flex-shrink: 0;
 }
@@ -465,13 +490,6 @@ footer > div > a {
     }
 }
 /* ============================ Mailer ===================== */
-/* .select-input {
-    width: 18%;
-}
-
-.titleMailer {
-    text-align: center;
-} */
 .invitation {
     display: flex;
     flex-direction: column;
@@ -546,19 +564,6 @@ footer > div > a {
 }
 
 /* ========================== Event details ========================== */
-.color-one {
-    color: var(--color-one);
-}
-.color-four {
-    color: var(--color-four);
-}
-.color-two {
-    color: var(--color-two);
-}
-.color-five {
-    color: var(--color-five);
-}
-
 /* Title section */
 .title {
     font-family: 'Raleway', sans-serif;
@@ -737,9 +742,6 @@ footer > div > a {
         justify-content: flex-end;
     }
 }
-.color-three {
-    color: var(--color-three);
-}
 .button-filter {
     color: var(--color-one);
     background-color: var(--color-four);
@@ -844,23 +846,6 @@ footer > div > a {
     display: grid;
 }
 /* ============= Formulaires admin ============== */
-
-.bg-one {
-    background-color: var(--color-one);
-}
-
-.bg-two {
-    background-color: var(--color-two);
-}
-
-.bg-three {
-    background-color: var(--color-three);
-}
-
-.bg-four {
-    background-color: var(--color-four);
-}
-
 .border-three {
     border: 1px solid var(--color-three);
 }
@@ -908,14 +893,109 @@ footer > div > a {
     color: var(--color-one);
 }
 
-/* ======================= Survey =========================== */
-.survey-content {
-    width: 30rem;
-    padding: 2rem;
-    border: 2px solid var(--color-four);
+/* ======================= Survey-list =========================== */
+main .title h4 a {
+    font-weight: bold;
+    color: var(--color-four);
+    font-size: 1rem;
 }
-.survey-list {
-    width: 80%;
-    background-color: rgba(6,6,68,0.30);
+.survey-index > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    color: white;
+    padding: 3rem;
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+}
+.survey-table {
+    color: white;
+    margin-left: 12px;
+}
+.survey-table thead tr {
+    font-size: 2rem;
+}
+.survey-table tbody tr .table-title, .survey-table tbody tr {
+    border-bottom: 1px solid var(--color-three);
+}
+.title {
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+.title > h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+@media (max-width: 770px){
+    .survey-index {
+        display: flex;
+    }
+    .survey-table thead {
+        display: none;
+    }
+    .survey-table tr{
+        display: block;
+        margin-bottom: 40px;
+    }
+    .survey-table td {
+        display: block;
+        text-align: right;
+    }
+    .survey-table td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+}
+@media (min-width: 771px) {
+    .survey-table table thead tr {
+        border-bottom: 2px solid var(--color-three);
+    }
+    .survey-table table tbody tr, .events-table tbody tr .table-title {
+        border-bottom: 1px solid RGBa(255,255,255,0.3);
+    }
+    .survey-event, .survey-choice1, .survey-choice2, .survey-choice3, .survey-status {
+        width: 270px;
+    }
 }
 
+/* ======================= Survey create =========================== */
+.survey-create {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.survey-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+    width : 90%;
+}
+.survey-form h1 {
+    text-align: center;
+    color: var(--color-four);
+    font-weight: bold;
+    font-size: 2em;
+    margin-top: 20px;
+}
+.survey-create-button {
+    text-align: center;
+}
+
+@media screen and (min-width: 600px) {
+    .survey-create {
+        margin-top: 0;
+    }
+    .survey-form {
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .survey-form {
+        width: 40%
+    }
+}
