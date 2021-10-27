@@ -23,22 +23,34 @@ class EventCreateType extends AbstractType
     {
         $builder
             ->add('title', null, [
-                'label' => 'Titre'
+                'label' => 'Titre',
+                'row_attr' => [
+                    'class' => 'event-create-form-label'
+                ],
                 // In the parameter of the add method (the property, the type of poperty, an array)
                 // It allows us to modify the label of the input in the form
                 // Labels are by défautl in English in the Event entity
             ])
             ->add('adress', null, [
-                'label' => 'Adresse'
+                'label' => 'Adresse',
+                'row_attr' => [
+                    'class' => 'event-create-form-label'
+                ],
             ])
             ->add('description', null, [
-                'label' => 'Description'
+                'label' => 'Description',
+                'row_attr' => [
+                    'class' => 'event-create-form-label'
+                ],
             ])
             ->add('date', DateTimeType::class, [
                 'required' => false,
                 'label' => 'Date',
                 'widget'=> 'single_text',
                 'input' => 'datetime_immutable',
+                'row_attr' => [
+                    'class' => 'event-create-form-label'
+                ],
             ])
 
             ->add('need', CollectionType::class, [
@@ -46,7 +58,11 @@ class EventCreateType extends AbstractType
                 'entry_type' => NeedType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'row_attr' => [
+                    'class' => 'event-create-form-label'
+                ],
+
             ]);
     }
     public function configureOptions(OptionsResolver $resolver)
@@ -56,28 +72,3 @@ class EventCreateType extends AbstractType
         ]);
     }
 }
-
-// ->add('imgUpload', FileType::class, [
-//     'label' => 'Choisir une image',
-
-//     // unmapped means that this field is not associated to any entity property
-//     'mapped' => false,
-
-//     // make it optional so you don't have to re-upload the PDF file
-//     // every time you edit the Product details
-//     'required' => false,
-
-//     // unmapped fields can't define their validation using annotations
-//     // in the associated entity, so you can use the PHP constraint classes
-//     'constraints' => [
-//         new File([
-//             'maxSize' => '1024k',
-//             'mimeTypes' => [
-//                 'image/png',
-//                 'image/jpeg'
-//             ],
-//             'mimeTypesMessage' => 'Merci de ne choisir que des fichiers .png et .jpeg',
-//         ])
-//     ],
-// ])
-// ;

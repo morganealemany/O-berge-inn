@@ -307,6 +307,7 @@ footer > div > a {
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
+    font-size: 2.5em;
 }
 .login {
     width: 90%;
@@ -326,8 +327,6 @@ footer > div > a {
         width: 30%;
     }
 }
-
-
 
 /* ============================ Dashboard =========================== */
 
@@ -410,6 +409,139 @@ footer > div > a {
         margin-bottom: 40px;
         min-width: 269px;
         max-width: 270px;
+    }
+}
+
+/* ========================== Event create ========================== */
+.event-create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+.event-create-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+    width : 90%;
+}
+.event-create-form h1 {
+    text-align: center;
+    color: var(--color-four);
+    font-weight: bold;
+    font-size: 2em;
+    margin: 20px 0 20px 0;
+}
+.event-create-form-label > label {
+    color: var(--color-three);
+    font-weight: bold;
+}
+.need-create-form-label > label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.event-create-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.event-create-buttons > button {
+    margin-bottom: 10px;
+}
+@media screen and (min-width: 600px) {
+    .event-create {
+        margin-top: 0;
+    }
+    .event-create-form {
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .event-create-form {
+        width: 40%
+    }
+}
+/* ============================ Mailer ===================== */
+/* .select-input {
+    width: 18%;
+}
+
+.titleMailer {
+    text-align: center;
+} */
+.invitation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+.invitation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+    width : 90%;
+}
+.invitation-form h1 {
+    text-align: center;
+    color: var(--color-four);
+    font-weight: bold;
+    font-size: 2em;
+    margin-top: 20px;
+}
+.input-group-text {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+.event-choice-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.select-input {
+    width: 90%;
+}
+.email-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.email-form label {
+    color: var(--color-four);
+    font-weight: bold;
+    margin-right: 10px;
+}
+.email-form div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.email-input-section {
+    text-align: center;
+    width: 80%;
+}
+.button-submit-invitation {
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 600px) {
+    .invitation {
+        margin-top: 0;
+    }
+    .invitation-form {
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .invitation-form {
+        width: 40%
     }
 }
 
@@ -688,18 +820,6 @@ footer > div > a {
     place-items: center;
 
 } 
-/* ============================ Mailer ===================== */
-
-
-.select-input {
-    width: 18%;
-}
-
-.titleMailer {
-    text-align: center;
-}
-
-
 
 /* ====================== Backoffice/ADMIN ================= */
 

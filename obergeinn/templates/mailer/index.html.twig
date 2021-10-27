@@ -6,32 +6,35 @@
 
 {# {{dump(app.user.event)}} #}
 
-
-
-            <h1 class="titleMailer">Invitation</h1>
-
-        
+<div class="invitation">
+    <section class="invitation-form">
+        <h1 class="titleMailer">Envoyer des invitations</h1>
+        <h4 class="mb-5 color-three">Pour votre événement</h4>
         <form action="" method="POST">
-        <div class="d-flex flex-column align-items-center color-one">
-            {# Event choose #}
-            <label class="input-group-text" for="inputGroupSelect01">Choisir un événement</label>
-            <select class="form-select select-input" id="inputGroupSelect01" name="eventId">
-                {% for event in app.user.event %}
-                    <option value="{{event.id}}">{{event.title}} créé le {{event.createdAt|date('d-m-Y')}}</option>
-                {% endfor %}
-            </select>
-        </div>
+            <div class="event-choice-form">
+                {# Event choose #}
+                <label class="input-group-text" for="inputGroupSelect01">Choisir un événement</label>
+                <select class="form-select select-input" id="inputGroupSelect01" name="eventId">
+                    {% for event in app.user.event %}
+                        <option value="{{event.id}}">{{event.title}} créé le {{event.createdAt|date('d-m-Y')}}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-            {# Email input #}
-        <div class="d-flex flex-column align-items-center color-one">
-            <label for="mail">Adresse mail invités</label>
-            <a class="add-email-input"><i class="bi bi-plus-square-fill fs-3 addInput"></i></a>
-            <section class="email-input-section">
-                <input type="email" name="mail[]" id="mail" required>
-            </section>
-            <input class="btn button_inscription" type="submit" value="Envoyer">
-        </div>
+                {# Email input #}
+            <div class="email-form">
+                <div>
+                <label for="mail">Adresse mail invités</label>
+                    <a class="add-email-input"><i class="bi bi-plus-square-fill fs-3 addInput"></i></a>
+                </div>
+                <section class="email-input-section">
+                    <input type="email" name="mail[]" id="mail" required>
+                </section>
+                <input class="button-submit-invitation btn button_inscription" type="submit" value="Envoyer">
+            </div>
         </form>
+    </section>
+</div>
         
 
         {# Template #}
