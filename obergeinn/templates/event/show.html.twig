@@ -3,58 +3,50 @@
 {% block title %}Evenement X - {{ parent() }}{% endblock %}
 
 {% block body %}
-<div class="container show"></div>
-    <div class="row">
+<div class="container show">
+    <button class="button-link d-flex align-self-start ms-4 bg-one rounded p-1">
+        <a class="text-decoration-none link color-four" href="{{ path('event_index') }}">Retour</a>
+    </button>
 
         {# Title section #}
 
-        <section class="title col-12 col-lg-12 text-center mb-5">
+        <section class="title">
         {#redirect to eventlist not dashboard #}  
-          <a class="d-flex align-self-end ms-4 color-four text-decoration-none link"href="{{ path('dashboard') }}">Retour</a>
             <h1 class="text-uppercase fw-bold">{{event.title}}</h1>
-            <h3 id="by-pseudo"class="fw-bold color-three mb-5">BY {{event.user.pseudo}}</h3>
+            <h3 id="by-pseudo"class="fw-bold color-three mb-5">by {{event.user.pseudo}}</h3>
             
-            {# Description #}
-
-            <div class="accordion d-inline-block" id="accordion">
-                <div class="accordion-item bg-one">
-                <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button collapsed" id="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                   Description
-                </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
-                    <div class="accordion-body">
-                    <p class="color-four"> {{event.description}} </p>
-                    </div>
-                </div>
-                </div>
+        </section>
+    <div class="event-details-content">
+        {# Description section #}
+        <section class="description">
+            <div>
+                <h2>Description</h2>
+                <p>{{event.description}}</p>
             </div>
+        
         </section>
-
+           
         {# Adress section #}
+        <section class="adress">
 
-        <section class="adress col-12 col-lg-7 order-lg-1 text-center d-flex flex-column">
+            <div class="adress-text">
+                <h2 class="color-three mt-2">Adresse </h2>
+                <p id="adress" class="fs-4 color-four" data-adress="{{event.adress}}">{{event.adress}}</p>
+                
+            </div>
 
-        <div class="adress-text d-flex flex-column align-self-center rounded-top bg-one">
-            <h2 class="color-three mt-2">Adresse </h2>
-            <p id="adress" class="fs-4 color-four" data-adress="{{event.adress}}">{{event.adress}}</p>
-            
-        </div>
-
-        <div id="map" class="align-self-center border rounded-bottom"></div>
+            <div id="map" class="align-self-center border rounded-bottom"></div>
 
         </section>
 
-        {# Survey section #}
-                     
-        <section class="survey col-12 col-lg-6 order-lg-3 text-center mt-5 mb-5 d-flex align-items-center">
-            <div class="border bg-light d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
-                <div class="survey-list">
+        {# Survey section #}            
+        <section class="survey">
+            <div class="mx-auto">
               
                 {# If a survey exists for this event, display the survey #}
                 {% if event.survey and event.survey.status == true %}
-                <h2 class="fs-1 mt-2 mb-3 color-one">Sondage</h2>
+                <h2>Sondage</h2>
+                <div class="survey-list">
 
                     {% set dateChoiceNumber = 1 %}
                     {% for responses in event.survey.surveyResponses %}
@@ -75,12 +67,6 @@
                                     {{responses.response|date('d-M-Y')}}
                                 </label>
                             </div>
-                                {# <div class="progress align-self-center">
-                                    <div class="progress">
-                                        <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </div> #}
                                 {% set dateChoiceNumber = dateChoiceNumber + 1 %}
                     {% endfor %}
                                 <input type="submit" value="Valider" class="button_inscription mt-2 mb-2" 
@@ -98,7 +84,7 @@
                             </form> 
 
                 {% else %}
-                <p class="fs-4 mt-3">Date :
+                <p class="event-details-date fs-4">Date :
                 {# we have create a condition for display the Date of the event if it's defined, else show "ND" for "non définie"#}
                 {{ event.date ? event.date|date('d-m-Y') : 'NC' }}
                 </p>                
@@ -108,110 +94,109 @@
         </section> 
 
         {# Need section #}
+        <section class="need-section">
+            <div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-lg button-needs" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Liste des besoins
+                </button>
 
-        <section class=" need col-12 col-lg-5 order-lg-2 d-flex justify-content-center flex-column align-items-center mb-5">
-        
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-lg button-needs mb-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Liste des besoins
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title fw-bold" id="staticBackdropLabel">Liste des besoins</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="" method="post" class="modal-body">
-
-                        {# For every needs of the current event #}
-                        {% for need in event.need %}
-
-                        <div class="form-check d-flex fs-4">
-                            <input class="form-check-input-modal me-2" type="checkbox" value="" id="flexCheck{{need.id}}"
-                            
-                            {# We retrieve all quantities which are already assigned #}
-                            {% set totalAssignations = 0 %}
-                            {% for assignation in need.assignations %}
-                                {# We add them up #}
-                                {% set totalAssignations = totalAssignations + assignation.quantity %}
-                                {# If the difference between the quantity needed and the quantity already assigned is null or negative #}
-                                {% if need.quantity - totalAssignations <= 0 %}
-                                {# disabled the checkbox to avoid another assignation #}
-                                    {{"disabled"}}
-                                {% endif %}
-                            {% endfor %}
-                             
-                            >
-                            <label class="form-check-label" for="flexCheck{{need.id}}">
-
-                            {{need.quantity}} {{need.measureUnit.unit}} {{need.name}}                        
-                            
-                            </label>
-                            <input class="ms-2 fs-6 checkbox-need" type="number" name="quantity-assignees{{need.id}}" hidden>
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-bold" id="staticBackdropLabel">Liste des besoins</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        {% endfor %}
+                        <form action="" method="post" class="modal-body">
 
-                    <div class="modal-footer">
-                        <p class="text-center color-five"
-                        {% for participation in app.user.participation %}
-                            {% if participation.event == event and participation.status == true %}
-                                hidden
-                            {% endif %}
-                        {% endfor %}
-                                ><i class="bi bi-exclamation-triangle-fill"></i> Tu ne peux pas t'assigner de besoins si tu ne confirmes pas ta présence à l'événement.</p>
-                                <button type="button" class="btn button-close" data-bs-dismiss="modal">Fermer</button>
-                                <input type="submit" class="btn button-validate button-validate-need-assignees"
-                                {% for participation in app.user.participation %}
-                            {% if participation.event == event and participation.status == false %}
-                                hidden
-                            {% endif %}
-                        {% endfor %}></input>
-                               
-                                        
-                    </div>
-                    </form>
-                    <div class="ms-4">
-                        <h5 class="fw-bold">Ce que vous devez apporter</h5>
-                        {% for need in event.need %}
-                            {% for assignation in app.user.assignations %}
-                                {% if need.id == assignation.need.id %}
-                                    <ul>
-                                    <li>{{assignation.quantity}} {{assignation.need.measureUnit.unit}} {{assignation.need.name}}</li>
-                                    </ul>
+                            {# For every needs of the current event #}
+                            {% for need in event.need %}
+
+                            <div class="form-check d-flex fs-4">
+                                <input class="form-check-input-modal me-2" type="checkbox" value="" id="flexCheck{{need.id}}"
+                                
+                                {# We retrieve all quantities which are already assigned #}
+                                {% set totalAssignations = 0 %}
+                                {% for assignation in need.assignations %}
+                                    {# We add them up #}
+                                    {% set totalAssignations = totalAssignations + assignation.quantity %}
+                                    {# If the difference between the quantity needed and the quantity already assigned is null or negative #}
+                                    {% if need.quantity - totalAssignations <= 0 %}
+                                    {# disabled the checkbox to avoid another assignation #}
+                                        {{"disabled"}}
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                >
+                                <label class="form-check-label" for="flexCheck{{need.id}}">
+
+                                {{need.quantity}} {{need.measureUnit.unit}} {{need.name}}                        
+                                
+                                </label>
+                                <input class="ms-2 fs-6 checkbox-need" type="number" name="quantity-assignees{{need.id}}" hidden>
+                            </div>
+                            {% endfor %}
+
+                        <div class="modal-footer">
+                            <p class="text-center color-five"
+                            {% for participation in app.user.participation %}
+                                {% if participation.event == event and participation.status == true %}
+                                    hidden
                                 {% endif %}
                             {% endfor %}
-                        {% endfor %}
-                    </div>
-                    <div class="ms-4">
-                        <h5 class="fw-bold">Qui amène quoi?</h5>
-                        {% for need in event.need %}
-                            {% for assignation in need.assignations %}
-                            <ul>
-                                <li> <em class="fw-bold color-two">{{assignation.user.pseudo}} </em> apporte {{assignation.quantity}} {{assignation.need.measureUnit.unit}} {{assignation.need.name}} </p>
-                            </ul>
+                                    ><i class="bi bi-exclamation-triangle-fill"></i> Tu ne peux pas t'assigner de besoins si tu ne confirmes pas ta présence à l'événement.</p>
+                                    <button type="button" class="btn button-close" data-bs-dismiss="modal">Fermer</button>
+                                    <input type="submit" class="btn button-validate button-validate-need-assignees"
+                                    {% for participation in app.user.participation %}
+                                {% if participation.event == event and participation.status == false %}
+                                    hidden
+                                {% endif %}
+                            {% endfor %}></input>
+                                
+                                            
+                        </div>
+                        </form>
+                        <div class="ms-4">
+                            <h5 class="fw-bold">Ce que vous devez apporter</h5>
+                            {% for need in event.need %}
+                                {% for assignation in app.user.assignations %}
+                                    {% if need.id == assignation.need.id %}
+                                        <ul>
+                                        <li>{{assignation.quantity}} {{assignation.need.measureUnit.unit}} {{assignation.need.name}}</li>
+                                        </ul>
+                                    {% endif %}
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
-                    </div> 
+                        </div>
+                        <div class="ms-4">
+                            <h5 class="fw-bold">Qui amène quoi?</h5>
+                            {% for need in event.need %}
+                                {% for assignation in need.assignations %}
+                                <ul>
+                                    <li> <em class="fw-bold color-two">{{assignation.user.pseudo}} </em> apporte {{assignation.quantity}} {{assignation.need.measureUnit.unit}} {{assignation.need.name}} </p>
+                                </ul>
+                                {% endfor %}
+                            {% endfor %}
+                        </div> 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: {{needsPercent}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                {{needsPercent}}%
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: {{needsPercent}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    {{needsPercent}}%
+                    </div>
                 </div>
             </div>
         </section>
 
         {# Guest section #}
+        <section class="guest">
+            <div>
+                <h2>Invités</h2>
 
-        <section class="guest col-12 col-lg-6 order-lg-4 text-center d-flex align-items-center justify-content-center">
-            <div class="border rounded-3 d-flex flex-column align-items-center">
-                <h2 class="fs-1 mt-5 mb-5 color-one">Invités</h2>
-
-                <div class="guest-list d-flex flex-wrap justify-content-center mb-5">
+                <div class="guest-list">
 
                 {% for participation in event.participation %}
                     {% if participation.status == true %}
@@ -243,8 +228,9 @@
             </div>
         </section>
 
+    </div>
         {# Participation section #}
-        <section class="participation col-12 col-lg-12 order-lg-5 text-center d-flex justify-content-evenly mt-5">
+        <section class="participation">
 
             {# Pour chaque participation de l'utilisateur connecté #}
             {% for participation in app.user.participation %}
@@ -252,47 +238,15 @@
                 {# On vérifie si l'event de la participation correspond à l'event en cours #}
                 {% if participation.event == event and participation.status == false %}
 
-                    <div class="text-success fw-bold fs-3">
-                        <a href="{{path('event_accept', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de participer à cet évènement ?');"> <i class="bi bi-hand-thumbs-up-fill text-success btn fs-1 ms-4 me-3"></i></a>
-                        <p>Je participe</p>
-                    </div>
-            
-                    <div class="text-danger fw-bold fs-3">
-                        <a href="" onclick="return confirm('Es-tu sûr de ne pas participer à cet évènement ?');"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
-                        <p>Je ne participe pas</p>        
-                    </div> 
+                        <a href="{{path('event_accept', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de participer à cet évènement ?');" class="participation-accept" title= "Accepter l'invitation"> <i class="bi bi-check-circle-fill"></i></a>
+
+                        <a href="{{path('event_deny', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de ne pas participer à cet évènement ?');" class="participation-deny" title="Refuser l'invitation"><i class="bi bi-x-circle-fill"></i></a>
 
                 {% elseif participation.event == event and participation.status == true %}
-                    <div class="text-danger fw-bold fs-3">
-                        <a href="{{path('event_deny', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de ne pas participer à cet évènement ?');"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
-                        <p>Je ne participe plus</p>        
-                    </div> 
+                        <a href="{{path('event_deny', {'id': event.id})}}" onclick="return confirm('Es-tu sûr de ne pas participer à cet évènement ?');" class="participation-deny" title="Je ne participe plus"><i class="bi bi-x-circle-fill"></i></a>
                     
                 {% endif %}
             {% endfor %} 
         </section>
-    </div>
 </div>
 {% endblock %}
-
-
-
-
-
-
-
-
-{# 
-        <section class="participation col-12 col-lg-12 order-lg-5 text-center d-flex justify-content-evenly mt-5">
-            <div class="text-success fw-bold fs-3">
-                <a href="{{ path('event_accept-participate', {'id': event.id}) }}"> <i class="bi bi-hand-thumbs-up-fill text-success btn fs-1 ms-4 me-3"></i></a>
-                <p>Je participe</p>
-            </div>
-            <div class="text-danger fw-bold fs-3">
-                <a href="{{ path('event_deny-participate', {'id': event.id}) }}"><i class="bi bi-hand-thumbs-down-fill text-danger btn fs-1 ms-4 me-3"></i></a>
-                <p>Je ne participe pas</p>        
-            </div>
-        </section>
-    </div>
-</div>
-{% endblock %} #}
