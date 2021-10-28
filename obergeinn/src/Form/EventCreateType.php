@@ -5,8 +5,6 @@ namespace App\Form;
 use App\Entity\Need;
 use App\Entity\Event;
 use App\Entity\MeasureUnit;
-use Doctrine\DBAL\Types\TextType as TypesTextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -22,7 +20,7 @@ class EventCreateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, [
+            ->add('title', TextType::class, [
                 'label' => 'Titre',
                 'row_attr' => [
                     'class' => 'event-create-form-label'
@@ -31,7 +29,7 @@ class EventCreateType extends AbstractType
                 // It allows us to modify the label of the input in the form
                 // Labels are by défautl in English in the Event entity
             ])
-            ->add('adress', null, [
+            ->add('adress', TextType::class, [
                 'label' => 'Adresse',
                 'row_attr' => [
                     'class' => 'event-create-form-label'

@@ -308,6 +308,9 @@ footer > div > a {
     font-weight: bold;
     text-transform: uppercase;
 }
+.register-form form {
+    width: 90%;
+}
 .registration-label, registration-label > label {
     color: var(--color-four);
     font-weight: bold;
@@ -320,6 +323,24 @@ footer > div > a {
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
+}
+@media screen and (min-width: 400px) {
+    .register-form form {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .register-form form {
+        width: 40%;
+    }
+    .return-button {
+    margin-top: 0;
+    }
+}
+@media screen and (min-width:1000px) {
+    .register-form form  {
+        width: 400px;
+    }
 }
 
 /* ============================= Login ============================== */
@@ -808,6 +829,73 @@ footer > div > a {
         order: 6;
     }
 }
+/* =========================== Event edition =========================== */
+.event-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.event-edit h1 {
+    color: var(--color-three);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+.event-edit span {
+    color: var(--color-four);
+}
+.event-edit form {
+    width: 90%;
+}
+.event-edit-form-label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.edit-event-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+}
+/* .button-edit-password {
+    margin-top: 20px;
+}
+.button-edit-password a {
+    color: var(--color-one);
+    text-decoration: none;
+}
+.button-edit-password a:hover {
+    color: var(--color-four);
+    background-color: var(--color-one);
+} */
+@media screen and (min-width: 400px) {
+    .event-edit form {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .event-edit form {
+        width: 40%;
+    }
+    .return-button {
+    margin-top: 0;
+    }
+}
+@media screen and (min-width:1000px) {
+    .event-edit form  {
+        width: 400px;
+    }
+    /* .edit-event-button {
+        flex-direction: row;
+        justify-content: space-evenly;
+    } */
+    /* .button-edit-password {
+        margin-top: 0;
+    } */
+}
+
+
+
 
 /* =========================== Event list =========================== */
 .events h4 a {
@@ -855,7 +943,7 @@ footer > div > a {
     border-bottom: 1px solid var(--color-three);
 }
 
-@media (max-width: 700px){
+@media (max-width: 770px){
     .events-table thead {
     display: none;
     }
@@ -874,7 +962,7 @@ footer > div > a {
     }
 }
 
-@media (min-width: 701px) {
+@media (min-width: 771px) {
     .events-table thead tr {
         border-bottom: 2px solid var(--color-three);
     }
@@ -1143,7 +1231,6 @@ main .title h4 a {
 }
 /* ====================== Backoffice/ADMIN ================= */
 
-
 .card-color {
 
     background-color: #060644;
@@ -1167,41 +1254,26 @@ main .title h4 a {
 .border-three {
     border: 1px solid var(--color-three);
 }
-
 .nav-link-custom {
     display: block;
     padding: 0.5rem 1rem;
     color: var(--color-four);
     text-decoration: none;
 }
-
 .nav-link-custom:hover, .active {
     background-color: var(--color-four);
     color: var(--color-one);
 }
-
-/* .form-check-input {
-    background-color: var(--color-four);
-} */
-
 .form-checked-input:checked {
     background-color: var(--color-three);
 }
-
 .menu-item:hover {
     background-color: var(--color-four);
     color: var(--color-one);
 }
-
 .accordion {
     width: 20rem;
 }
-
-/* button.accordion-button:not(.collapsed), button.accordion-button {
-    color: var(--color-one);
-    background-color: var(--color-four);
-} */
-
 #accordion-button:not(.collapsed), #accordion-button {
     color: var(--color-one);
     background-color: var(--color-four);
@@ -1315,5 +1387,70 @@ main .title h4 a {
 @media screen and (min-width: 1000px) {
     .survey-form {
         width: 40%
+    }
+}
+/* ======================= Search =========================== */
+main .title h4 {
+    font-weight: bold;
+    color: var(--color-four);
+    font-size: 2rem;
+}
+.search > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    color: white;
+    padding: 3rem;
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+}
+.search-table {
+    color: white;
+}
+.search-table thead tr {
+    font-size: 2rem;
+}
+.search-table tbody tr .table-title, .search-table tbody tr {
+    border-bottom: 1px solid var(--color-three);
+}
+.title {
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+.title > h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+@media (max-width: 770px){
+    .search {
+        display: flex;
+    }
+    .search-table thead {
+        display: none;
+    }
+    .search-table tr{
+        display: block;
+        margin-bottom: 40px;
+    }
+    .search-table td {
+        display: block;
+        text-align: right;
+    }
+    .search-table td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+}
+@media (min-width: 771px) {
+    .search-table thead tr {
+        border-bottom: 2px solid var(--color-three);
+    }
+    .search-table tbody tr, .search-table tbody tr .table-title {
+        border-bottom: 1px solid RGBa(255,255,255,0.3);
+    }
+    .search-event, .search-date, .search-city, .search-organizer {
+        width: 270px;
     }
 }
