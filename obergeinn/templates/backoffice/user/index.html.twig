@@ -5,36 +5,32 @@
 {% endblock %}
 
 {% block content %}
-    <main>
-        
-        <h3 class='text-center color-one pb-5 fw-bold'>Liste des utilisateurs</h3>
-
-        <table class="table table  color-one col-9 pb-5 align-text-top fw-bold">
-            <thead class='color-three'>
-                <tr>
-                    <th>Pseudo</th>
-                    <th>E-mail</th>
-                    <th>Prénom</th>
-                    <th>nom</th>
-                </tr>
-            </thead>
-
-            <tbody>
-            {% for user in users %}
+<main class="admin-user-index">
+    <h3>Gestion des utilisateurs</h3>
+    <table class="admin-user-table table table-striped">
+        <thead>
             <tr>
-            
-                <td class='p-4'> {{ user.pseudo }} </td>
-                <td> {{ user.email }} </td>
-                <td> {{ user.firstname }} </td>
-                <td> {{ user.lastname }} </td>
+                <th class="user-firstname">Prénom</th>
+                <th class="user-lastname">Nom</th>
+                <th class="user-pseudo">Pseudo</th>
+                <th class="user-email">E-mail</th>
+                <th class="user-actions">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td data-label="Prénom"> {{ user.firstname }} </td>
+                <td data-label="Nom"> {{ user.lastname }} </td>
+                <td data-label="Pseudo"> {{ user.pseudo }} </td>
+                <td data-label="Email"> {{ user.email }} </td>
                 <td>
-                    <a class='color-four link' href="{{ path('backoffice_user_edit', {id:user.id}) }}">Éditer</a>
+                    <a href="{{ path('backoffice_user_edit', {id:user.id}) }}">Éditer</a>
                     {# <a href="{{ path('backoffice_user_delete', {id:user.id}) }}" onclick="return confirm('Es-tu sure de vouloir supprimer ton compte ?')">Supprimer</a> #}
                 </td>
-                
             </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </main>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
 {% endblock %}

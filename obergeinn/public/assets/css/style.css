@@ -1229,59 +1229,6 @@ main .title h4 a {
         width: 400px;
     }
 }
-/* ====================== Backoffice/ADMIN ================= */
-
-.card-color {
-
-    background-color: #060644;
-}
-
-.button_admin {
-    color: var(--color-one);
-    background-color: var(--color-three);
-    border-color: var(--color-three);
-}
-.button_admin:hover {
-    color: var(--color-three);
-    background-color: var(--color-two);
-    border-color: var(--color-one);
-}
-
-.display_grid {
-    display: grid;
-}
-/* ============= Formulaires admin ============== */
-.border-three {
-    border: 1px solid var(--color-three);
-}
-.nav-link-custom {
-    display: block;
-    padding: 0.5rem 1rem;
-    color: var(--color-four);
-    text-decoration: none;
-}
-.nav-link-custom:hover, .active {
-    background-color: var(--color-four);
-    color: var(--color-one);
-}
-.form-checked-input:checked {
-    background-color: var(--color-three);
-}
-.menu-item:hover {
-    background-color: var(--color-four);
-    color: var(--color-one);
-}
-.accordion {
-    width: 20rem;
-}
-#accordion-button:not(.collapsed), #accordion-button {
-    color: var(--color-one);
-    background-color: var(--color-four);
-}
-
-.bi-eye-fill:hover {
-    color: var(--color-one);
-}
 
 /* ======================= Survey-list =========================== */
 main .title h4 a {
@@ -1452,5 +1399,106 @@ main .title h4 {
     }
     .search-event, .search-date, .search-city, .search-organizer {
         width: 270px;
+    }
+}
+
+/* ==================== Admin =========================== */
+/* Admin user index */
+.admin-user-index h3 {
+    text-align: center;
+    margin: 40px 0 40px 0;
+}
+.admin-user-index a {
+    color: var(--color-two);
+}
+.admin-body {
+    background-color: white;
+}
+#admin-title {
+    color: var(--color-three);
+}
+@media (max-width: 700px){
+    .admin-user-table thead {
+    display: none;
+    }
+    .admin-user-table tr{
+    display: block;
+    margin-bottom: 40px;
+    }
+    .admin-user-table td {
+    display: block;
+    text-align: right;
+    }
+    .admin-user-table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    }
+}
+
+/* Admin event index */
+.admin-event-index h3 {
+    text-align: center;
+    margin: 40px 0 40px 0;
+}
+.admin-event-index a {
+    color: var(--color-two);
+}
+@media (max-width: 700px){
+    .admin-event-table thead {
+    display: none;
+    }
+    .admin-event-table tr{
+    display: block;
+    margin-bottom: 40px;
+    }
+    .admin-event-table td {
+    display: block;
+    text-align: right;
+    }
+    .admin-event-table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    }
+}
+
+/* Admin user/event edit */
+.admin-user-edit, .admin-event-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.admin-user-edit h1, .admin-event-edit h1 {
+    text-align: center;
+    margin: 40px 0 40px 0;
+}
+.admin-user-edit-form, .admin-event-edit-form {
+    width: 90%;
+    margin-bottom: 20px;
+}
+.admin-user-edit-button, .admin-event-edit-button {
+    display: flex;
+    justify-content: center;
+}
+.admin-event-edit-form form .event-edit-form-label {
+    font-weight: normal;
+    color: initial;
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 400px) {
+    .admin-user-edit-form, .admin-event-edit-form {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .admin-user-edit-form, .admin-event-edit-form {
+        width: 40%;
+    }
+}
+@media screen and (min-width:1000px) {
+    .admin-user-edit-form, .admin-event-edit-form {
+        width: 400px;
     }
 }

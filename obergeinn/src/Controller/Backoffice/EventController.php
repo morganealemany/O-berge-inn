@@ -18,10 +18,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class EventController extends AbstractController
 {
     /**
-     * 
-     * URL: /backoffice/evenement/
-     * Route : backoffice_event_index
-     * 
      * @Route("/", name="index")
      */
     public function index(EventRepository $eventRepository): Response
@@ -52,6 +48,8 @@ class EventController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'L\'événement ' . $event->getTitle() . ' a bien été mis à jour.');
+
             return $this->redirectToRoute('backoffice_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -76,6 +74,8 @@ class EventController extends AbstractController
             $entityManager->remove($event);
             $entityManager->flush();
         }
+
+        $this->addFlash('danger', 'L\'événement ' . $event->getTitle() . ' a bien été supprimé.');
 
         return $this->redirectToRoute('backoffice_event_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -6,13 +6,14 @@
 
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center color-one ">
-    <h1 class="color-one text-uppercase fw-bold mb-5">Editer un évenement</h1>
 
+<div class="admin-event-edit">
+    <h1>Editer l'événement {{event.title}}</h1>
+    <div class="admin-event-edit-form">
     {{ include('backoffice/event/_form.html.twig', {'button_label': 'Editer'}) }}
+    </div>
 
     {{ include('backoffice/event/_delete_form.html.twig') }}
 
     </div>
-
 {% endblock %}

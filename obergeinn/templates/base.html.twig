@@ -1,18 +1,11 @@
+<body>
+    {% include "partials/_header.html.twig" %}
+    
+    {% include "partials/_flash.html.twig" %}
 
-    <body>
-    {# {% if app.user.username is defined %} #}
-        {% include "partials/_header.html.twig" %}
-{# 
-    {% else %}
-        {% include "partials/_header.html.twig" %}
+    {% block body %}{% endblock %}
 
-    {% endif %} #}
-        
-        {% include "partials/_flash.html.twig" %}
+    {% include "partials/_footer.html.twig" %}
 
-        {% block body %}{% endblock %}
-
-        {% include "partials/_footer.html.twig" %}
-
-        
+    
 

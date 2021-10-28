@@ -56,7 +56,13 @@
                     </li>
                     {% if is_granted('ROLE_ADMIN') %}
     
-                    <li><a href="{{ path('backoffice_admin_index')}}">Admin</a></li> 
+                    <li class="drop-down"><a href="#">Admin</a>
+                        <ul class="under">
+                            <li><a href="{{ path('backoffice_user_index')}}">Utilisateurs</a></li>
+                            <li><a href="{{ path('backoffice_event_index')}}">Evénements</a></li>
+                        </ul>
+                    </li>
+
          
                     {% endif %}
                     <li class="drop-down"><a href="#">Profil</a>
