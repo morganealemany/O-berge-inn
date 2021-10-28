@@ -5,19 +5,14 @@
 {% block body %}
 <main class="container">
     <section class="title mb-5">
-    {# <div class="d-flex justify-content-between"> #}
         <button class="button-link d-flex align-self-end ms-4 bg-one rounded p-1">
             <a class="text-decoration-none link color-four" href="{{ path('dashboard') }}">Retour</a>
         </button>
-        {# <a href="{{path('survey_create')}}" class="me-5" title="Créer un sondage">
-            <i class="bi bi-plus-lg fs-3 color-three"></i>
-        </a> #}
-    {# </div> #}
+  
         <h1>Mes sondages</h1>
         <h4><a href="{{ path('survey_create') }}"><i class="bi bi-plus-circle-fill"></i> Créer un nouveau sondage </a></h4>
 
     </section>
-
 
     <section class="survey-index">
         <div class="mx-auto">

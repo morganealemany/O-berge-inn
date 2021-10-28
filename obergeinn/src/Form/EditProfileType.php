@@ -16,14 +16,29 @@ class EditProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)  
-            
-            ->add('pseudo', TextType::class)
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            
-           // Add a new field to the form in order to upload an image which is in the User Entity
-           ->add('image', FileType::class, [
+        ->add('lastname', TextType::class, [
+            'label' => 'Nom',
+            'row_attr' => [
+                'class' => 'edit-profile-label'
+            ]
+        ])
+        ->add('firstname', TextType::class, [
+            'label' => 'Prénom',
+            'row_attr' => [
+                'class' => 'edit-profile-label'
+            ]
+        ])
+        ->add('pseudo', TextType::class, [
+            'row_attr' => [
+                'class' => 'edit-profile-label'
+            ]
+        ])
+        ->add('email', EmailType::class, [
+            'row_attr' => [
+                'class' => 'edit-profile-label'
+            ]
+        ])            // Add a new field to the form in order to upload an image which is in the User Entity
+        ->add('image', FileType::class, [
             'label' => 'Choisir un avatar (png ou jpeg)',
 
             // unmapped means that this field is not associated to any entity property
@@ -45,9 +60,10 @@ class EditProfileType extends AbstractType
                     'mimeTypesMessage' => 'Merci de ne choisir que des fichiers .png ou .jpeg',
                 ])
             ],
-        ])
-            
-        ;
+            'row_attr' => [
+                'class' => 'edit-profile-label'
+            ]
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

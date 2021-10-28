@@ -317,6 +317,7 @@ footer > div > a {
 }
 .register-button {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin-top: 20px;
 }
@@ -806,9 +807,6 @@ footer > div > a {
     .participation {
         order: 6;
     }
-    .event-description-text {
-        
-    }
 }
 
 /* =========================== Event list =========================== */
@@ -925,55 +923,224 @@ footer > div > a {
 
 /* ======================== Profil ========================= */
 
-.img-profil {
-    width: 8%;
-}
-
-.button_edit_profil {
-    width: 10rem;
-    color: var(--color-one);
-    background-color: var(--color-four);
-    border-color: var(--color-four);
-}
-
-.button_edit_profil:hover {
+main .title h4 a {
+    font-weight: bold;
     color: var(--color-four);
-    background-color: var(--color-one);
-    border-color: var(--color-one);
+    font-size: 1rem;
 }
-
-.button_edit_password {
-    width: 10rem;
-    color: var(--color-one);
-    background-color: var(--color-three);
-    border-color: var(--color-three);
-}
-.button_edit_password:hover {
-    color: var(--color-three);
-    background-color: var(--color-one);
-    border-color: var(--color-one);
-}
-
-.button_delete {
-    width: 10rem;
-    color: var(--color-four);
-    background-color: var(--color-five);
-    border-color: var(--color-one);
-}
-
-.button_delete:hover {
-    color: var(--color-four);
-    background-color: var(--color-one);
-    border-color: var(--color-one);
-}
-
-.profile-button {
+.profile-index > div {
     display: flex;
-    justify-content: space-around;
-    place-items: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    color: white;
+    padding: 3rem;
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+    max-width: 800px;
+}
+.profile-table {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+.profile-table tr {
+    margin-bottom: 20px;
+}
+.profile-table td {
+    color: var(--color-four);
+    text-align: end;
+    /* margin-left: 12px; */
+}
+.profile-table th {
+    color: var(--color-three);
+}
+.profile-table thead tr {
+    font-size: 2rem;
+}
+.profile-table tbody tr .table-title, .profile-table tbody tr {
+    border-bottom: 1px solid RGBa(252, 215, 121,0.2);
+    ;
+}
+.title {
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+.title > h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.profile-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.profile-actions a {
+    font-size: 4em;
+}
+.button-edit-profile {
+    color: #77B255;
+}
+.button-delete-profile {
+    color: var(--color-five);
+}
+.button-edit-profile:hover {
+    color: RGBa(119,178,85,0.8)
+}
+.button-delete-profile:hover {
+    color: RGBa(117,1,1,0.7);
+}
+@media (max-width: 770px){
+    .profile-index {
+        display: flex;
+    }
+    .profile-table {
+        font-size: 1em;
+    }
+    .profile-table tr {
+        display: block;
+        margin-bottom: 20px;
+    }
+    .profile-table th {
+        display: none;
+    }
+    .profile-table td {
+        display: block;
+        text-align: right;
+        color: var(--color-four)
+    }
+    .profile-table td:before {
+        color: var(--color-three);
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+    .profile-index > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--color-one);
+        color: white;
+        padding: 3rem;
+        border: 2px solid var(--color-four);
+        border-radius: 1%;
+    }
+    .profile-actions a {
+        font-size: 3em;
+    }
+    .button-edit-profile {
+        color: #77B255;
+    }
+    .button-delete-profile {
+        color: var(--color-five);
+    }
+}
+/* ====================== Profile edition ================= */
+.profile-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-edit h1 {
+    color: var(--color-three);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.profile-edit form {
+    width: 90%;
+}
+.edit-profile-label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.edit-profile-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+}
+.button-edit-password {
+    margin-top: 20px;
+}
+.button-edit-password a {
+    color: var(--color-one);
+    text-decoration: none;
+}
+.button-edit-password a:hover {
+    color: var(--color-four);
+    background-color: var(--color-one);
+}
+@media screen and (min-width: 400px) {
+    .profile-edit form {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .profile-edit form {
+        width: 40%;
+    }
+    .return-button {
+    margin-top: 0;
+    }
+}
+@media screen and (min-width:1000px) {
+    .profile-edit form  {
+        width: 400px;
+    }
+    .edit-profile-buttons {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .button-edit-password {
+        margin-top: 0;
+    }
+}
 
-} 
-
+/* ================ Profile password edition ================= */
+.return-button {
+    margin-top: 40px;
+}
+.profile-password-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-password-edit h1 {
+    color: var(--color-three);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+.profile-password-edit form{
+    width: 90%;
+}
+.profile-password-edit form div label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.profile-password-edit-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+}
+@media screen and (min-width: 400px) {
+    .profile-password-edit form{
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .profile-password-edit form{
+        width: 40%;
+    }
+    .return-button {
+    margin-top: 0;
+    }
+}
+@media screen and (min-width:1000px) {
+    .profile-password-edit form {
+        width: 400px;
+    }
+}
 /* ====================== Backoffice/ADMIN ================= */
 
 

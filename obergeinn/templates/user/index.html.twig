@@ -4,98 +4,48 @@
 
 {% block body %}
 
-
-    <h1 class="d-flex flex-column align-items-center color-one fw-bold mt-5 mb-5 pb-5">Bonjour {{ app.user.pseudo }}! </h1>
-
-
-       {# {%for message in app.flashes('success')%}
-        <div class="alert alert-primary" role="alert">
-                 {{message}}
-        </div>
-        {%endfor%} #}
-
-        
-        
-   <table class=" table table-borderless color-one h4 mb-5 pb-5 mt-5 text-center">
+<main class="container">
+    <section class="title mb-5">
+        <button class="button-link d-flex align-self-end ms-4 bg-one rounded p-1">
+            <a class="text-decoration-none link color-four" href="{{ path('dashboard') }}">Retour</a>
+        </button>
   
-  <thead>
+        <h1>Mon profil</h1>
 
-    
-    <tr>
-      <th class='pb-5 ' scope="col">Prénom</th>
-      <th  class='pb-5'scope="col">{{ app.user.firstname }}</th>
-    </tr>
-  
-    </thead>
-    
-
-    <thead>
-
-    <tr>
-      <th class='pb-5' scope="col">Nom</th>
-      <th class='pb-5' scope="col">{{ app.user.lastname }}</th>
-    </tr>
+    </section>
+<section class="profile-index">
  
- 
-      </thead>
-    
-
-    <thead>
-    
-  
-    <tr>
-      <th class='pb-5' scope="col">Pseudo</th>
-      <th class='pb-5' scope="col">{{ app.user.pseudo }}</th>
-    </tr>
-
-    </thead>
-    
-
-    <thead>
-
-    
-  
-    <tr>
-      <th class='pb-5' scope="col">E-mail</th>
-      <th class='pb-5' scope="col">{{ app.user.email }}</th>
-    </tr>
-
-    </thead>
-    
-
-    <thead>
-
-    
-  
-    <tr>
-      <th class='pb-5' scope="col">Image</th>
-      <th class='pb-5' scope="col">    {% if app.user.image %}
-                    <img alt="icon" src="{{ asset('uploads/' ~ app.user.image)}}" class="rounded-circle" >
-                {% else %} {# Else use the default user icon for thumbnail #}
-                    <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}">
-                {% endif %}
-                            
-        </th>
-    </tr>
-
-    </thead>
-    
-
-    
-
-
+<div class="mx-auto">
+    <table class="profile-table">
+        <tr>
+            <th class="profile-firstname">Prénom</th>
+            <td data-label="Prénom">{{app.user.firstname}}</td>
+        </tr>
+        <tr>
+            <th class="profile-lastname">Nom</th>
+            <td data-label="Nom">{{app.user.lastname}}</td>
+        </tr>
+        <tr>
+            <th class="profile-pseudo">Pseudo</th>
+            <td data-label="Pseudo">{{app.user.pseudo}}</td>
+        </tr>
+        <tr>
+            <th class="profile-email">Email</th>
+            <td data-label="Email">{{app.user.email}}</td>
+        </tr>
+        <tr>
+            <th class="profile-image">Avatar</th>
+            <td data-label="Avatar"><img src="{{ asset('uploads/' ~ app.user.image)}}" class="rounded-circle" alt=""></td>
+        </tr>
     </table>
-    
- 
+    <div class="profile-actions">
+        <a href="{{ path('user_update') }}" class="btn  button-edit-profile" title="Modifier"><i class="bi bi-pencil-square"></i></a>
 
-<div class="profile-button pb-5 mt-5">
+        <a href="{{ path('user_delete', {'id': app.user.id}) }}" onclick="return confirm('Es-tu sûr de vouloir supprimer ton compte ?');" class="btn  button-delete-profile" title="Supprimer"><i class="bi bi-x-square-fill"></i></a>
 
-    <a href="{{ path('user_update') }}" class="btn  button_edit_profil">Modifier le Profil</a>
-
-    <a href="{{ path('user_password') }}" class="btn  button_edit_password">Modifier le Mot de passe</a>
-
-    <a href="{{ path('user_delete', {'id': app.user.id}) }}" onclick="return confirm('Es-tu sûr de vouloir supprimer ton compte ?');" class="btn  button_delete">Supprimer le compte</a>
-
+    </div>
 </div>
+</section>
+</main>
 
 {% endblock %}
