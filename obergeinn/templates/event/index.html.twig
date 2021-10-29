@@ -48,7 +48,7 @@
     <section class="event-list text-center d-flex align-items-center">
         <div class="mx-auto">
             <div>
-                <table class="events-table fs-3">
+                <table class="events-table table-sortable fs-3">
                     <thead>
                         <tr>
                         <th class="event-title" scope="col">Evenement</th>
@@ -82,7 +82,7 @@
                                 {% endif %}
 
                                 ">{{event.title}}</td>
-                                <td data-label="Date"
+                                <td data-label="Date" data-timestamp="{{event.date|date('U')}}"
 
                                 {% if (event.status == 0) %}
                                     class="color-five"

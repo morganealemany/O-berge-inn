@@ -109,21 +109,21 @@ class SurveyController extends AbstractController
             $surveyResponses1->setResponse($firstDate);
             $surveyResponses1->setSurvey($survey);
             $em->persist($surveyResponses1);
-            dump($surveyResponses1);
+            // dump($surveyResponses1);
     
             $secondDate = DateTime::createFromFormat('Y-m-d',$_POST['survey']['response2']);
             $surveyResponses2 = new SurveyResponses();
             $surveyResponses2->setResponse($secondDate);
             $surveyResponses2->setSurvey($survey);
             $em->persist($surveyResponses2);
-            dump($surveyResponses2);
+            // dump($surveyResponses2);
 
             $thirdDate = DateTime::createFromFormat('Y-m-d',$_POST['survey']['response3']);
             $surveyResponses3 = new SurveyResponses();
             $surveyResponses3->setResponse($thirdDate);
             $surveyResponses3->setSurvey($survey);
             $em->persist($surveyResponses3);
-            dump($surveyResponses3);
+            // dump($surveyResponses3);
 
             $em->flush();
 

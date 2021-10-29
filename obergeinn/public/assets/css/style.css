@@ -885,17 +885,7 @@ footer > div > a {
     .event-edit form  {
         width: 400px;
     }
-    /* .edit-event-button {
-        flex-direction: row;
-        justify-content: space-evenly;
-    } */
-    /* .button-edit-password {
-        margin-top: 0;
-    } */
 }
-
-
-
 
 /* =========================== Event list =========================== */
 .events h4 a {
@@ -942,7 +932,21 @@ footer > div > a {
 .events-table tbody tr .table-title, .events-table tbody tr {
     border-bottom: 1px solid var(--color-three);
 }
-
+.table-sortable th {
+    cursor: pointer;
+}
+.table-sortable .th-sort-asc::after {
+    content: "\25b4";
+}
+.table-sortable .th-sort-desc::after {
+    content: "\25be";
+}
+.table-sortable .th-sort-asc::after, .table-sortable .th-sort-desc::after {
+    margin-left: 5px;
+}
+.table-sortable .th-sort-asc, .table-sortable .th-sort-desc {
+    background: RGBa(0, 0, 0, 0.1);
+}
 @media (max-width: 770px){
     .events-table thead {
     display: none;
