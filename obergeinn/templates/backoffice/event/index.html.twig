@@ -5,32 +5,29 @@
 {% endblock %}
 
 {% block content %}
-    <main>
-        <h3 class='text-center color-one pb-5 fw-bold'>Liste des évènements</h3>
-
-        <table class="table  color-one col-9 pb-5 align-text-top fw-bold">
-            <thead class='color-three'>
+    <main class="admin-event-index">
+        <h3>Gestion des évènements</h3>
+        <table class="admin-event-table table table-striped">
+            <thead>
                 <tr>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Adresse</th>
-                    <th>Date</th>
+                    <th class="event-title">Titre</th>
+                    <th class="event-description">Description</th>
+                    <th class="event-address">Adresse</th>
+                    <th class="event-date">Date</th>
+                    <th class="event-actions">Actions</th>
                 </tr>
             </thead>
-
             <tbody>
             {% for event in events %}
             <tr>
-            
-                <td class='p-4'> {{ event.title }} </td>
-                <td> {{ event.description }} </td>
-                <td> {{ event.adress }} </td>
-                <td>{{event.date ? event.date|date('d-m-Y')}}</td>
-                <td>
-                    <a class='color-four link' href="{{ path('backoffice_event_edit', {id:event.id}) }}">Éditer</a>
+                <td data-label="Titre"> {{ event.title }} </td>
+                <td data-label="Description"> {{ event.description }} </td>
+                <td data-label="Adresse"> {{ event.adress }} </td>
+                <td data-label="Date">{{event.date ? event.date|date('d-m-Y')}}</td>
+                <td data-label="Actions">
+                    <a href="{{ path('backoffice_event_edit', {id:event.id}) }}">Éditer</a>
                     {# <a href="{{ path('backoffice_user_delete', {id:user.id}) }}">Supprimer</a> #}
                 </td>
-                
             </tr>
             {% endfor %}
             </tbody>

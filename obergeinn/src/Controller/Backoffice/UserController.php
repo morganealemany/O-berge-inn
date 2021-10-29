@@ -20,9 +20,6 @@ class UserController extends AbstractController
 {
     /**
      * 
-     * URL: /backoffice/utilisateur/
-     * Route : backoffice_user_index
-     * 
      * @IsGranted("ROLE_ADMIN")
      * 
      * @Route("/", name="index")
@@ -67,6 +64,8 @@ class UserController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'La fiche de l\'utilisateur ' . $user->getPseudo() . ' a bien été mise à jour.');
+
             return $this->redirectToRoute('backoffice_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -91,6 +90,8 @@ class UserController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
+
+        $this->addFlash('danger', 'L\'utilisateur ' . $user->getPseudo() . ' a bien été supprimé.');
 
         return $this->redirectToRoute('backoffice_user_index', [], Response::HTTP_SEE_OTHER);
     }

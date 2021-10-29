@@ -14,21 +14,30 @@ class EventType extends AbstractType
     {
         $builder
         ->add('title', null, [
-            'label' => 'Titre'
-            // In the parameter of the add method (the property, the type of poperty, an array)
-            // It allows us to modify the label of the input in the form
-            // Labels are by défautl in English in the Event entity
+            'label' => 'Titre',
+            'row_attr' => [
+                'class' => 'event-edit-form-label'
+            ],
         ])
         ->add('adress', null, [
-            'label' => 'Adresse'
+            'label' => 'Adresse',
+            'row_attr' => [
+                'class' => 'event-edit-form-label'
+            ],
         ])
         ->add('description', null, [
-            'label' => 'Description'
+            'label' => 'Description',
+            'row_attr' => [
+                'class' => 'event-edit-form-label'
+            ],
         ])
         ->add('date', DateTimeType::class, [
             'label' => 'Date',
             'widget'=> 'single_text',
             'input' => 'datetime_immutable',
+            'row_attr' => [
+                'class' => 'event-edit-form-label'
+            ],
         ])
         ;
     }

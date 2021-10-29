@@ -4,69 +4,63 @@
 
 {% block body %}
  
- <main class="container ">
+<main class="container events ">
   
-        {# Title section #} 
+    {# Title section #} 
 
-        <section class="title col-12 col-lg-12 text-center mb-5">
-            <a class="d-flex align-self-end ms-4 color-four text-decoration-none link"href="{{ path('dashboard')}}">Retour</a>
+    <section class="title text-center mb-5">
+        <button class="button-link d-flex align-self-end ms-4 bg-one rounded p-1">
+            <a class="text-decoration-none link color-four" href="{{ path('dashboard') }}">Retour</a>
+        </button>
             <h1 class="text-uppercase fw-bold">Mes Evenements</h1>
+            <h4><a href="{{ path('event_create') }}"><i class="bi bi-plus-circle-fill"></i> Créer un nouvel événement</a></h4>
+    </section>
+    <div class="navigation-event">
 
-        </section>
-
-
-        <div class="container navigation-event">
-
-        {#filter input #}
-
-            <div class="">
-            <button type="button" class="btn  dropdown-toggle button-filter" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtres
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item all-events" href="#">Tous les évènements</a></li>
-                <li><a class="dropdown-item organized-events" href="#">Evènements organisés</a></li>
-                <li><a class="dropdown-item invited-events" href="#">Evènements invités</a></li>
-                <li>
-                <a class="dropdown-item archived-events" href="#">Evènements archivés</a>
-                </li>
-            </ul>
-            </div>
-
-
-        {#searchbar#}
-
-            <form action="{{ path('search_index') }}" class="input-group searchbar">
-                <div class="form-outline">
-                    <input type="text" name="search" id="search-form" placeholder="Ex : Barbecue" class="form-control" />
-                    <label class="form-label" for="search-form">Rechercher</label>
-                </div>
-                <input id="search-button" name="submit" type="submit" value="Go!" class="btn btn-primary button-search">
-            </form> 
-
-     
+        {# filter input #}
+        <div>
+        <button type="button" class="btn dropdown-toggle button-filter" data-bs-toggle="dropdown" aria-expanded="false">
+            Filtres
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item all-events" href="#">Tous les évènements</a></li>
+            <li><a class="dropdown-item organized-events" href="#">Evènements organisés</a></li>
+            <li><a class="dropdown-item invited-events" href="#">Evènements invités</a></li>
+            <li>
+            <a class="dropdown-item archived-events" href="#">Evènements archivés</a>
+            </li>
+        </ul>
         </div>
 
-         {# Events list section #}
+        {#searchbar#}
+        <form action="{{ path('search_index') }}" class="input-group searchbar">
+            <div class="form-outline">
+                <input type="text" name="search" id="search-form" placeholder="Ex : Barbecue" class="form-control" />
+                <label class="form-label" for="search-form">Rechercher</label>
+            </div>
+            <div>
+            <input id="search-button" name="submit" type="submit" value="Go!" class="btn button-search">
+            </div>
+        </form> 
+    </div>
 
-        <section class="event-list col-12 col-lg-12 text-center mt-5 mb-5 d-flex align-items-center">
-            <div class="border d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
-                <div>
-                    <h2 class="fs-1 mb-5 color-three">Tous mes évènements</h2>
-                    <table class="table fs-3">
-                        <thead>
-                            <tr>
-                            <th scope="col">Evenement</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Ville</th>
-                            <th scope="col">Organisateur</th>
-                            <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
+    {# Events list section #}
+    <section class="event-list text-center d-flex align-items-center">
+        <div class="mx-auto">
+            <div>
+                <table class="events-table fs-3">
+                    <thead>
+                        <tr>
+                        <th class="event-title" scope="col">Evenement</th>
+                        <th class="event-date" scope="col">Date</th>
+                        <th class="event-city" scope="col">Ville</th>
+                        <th class="event-organizer" scope="col">Organisateur</th>
+                        <th class="event-actions"scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {% for event in app.user.event %}    
-                            
+                        
                             {# If the user connected is the organizer of the event #}
                             {% if app.user == event.user %}
                                 <tr id="myevent" class="organizer
@@ -81,69 +75,104 @@
                                 {% endif %}
                                 ">
                             {% endif %}
-                                    <th scope="row"
+                                <td data-label="Evénement" scope="row" class="table-title
 
-                                    {% if (event.status == 0) %}
-                                        class="color-five"
-                                    {% endif %}
+                                {% if event.status == 0 %}
+                                    color-five
+                                {% endif %}
 
-                                    >{{event.title}}</th>
-                                    <td>{{event.date ? event.date|date('d-m-Y')}}</td>
-                                    {# Use the twig filter 'split' to cut the adress #}
-                                    {% set adressData = event.adress|split(' ')%}
-                                    {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
-                                    <td>{{(adressData|last)|capitalize}}</td>
-                                    <td>{{event.user.pseudo}}</td>
-                                    <td>
-                                        <a href="{{ path('event_show', {'id': event.id}) }}" title="Voir"><i class="bi bi-eye-fill color-three"></i></a>
-                                        <a href="{{ path('event_edit', {'id' : event.id}) }}" title="Modifier"><i class="bi bi-pencil-square color-four"></i></a>
-                                        <a href="{{ path('event_archiving', {'id': event.id}) }}" title="
-                                        {% if (event.status == 0) %}
-                                            {{'Archiver"><i class="bi bi-archive-fill color-one'}}
-                                        {% else %}
-                                            {{'Sortir de l\'archive"><i class="bi bi-archive-fill color-five'}}
-                                        {% endif %}
-                                        
-                                        "></i></a>
-                                    </td>
-                                
-                                </tr>
-                        {% endfor %}
-
-                        {% for participation in app.user.participation %}    
-                            {% set event = participation.event %}
-
-                            {% if app.user == event.user %}
-                                <tr id="myevent" class="organizer">
-                            {% else %}
-                                <tr id="myevent" class="invited">
-                            {% endif %}
-                                <th scope="row"
+                                ">{{event.title}}</td>
+                                <td data-label="Date"
 
                                 {% if (event.status == 0) %}
                                     class="color-five"
                                 {% endif %}
-                                
-                                >{{event.title}}</th>
-                                <td>{{event.date ? event.date|date('d-m-Y')}}</td>
+                                    
+                                >{{event.date ? event.date|date('d-m-Y')}}</td>
                                 {# Use the twig filter 'split' to cut the adress #}
                                 {% set adressData = event.adress|split(' ')%}
                                 {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
-                                <td>{{(adressData|last)|capitalize}}</td>
-                                <td>{{event.user.pseudo}}</td>
+                                <td data-label="Ville"
+
+                                {% if (event.status == 0) %}
+                                    class="color-five"
+                                {% endif %}
+                        
+                                >{{(adressData|last)|capitalize}}</td>
+                                <td data-label="Organisateur"
+                                
+                                {% if (event.status == 0) %}
+                                    class="color-five"
+                                {% endif %}
+
+                                >{{event.user.pseudo}}</td>
                                 <td>
-                                    <a href="{{ path('event_show', {'id': event.id}) }}"><i class="bi bi-eye-fill color-three"></i></a>
+                                    <a href="{{ path('event_show', {'id': event.id}) }}" title="Voir"><i class="bi bi-eye-fill color-three"></i></a>
+                                    <a href="{{ path('event_edit', {'id' : event.id}) }}" title="Modifier"><i class="bi bi-pencil-square color-two"></i></a>
+                                    <a href="{{ path('event_archiving', {'id': event.id}) }}" title="
+                                    {% if (event.status == 1) %}
+                                        {{'Archiver"><i class="bi bi-archive-fill color-five'}}
+                                    {% else %}
+                                        {{'Sortir de l\'archive"><i class="bi bi-archive-fill color-four'}}
+                                    {% endif %}
+                                    
+                                    "></i></a>
                                 </td>
-                            </tr>
+                                
+                                </tr>
                         {% endfor %}
 
-                        </tbody>
-                    </table> 
-                </div>
-                    
-            </div>
-        </section>
+                    {% for participation in app.user.participation %}    
+                        {% set event = participation.event %}
 
-  </main>  
+                        {% if app.user == event.user %}
+                            <tr id="myevent" class="organizer">
+                        {% else %}
+                            <tr id="myevent" class="invited">
+                        {% endif %}
+                            <td data-label="Evénement"scope="row"
+
+                            {% if (event.status == 0) %}
+                                class="color-five"
+                            {% endif %}
+                            
+                            >{{event.title}}</td>
+                            <td data-label="Date"
+
+                                {% if (event.status == 0) %}
+                                class="color-five"
+                            {% endif %}
+                            
+                            >{{event.date ? event.date|date('d-m-Y')}}</td>
+                            {# Use the twig filter 'split' to cut the adress #}
+                            {% set adressData = event.adress|split(' ')%}
+                            {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
+                            <td data-label="Ville"
+
+                            {% if (event.status == 0) %}
+                                class="color-five"
+                            {% endif %}
+                            
+                            >{{(adressData|last)|capitalize}}</td>
+                            <td data-label="Organisateur"
+
+                            {% if (event.status == 0) %}
+                                class="color-five"
+                            {% endif %}
+                            
+                            >{{event.user.pseudo}}</td>
+                            <td>
+                                <a href="{{ path('event_show', {'id': event.id}) }}"><i class="bi bi-eye-fill color-three"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </section>
+
+</main>  
 
 {% endblock %}

@@ -1,10 +1,37 @@
-/* ===== Color and background definition ====== */
+/* ================== Color and background definition ================ */
 html {
     --color-one: #060644;
     --color-two: #744eaa;
     --color-three: #92fcd8;
     --color-four: #fcd779;
     --color-five: #750101;
+}
+.bg-one {
+    background-color: var(--color-one);
+}
+.bg-two {
+    background-color: var(--color-two);
+}
+.bg-three {
+    background-color: var(--color-three);
+}
+.bg-four {
+    background-color: var(--color-four);
+}
+.color-one {
+    color: var(--color-one);
+}
+.color-two {
+    color: var(--color-two);
+}
+.color-three {
+    color: var(--color-three);
+}
+.color-four {
+    color: var(--color-four);
+}
+.color-five {
+    color: var(--color-five);
 }
 body {
     font-family: 'Raleway', sans-serif;
@@ -13,27 +40,204 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 main {
     flex: 1 0 auto;
 }
-
 footer {
     flex-shrink: 0;
 }
-/* ============= Home ============== */
-
-.header-dropdown-toggle {
+footer > div {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
+/* ================================ Navbar =========================== */
+header > div {
+    height: 200px;
+}
+nav{
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--color-four);
+    position: sticky;
+    top: 0px;
+}
+.container-nav{
+    position: absolute;
+    width: 100%;
+}
+.link-logo {
+    width: 50%;
+}
+.logo {
+    width: 150%;
+    background: no-repeat center/100px url(../images/obergeinn-petit-modèle.png);
+}
+nav input[type=checkbox]{
+    display: none;
+}
+nav label{
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0px;
+    text-align: center;
+    background-color: var(--color-four);
+    font-weight: bold;
+    color: var(--color-one);
+}
+nav ul{
+    display: none;
+    list-style-type: none;
+    padding-left: 0;
+}
+nav input[type=checkbox]:checked + ul{
+    display: flex;
+    flex-flow : column wrap;
+}
+nav ul li{
+    flex: 1 1 auto;
+    text-align: center;
+}
+nav > div > ul > li > a{
+    color: var(--color-four);
+    font-weight: bold;
+}
+nav a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 10px 0px;
+    background-color: var(--color-one);
+}
+.under{
+    display: flex;
+    flex-flow: column wrap;
+    z-index: 1000;
+    background-color: var(--color-one);
+}
+.under li{
+    flex: 1 1 auto;
+    text-align: left;
+}
+.under a{
+    padding: 10px;
+    background-color: RGBa(252, 215, 121,0.8);
+    color: var(--color-one);
+}
+.header-buttons {
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    display: flex;
+}
+.header-button_connexion, .header-button_inscription {
+    margin-left: 2.5em;
+}
+.name-user-connected {
+    display : none;
+}
+#deconnection {
+    background-color: var(--color-five);
+    color: var(--color-four);
+}
+@media screen and (min-width: 600px){
+    nav {
+        /* border-top: 3px solid var(--color-one); */
+        border-bottom: 3px solid var(--color-one);
+    }
+    footer > div {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .container-nav{
+        position: static;
+    }
+    nav label, nav input{
+        display: none;
+    }
+    nav input[type=checkbox]:checked + ul, nav ul{
+        display: flex;
+        flex-flow: row wrap;
+        background-color: white;
+    }
+    nav ul li{
+        position: relative;
+    }
+    nav > div > ul > li > a{
+        color:var(--color-one);
+        font-size: 1.5rem;
+    }
+    nav a{
+        border-bottom: 2px solid transparent;
+        background-color: var(--color-four);
+    }
+    nav a:hover{
+        color: var(--color-two);
+        border-bottom: 2px solid var(--color-three);
+    }
+    .under{
+        display: none;
+        box-shadow: 0px 1px 2px #CCC;
+        background-color: white;
+        position: absolute;
+        width: 100%;
+    }
+    nav > div > ul li:hover .under{
+        display: flex;
+        flex-flow: column wrap;
+    }
+    .under a{
+        color: var(--color-one);
+        border-bottom: none;
+        background-color: white;
+    }
+    .under a:hover{
+        border-bottom: none;
+        background-color: RGBa(252, 215, 121,0.3);
+    }
+    .deroulant > a::after{
+        content:" ▼";
+        font-size: 12px;
+    }
+    .header-buttons {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+    }
+    #deconnection:hover {
+       background-color: RGBa(117, 1, 1, 0.8);
+    }
+    .name-user-connected {
+        display: block;
+        color: var(--color-four);
+        font-weight: bold;
+    }
+    .logo {
+        width: 150%;
+        background: no-repeat center/90% url(../images/logo1.png);
+    }
+}
+
+@media screen and (min-width: 980px) {
+    .logo {
+        width: 150%;
+        background: no-repeat center/500px url(../images/logo1.png);
+    }
+}
+
 .header-user-icon {
     width: 5rem;
 }
-/* TODO gérer le dropdown et affichage menu en mobile*/
+
+/* ============================= Home ================================ */
+
 .home-container {
     display: flex;
     justify-content: space-evenly;
+}
+.home-container > div > img {
+    border: 5px solid white;
+    border-radius: 5%;
+    width: 80%;
+    margin-top: 10px;;
 }
 .home-buttons {
     display: flex;
@@ -45,15 +249,12 @@ footer {
     align-self:center;
 }
 .home-button_inscription {
-    font-size: 2rem;
-}
-.logo {
-    width: 550px;
+    font-size: 1.5rem;
 }
 .accroche {
     font-family: 'Raleway', sans-serif;
     color: var(--color-one);
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: center;
 }
 .emphase {
@@ -91,58 +292,304 @@ footer > div > a {
     background-color: var(--color-four);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
     .home-container {
         display: block;
     }
 }
-
-@media screen and (max-width: 980px) {
-    .publicity > img {
-        width: 70%;
-    }
-    .accroche {
-        font-size: 3rem;
-    }
-    .home-buttons {
-        flex-direction: row;
-        justify-content: space-evenly;
-    }
-    .home-button_connexion {
-        font-size: 2rem;
-        width: 15rem;
-    }
-    .header-button_inscription, .header-button_connexion {
-        font-size: 2rem;
-    }
-    .header-user-icon {
-        width: 7rem;
-    }
-    .name-user-connected {
-        display: none;
-    }
-    .dropdown-menu {
-        width: 100% !important;
-    }
-    
-
+/* ============================ Register =========================== */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-
-/* ============= Event details ============== */
-.color-one {
+.register-form h1 {
+    color: var(--color-three);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.register-form form {
+    width: 90%;
+}
+.registration-label, registration-label > label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.registration-image input {
     color: var(--color-one);
 }
-.color-four {
-    color: var(--color-four);
+.register-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
 }
-.color-two {
-    color: var(--color-two);
+@media screen and (min-width: 400px) {
+    .register-form form {
+        width: 70%;
+    }
 }
-.color-five {
-    color: var(--color-five);
+@media screen and (min-width: 600px) {
+    .register-form form {
+        width: 40%;
+    }
+    .return-button {
+    margin-top: 0;
+    }
+}
+@media screen and (min-width:1000px) {
+    .register-form form  {
+        width: 400px;
+    }
 }
 
+/* ============================= Login ============================== */
+.connexion-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.connexion-form form h1 {
+    color: var(--color-three);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.5em;
+}
+.login {
+    width: 90%;
+    color: var(--color-four);
+    font-weight: bold;
+}
+.deconnexion {
+    color: var(--color-four);
+}
+@media screen and (min-width: 600px) {
+    .login {
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .login {
+        width: 30%;
+    }
+}
+
+/* ============================ Dashboard =========================== */
+
+.card {
+    position:static;
+    margin-bottom: 10px;
+    border: 2px solid var(--color-four);
+}
+.card-header {
+    text-transform: uppercase;
+    color: var(--color-three);
+    font-size: 1.3rem;
+}
+.card-header, .card-footer {
+    background-color: var(--color-one);
+    font-weight: bold;
+}
+.card-footer a {
+    color: var(--color-four);
+}
+.card-body > table {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;;
+}
+.card-body td {
+    border-bottom: 2px solid var(--color-two);
+    padding-right: 15px;
+}
+#events-organized, #survey-active {
+    color: green;
+}
+#events-invited {
+    color: orange;
+}
+#events-archived, #survey-inactive {
+    color: red;
+}
+#events-total, #survey-total {
+    font-weight: bold;
+}
+.access {
+    background-color: var(--color-three);
+    border: 2px solid var(--color-one);
+    color: var(--color-one);
+    font-weight: bold;
+    border-radius: 0em 0em 0.25em 0.25em;
+}
+.card-body > img {
+    border: 3px solid var(--color-two);
+    margin: 20px 10px;
+}
+.card .profile-card {
+    color: var(--color-one);
+    font-weight: bold;
+}
+.card .admin-text {
+    font-weight: bold;
+    color: var(--color-two);
+    margin-top: 71px;
+    margin-bottom: 70px;
+}
+.card > .profile-card .access{
+    margin-top: 38px;
+}
+.survey-card, .events-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 600px) {
+    #dashboard-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .card {
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+        min-width: 269px;
+        max-width: 270px;
+    }
+}
+
+/* ========================== Event create ========================== */
+.event-create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+.event-create-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+    width : 90%;
+}
+.event-create-form h1 {
+    text-align: center;
+    color: var(--color-four);
+    font-weight: bold;
+    font-size: 2em;
+    margin: 20px 0 20px 0;
+}
+.event-create-form-label > label {
+    color: var(--color-three);
+    font-weight: bold;
+}
+.need-create-form-label > label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.event-create-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.event-create-buttons > button {
+    margin-bottom: 10px;
+}
+@media screen and (min-width: 600px) {
+    .event-create {
+        margin-top: 0;
+    }
+    .event-create-form {
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .event-create-form {
+        width: 40%
+    }
+}
+/* ============================ Mailer ===================== */
+.invitation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+.invitation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+    width : 90%;
+}
+.invitation-form h1 {
+    text-align: center;
+    color: var(--color-four);
+    font-weight: bold;
+    font-size: 2em;
+    margin-top: 20px;
+}
+.input-group-text {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+.event-choice-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.select-input {
+    width: 90%;
+}
+.email-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.email-form label {
+    color: var(--color-four);
+    font-weight: bold;
+    margin-right: 10px;
+}
+.email-form div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.email-input-section {
+    text-align: center;
+    width: 80%;
+}
+.button-submit-invitation {
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 600px) {
+    .invitation {
+        margin-top: 0;
+    }
+    .invitation-form {
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .invitation-form {
+        width: 40%
+    }
+}
+
+/* ========================== Event details ========================== */
+.event-details-content {
+    display: flex;
+    flex-direction: column;
+}
 /* Title section */
 .title {
     font-family: 'Raleway', sans-serif;
@@ -157,63 +604,126 @@ footer > div > a {
     color: var(--color-three);
 }
 
+/* Description section */
+.description {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.description > div {
+    background-color: white;
+    border-top: 2px solid var(--color-three);
+    width: 90%;
+    border-radius: 1%;
+}
+.description h2 {
+    background-color: var(--color-one);
+    color: var(--color-three);
+    padding: 10px 0 15px 0;
+}
+.description p {
+    /* background-color: white; */
+    color: var(--color-one);
+    padding: 0 10px 0 10px;
+}
+
 /* Adress section */
+.adress {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
 .adress-text {
-    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    border-top-left-radius: 1%;
+    border-top-right-radius: 1%;
+    background-color: var(--color-one);
+    width: 90%;
     border-top: 2px solid var(--color-three);
 }
+        /* Map */
 
-/* ============= Map ============== */
-
-#map {
-    width : 70%;
-    height : 300;
-}
-
+        #map {
+            width : 90%;
+            height : 300;
+        }
 
 /* Survey section */
+.survey {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
 .survey > div {
-    width: 400px;
+    width: 90%;
+    background-color: white;
+    border-top: 2px solid var(--color-one);
+    border-radius: 1%;
+}
+.survey > div > h2 {
+    background-color: var(--color-four);
+    color: var(--color-one);
+    padding: 10px 0 15px 0;
+    text-align: center;
 }
 .survey > div > h3 {
     color: var(--color-one);
 }
 .survey-list {
-    width: 400px;
+    width: 100%;
 }
 .form-check-input:checked {
     background-color: var(--color-four);
     border-color: var(--color-four);
 }
-.progress {
-    width: 75px;
-}
-.progress-bar {
-    background-color: var(--color-four);
-    color: var(--color-one);
+.event-details-date {
+    background-color: var(--color-one);
+    color: var(--color-four);
+    margin: 0;
+    padding: 10px;
 }
 
 /* Need section */
-.need > a {
-    color: var(--color-three);
+.need-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 40px;
 }
-.need > .progress {
-    width: 200px;
-    height: 50px;
+.need-section > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    background-color: var(--color-four);
+    border-top: 2px solid var(--color-one);
+    border-radius: 1%;
 }
-
-.button-needs {
+.need-section > div > button {
+    margin: 20px 0 20px 0;
     color: var(--color-one);
     background-color: var(--color-three);
     border-color: var(--color-three);
 }
-
+.progress {
+    width: 200px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+.progress-bar {
+    background-color: var(--color-one);
+    color: var(--color-four);
+    font-weight: bold;
+}
 .button-close {
     color: var(--color-one);
     background-color: var(--color-four);
     border-color: var(--color-four);
 }
-
 .button-validate {
     color: var(--color-one);
     background-color: var(--color-three);
@@ -221,10 +731,32 @@ footer > div > a {
 }
 
 /* Guest section */
+.guest {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    margin-top: 40px;
+}
 .guest > div {
-    background-color: var(--color-four);
-    border-color: var(--color-four);
-    width: 500px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background-color: white;
+    border-top: 2px solid var(--color-three);
+    border-radius: 1%;
+}
+.guest > div > h2 {
+    background-color: var(--color-one);
+    color: var(--color-three);
+    padding: 10px 0 15px 0;
+}
+.guest-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 0 10px 0;
 }
 .guest img {
     width: 75px;
@@ -234,84 +766,242 @@ footer > div > a {
 }
 
 /* Participation section */
-.participation p {
-    font-size: 1em;
+.participation {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    margin-top: 40px;
+}
+.participation-accept {
+    font-size: 4em;
+    color: #77B255;
+}
+.participation-accept:hover {
+    color: RGBa(119,178,85,0.8)
+}
+.participation-deny {
+    font-size: 4em;
+    color: var(--color-five);
+}
+.participation-deny:hover {
+    color: RGBa(117,1,1,0.7);
 }
 
-/* ============= Login ============== */
-
-.login {
-    width: 30%;
+@media screen and (min-width: 600px) {
+    .event-details-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .survey {
+        order: 4;
+        min-width: 300px;
+    }
+    .description {
+        order: 1;
+        max-width: 400px;
+        height: 444px;
+        /* margin-bottom: 0; */
+    }
+    .adress {
+        order: 2;
+        max-width: 400px;
+    }
+    .guest {
+        order: 3;
+        max-width: 450px;
+        margin-top: 0;
+        justify-content: flex-start;
+    }
+    .guest > div {
+        height: 444px;
+    }
+    
+    .need-section {
+        order: 5;
+        min-width: 300px;
+    }
+    .need-section > div {
+        height: 240px;
+        justify-content: center;
+    }
+    .participation {
+        order: 6;
+    }
 }
-.button-connexion {
-    color: var(--color-one);
-    background-color: var(--color-three);
-    border-color: var(--color-three);
+/* =========================== Event edition =========================== */
+.event-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-.deconnexion {
+.event-edit h1 {
+    color: var(--color-three);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+.event-edit span {
     color: var(--color-four);
 }
-
-/* ============= Event list ============== */
-.event-list > div{
-    width: 900px;
+.event-edit form {
+    width: 90%;
+}
+.event-edit-form-label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.edit-event-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+}
+/* .button-edit-password {
+    margin-top: 20px;
+}
+.button-edit-password a {
+    color: var(--color-one);
+    text-decoration: none;
+}
+.button-edit-password a:hover {
+    color: var(--color-four);
+    background-color: var(--color-one);
+} */
+@media screen and (min-width: 400px) {
+    .event-edit form {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .event-edit form {
+        width: 40%;
+    }
+    .return-button {
+    margin-top: 0;
+    }
+}
+@media screen and (min-width:1000px) {
+    .event-edit form  {
+        width: 400px;
+    }
+    /* .edit-event-button {
+        flex-direction: row;
+        justify-content: space-evenly;
+    } */
+    /* .button-edit-password {
+        margin-top: 0;
+    } */
 }
 
-.color-three {
-    color: var(--color-three);
+
+
+
+/* =========================== Event list =========================== */
+.events h4 a {
+    font-weight: bold;
+    color: var(--color-four);
+    font-size: 1rem;
 }
-
-/* ============= Presentation ============== */
-
-.avatar {
-    width: 200px;
+.navigation-event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-.li-logo {
-    width: 130px;
+.navigation-event > div > button {
+    margin-bottom: 40px;
 }
-
-/* ============= All-event ============== */
-
+.form-outline > input {
+    border-radius: 0.25em 0em 0em 0.25em;
+}
 .searchbar {
-    justify-content: flex-end;
+    justify-content: center;
+    position: static;
+}
+.searchbar .btn {
+    position: static;
+    border-radius: 0em 0.25em 0.25em 0em;
+}
+.event-list > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    color: white;
+    padding: 3rem;
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+}
+.events-table {
+    color: white;
+    margin-left: 12px;
+}
+.events-table thead tr {
+    font-size: 2rem;
+}
+.events-table tbody tr .table-title, .events-table tbody tr {
+    border-bottom: 1px solid var(--color-three);
 }
 
+@media (max-width: 770px){
+    .events-table thead {
+    display: none;
+    }
+    .events-table tr{
+    display: block;
+    margin-bottom: 40px;
+    }
+    .events-table td {
+    display: block;
+    text-align: right;
+    }
+    .events-table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    }
+}
+
+@media (min-width: 771px) {
+    .events-table thead tr {
+        border-bottom: 2px solid var(--color-three);
+    }
+    .events-table tbody tr, .events-table tbody tr .table-title {
+        border-bottom: 1px solid RGBa(255,255,255,0.3);
+    }
+    .event-title, .event-date, .event-city, .event-organizer {
+        width: 270px;
+    }
+    .navigation-event {
+        flex-direction: row;
+    }
+    .searchbar {
+        justify-content: flex-end;
+    }
+}
 .button-filter {
     color: var(--color-one);
     background-color: var(--color-four);
     border-color: var(--color-four);
 }
-
-
 .button-filter:hover{
     color: var(--color-four);
     background-color: var(--color-one);
     border-color: var(--color-one);
 
 }
-
-
 .button-search {
     color: var(--color-one);
     background-color: var(--color-three);
     border-color: var(--color-three);
     margin-bottom : 50;
 }
-
 .button-search:hover {
 
     color: var(--color-three);
     background-color: var(--color-one);
     border-color: var(--color-one);
 }
-
-.navigation-event {
-
-    display: inline-flex;
-}
-
 .addInput {
     color: var(--color-four);
     background-color: var(--color-two);
@@ -319,164 +1009,496 @@ footer > div > a {
     margin-bottom : 50;
 }
 
-/* ============= Profil ============== */
+/* ======================== Profil ========================= */
 
-.img-profil {
-    width: 8%;
-}
-
-.button_edit_profil {
-    width: 10rem;
-    color: var(--color-one);
-    background-color: var(--color-four);
-    border-color: var(--color-four);
-}
-
-.button_edit_profil:hover {
+main .title h4 a {
+    font-weight: bold;
     color: var(--color-four);
-    background-color: var(--color-one);
-    border-color: var(--color-one);
+    font-size: 1rem;
 }
-
-.button_edit_password {
-    width: 10rem;
-    color: var(--color-one);
-    background-color: var(--color-three);
-    border-color: var(--color-three);
-}
-.button_edit_password:hover {
-    color: var(--color-three);
-    background-color: var(--color-one);
-    border-color: var(--color-one);
-}
-
-.button_delete {
-    width: 10rem;
-    color: var(--color-four);
-    background-color: var(--color-five);
-    border-color: var(--color-one);
-}
-
-.button_delete:hover {
-    color: var(--color-four);
-    background-color: var(--color-one);
-    border-color: var(--color-one);
-}
-
-.profile-button {
+.profile-index > div {
     display: flex;
-    justify-content: space-around;
-    place-items: center;
-
-} 
-/* ============= Mailer ============== */
-
-
-.select-input {
-    width: 18%;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    color: white;
+    padding: 3rem;
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+    max-width: 800px;
+}
+.profile-table {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+.profile-table tr {
+    margin-bottom: 20px;
+}
+.profile-table td {
+    color: var(--color-four);
+    text-align: end;
+    /* margin-left: 12px; */
+}
+.profile-table th {
+    color: var(--color-three);
+}
+.profile-table thead tr {
+    font-size: 2rem;
+}
+.profile-table tbody tr .table-title, .profile-table tbody tr {
+    border-bottom: 1px solid RGBa(252, 215, 121,0.2);
+    ;
+}
+.title {
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+.title > h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.profile-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.profile-actions a {
+    font-size: 4em;
+}
+.button-edit-profile {
+    color: #77B255;
+}
+.button-delete-profile {
+    color: var(--color-five);
+}
+.button-edit-profile:hover {
+    color: RGBa(119,178,85,0.8)
+}
+.button-delete-profile:hover {
+    color: RGBa(117,1,1,0.7);
+}
+@media (max-width: 770px){
+    .profile-index {
+        display: flex;
+    }
+    .profile-table {
+        font-size: 1em;
+    }
+    .profile-table tr {
+        display: block;
+        margin-bottom: 20px;
+    }
+    .profile-table th {
+        display: none;
+    }
+    .profile-table td {
+        display: block;
+        text-align: right;
+        color: var(--color-four)
+    }
+    .profile-table td:before {
+        color: var(--color-three);
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+    .profile-index > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: var(--color-one);
+        color: white;
+        padding: 3rem;
+        border: 2px solid var(--color-four);
+        border-radius: 1%;
+    }
+    .profile-actions a {
+        font-size: 3em;
+    }
+    .button-edit-profile {
+        color: #77B255;
+    }
+    .button-delete-profile {
+        color: var(--color-five);
+    }
+}
+/* ====================== Profile edition ================= */
+.profile-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-edit h1 {
+    color: var(--color-three);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.profile-edit form {
+    width: 90%;
+}
+.edit-profile-label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.edit-profile-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+}
+.button-edit-password {
+    margin-top: 20px;
+}
+.button-edit-password a {
+    color: var(--color-one);
+    text-decoration: none;
+}
+.button-edit-password a:hover {
+    color: var(--color-four);
+    background-color: var(--color-one);
+}
+@media screen and (min-width: 400px) {
+    .profile-edit form {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .profile-edit form {
+        width: 40%;
+    }
+    .return-button {
+    margin-top: 0;
+    }
+}
+@media screen and (min-width:1000px) {
+    .profile-edit form  {
+        width: 400px;
+    }
+    .edit-profile-buttons {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    .button-edit-password {
+        margin-top: 0;
+    }
 }
 
-.titleMailer {
+/* ================ Profile password edition ================= */
+.return-button {
+    margin-top: 40px;
+}
+.profile-password-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-password-edit h1 {
+    color: var(--color-three);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+.profile-password-edit form{
+    width: 90%;
+}
+.profile-password-edit form div label {
+    color: var(--color-four);
+    font-weight: bold;
+}
+.profile-password-edit-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+}
+@media screen and (min-width: 400px) {
+    .profile-password-edit form{
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .profile-password-edit form{
+        width: 40%;
+    }
+    .return-button {
+    margin-top: 0;
+    }
+}
+@media screen and (min-width:1000px) {
+    .profile-password-edit form {
+        width: 400px;
+    }
+}
+
+/* ======================= Survey-list =========================== */
+main .title h4 a {
+    font-weight: bold;
+    color: var(--color-four);
+    font-size: 1rem;
+}
+.survey-index > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    color: white;
+    padding: 3rem;
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+}
+.survey-table {
+    color: white;
+    margin-left: 12px;
+}
+.survey-table thead tr {
+    font-size: 2rem;
+}
+.survey-table tbody tr .table-title, .survey-table tbody tr {
+    border-bottom: 1px solid var(--color-three);
+}
+.title {
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+.title > h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+@media (max-width: 770px){
+    .survey-index {
+        display: flex;
+    }
+    .survey-table thead {
+        display: none;
+    }
+    .survey-table tr{
+        display: block;
+        margin-bottom: 40px;
+    }
+    .survey-table td {
+        display: block;
+        text-align: right;
+    }
+    .survey-table td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+}
+@media (min-width: 771px) {
+    .survey-table table thead tr {
+        border-bottom: 2px solid var(--color-three);
+    }
+    .survey-table table tbody tr, .events-table tbody tr .table-title {
+        border-bottom: 1px solid RGBa(255,255,255,0.3);
+    }
+    .survey-event, .survey-choice1, .survey-choice2, .survey-choice3, .survey-status {
+        width: 270px;
+    }
+}
+
+/* ======================= Survey create =========================== */
+.survey-create {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.survey-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    border: 2px solid var(--color-four);
+    border-radius: 1%;
+    width : 90%;
+}
+.survey-form h1 {
+    text-align: center;
+    color: var(--color-four);
+    font-weight: bold;
+    font-size: 2em;
+    margin-top: 20px;
+}
+.survey-create-button {
     text-align: center;
 }
 
-
-
-/* ============= Backoffice/ADMIN ============== */
-
-
-.card-color {
-
-    background-color: #060644;
+@media screen and (min-width: 600px) {
+    .survey-create {
+        margin-top: 0;
+    }
+    .survey-form {
+        width: 60%;
+    }
 }
-
-.button_admin {
-    color: var(--color-one);
-    background-color: var(--color-three);
-    border-color: var(--color-three);
+@media screen and (min-width: 1000px) {
+    .survey-form {
+        width: 40%
+    }
 }
-.button_admin:hover {
-    color: var(--color-three);
-    background-color: var(--color-two);
-    border-color: var(--color-one);
-}
-
-.display_grid {
-    display: grid;
-}
-/* ============= Formulaires admin ============== */
-
-.bg-one {
-    background-color: var(--color-one);
-}
-
-.bg-two {
-    background-color: var(--color-two);
-}
-
-.bg-three {
-    background-color: var(--color-three);
-}
-
-.bg-four {
-    background-color: var(--color-four);
-}
-
-.border-three {
-    border: 1px solid var(--color-three);
-}
-
-.nav-link-custom {
-    display: block;
-    padding: 0.5rem 1rem;
+/* ======================= Search =========================== */
+main .title h4 {
+    font-weight: bold;
     color: var(--color-four);
-    text-decoration: none;
+    font-size: 2rem;
 }
-
-.nav-link-custom:hover, .active {
-    background-color: var(--color-four);
-    color: var(--color-one);
-}
-
-.form-check-input {
-    background-color: var(--color-four);
-}
-
-.form-checked-input:checked {
-    background-color: var(--color-three);
-}
-
-.menu-item:hover {
-    background-color: var(--color-four);
-    color: var(--color-one);
-}
-
-.accordion {
-    width: 20rem;
-}
-
-/* button.accordion-button:not(.collapsed), button.accordion-button {
-    color: var(--color-one);
-    background-color: var(--color-four);
-} */
-
-#accordion-button:not(.collapsed), #accordion-button {
-    color: var(--color-one);
-    background-color: var(--color-four);
-}
-
-.bi-eye-fill:hover {
-    color: var(--color-one);
-}
-
-/* ============= Survey ============== */
-.survey-content {
-    width: 30rem;
-    padding: 2rem;
+.search > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-one);
+    color: white;
+    padding: 3rem;
     border: 2px solid var(--color-four);
+    border-radius: 1%;
 }
-.survey-list {
-    width: 80%;
-    background-color: rgba(6,6,68,0.30);
+.search-table {
+    color: white;
+}
+.search-table thead tr {
+    font-size: 2rem;
+}
+.search-table tbody tr .table-title, .search-table tbody tr {
+    border-bottom: 1px solid var(--color-three);
+}
+.title {
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+.title > h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+@media (max-width: 770px){
+    .search {
+        display: flex;
+    }
+    .search-table thead {
+        display: none;
+    }
+    .search-table tr{
+        display: block;
+        margin-bottom: 40px;
+    }
+    .search-table td {
+        display: block;
+        text-align: right;
+    }
+    .search-table td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+}
+@media (min-width: 771px) {
+    .search-table thead tr {
+        border-bottom: 2px solid var(--color-three);
+    }
+    .search-table tbody tr, .search-table tbody tr .table-title {
+        border-bottom: 1px solid RGBa(255,255,255,0.3);
+    }
+    .search-event, .search-date, .search-city, .search-organizer {
+        width: 270px;
+    }
 }
 
+/* ==================== Admin =========================== */
+/* Admin user index */
+.admin-user-index h3 {
+    text-align: center;
+    margin: 40px 0 40px 0;
+}
+.admin-user-index a {
+    color: var(--color-two);
+}
+.admin-body {
+    background-color: white;
+}
+#admin-title {
+    color: var(--color-three);
+}
+@media (max-width: 700px){
+    .admin-user-table thead {
+    display: none;
+    }
+    .admin-user-table tr{
+    display: block;
+    margin-bottom: 40px;
+    }
+    .admin-user-table td {
+    display: block;
+    text-align: right;
+    }
+    .admin-user-table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    }
+}
+
+/* Admin event index */
+.admin-event-index h3 {
+    text-align: center;
+    margin: 40px 0 40px 0;
+}
+.admin-event-index a {
+    color: var(--color-two);
+}
+@media (max-width: 700px){
+    .admin-event-table thead {
+    display: none;
+    }
+    .admin-event-table tr{
+    display: block;
+    margin-bottom: 40px;
+    }
+    .admin-event-table td {
+    display: block;
+    text-align: right;
+    }
+    .admin-event-table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    }
+}
+
+/* Admin user/event edit */
+.admin-user-edit, .admin-event-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.admin-user-edit h1, .admin-event-edit h1 {
+    text-align: center;
+    margin: 40px 0 40px 0;
+}
+.admin-user-edit-form, .admin-event-edit-form {
+    width: 90%;
+    margin-bottom: 20px;
+}
+.admin-user-edit-button, .admin-event-edit-button {
+    display: flex;
+    justify-content: center;
+}
+.admin-event-edit-form form .event-edit-form-label {
+    font-weight: normal;
+    color: initial;
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 400px) {
+    .admin-user-edit-form, .admin-event-edit-form {
+        width: 70%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .admin-user-edit-form, .admin-event-edit-form {
+        width: 40%;
+    }
+}
+@media screen and (min-width:1000px) {
+    .admin-user-edit-form, .admin-event-edit-form {
+        width: 400px;
+    }
+}

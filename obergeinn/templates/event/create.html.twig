@@ -4,29 +4,36 @@
 
 {% block body %}
 {# Do not forget to add a link in the dashboard in order to display the Event create page #}
-  
-<div class="d-flex flex-column align-items-center color-one ">
-    <h1>Créer ton évènement</h1>
+<button class="button-link d-flex align-self-start ms-4 bg-one rounded p-1">
+    <a class="text-decoration-none link color-four" href="{{ path('event_index') }}">Retour</a>
+</button>
 
-    {{ form_start(formView) }}
-        {{ form_row(formView.title) }}
-        {{ form_row(formView.adress) }}
-        {{ form_row(formView.description) }}
-        {{ form_row(formView.date) }}
+<div class="event-create">
+    <section class="event-create-form">
+        <h1>Créer un évènement</h1>
+
+        {{ form_start(formView) }}
+            {{ form_row(formView.title) }}
+            {{ form_row(formView.adress) }}
+            {{ form_row(formView.description) }}
+            {{ form_row(formView.date) }}
+            
+            {# Use symfony proptotype and JS to dynamicaly add several need form #}
+            <ul class="need" 
+            data-index="{{ formView.need|length > 0 ? formView.need|last.vars.name + 1 : 0 }}" 
+            data-prototype="{{ form_widget(formView.need.vars.prototype)|e('html_attr') }}">
+            </ul>
+            <div class="event-create-buttons">
+                <button type="button" class="btn button_connexion add_item_link" data-collection-holder-class="need"><i class="bi bi-plus-circle-fill"></i> Ajouter un besoin</button>
+
+                <button type="submit" class="btn button_inscription">Valider</button>
+            </div>
+            <div hidden>
+            {{ form_row(formView.need) }}
+            </div>
+        {{ form_end(formView) }}
         
-        {# Use symfony proptotype and JS to dynamicaly add several need form #}
-        <ul class="need" 
-        data-index="{{ formView.need|length > 0 ? formView.need|last.vars.name + 1 : 0 }}" 
-        data-prototype="{{ form_widget(formView.need.vars.prototype)|e('html_attr') }}">
-        </ul>
-        <button type="button" class="btn button_connexion add_item_link" data-collection-holder-class="need">Ajouter un besoin</button>
-
-        <button type="submit" class="btn button_inscription">Valider</button>
-        <div hidden>
-        {{ form_row(formView.need) }}
-        </div>
-    {{ form_end(formView) }}
-    
-</div>
+    </section>
+</div> 
 {% endblock %}
 

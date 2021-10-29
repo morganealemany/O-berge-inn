@@ -5,8 +5,10 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -19,16 +21,33 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastname', null, [
+            ->add('lastname', TextType::class, [
                 'label' => 'Nom',
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ]
             ])
-            ->add('firstname', null, [
-                'label' => 'Prénom'
+            ->add('firstname', TextType::class, [
+                'label' => 'Prénom',
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ]
             ])
-            ->add('pseudo')
-            ->add('email')
+            ->add('pseudo', TextType::class, [
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ]
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'J\'accepte les conditions',
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ],
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -41,6 +60,9 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
+                'row_attr' => [
+                    'class' => 'registration-label'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -76,6 +98,9 @@ class RegistrationFormType extends AbstractType
                         'mimeTypesMessage' => 'Merci de ne choisir que des fichiers .png ou .jpeg',
                     ])
                 ],
+                'row_attr' => [
+                    'class' => 'registration-label registration-image',
+                ]
             ])
         ;
     }

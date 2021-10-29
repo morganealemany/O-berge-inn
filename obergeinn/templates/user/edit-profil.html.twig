@@ -4,21 +4,24 @@
 
 {% block body %}
 
+<button class="button-link d-flex align-self-start ms-4 bg-one rounded p-1">
+    <a class="text-decoration-none link color-four" href="{{ path('user_index') }}">Retour</a>
+</button>
+<section class="profile-edit">
+    <h1>Modifier le profil</h1>
 
-<div class="d-flex flex-column align-items-center color-one ">
-
-    <a class="d-flex align-self-baseline ms-4 color-four text-decoration-none link"href="{{ path('user_index')}}">Retour</a>
-
-    <h1 class="mb-5">Modification du Profil</h1>
-
- {{ form_start(form) }}
-        {{ form_row(form.pseudo) }}
-        {{ form_row(form.firstname) }}
+    {{ form_start(form) }}
         {{ form_row(form.lastname) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.pseudo) }}
         {{ form_row(form.email) }}
         {{ form_row(form.image)}}
-
+        <div class="edit-profile-buttons">
           <button type="submit" class="btn button_inscription">Valider</button>
+          <button class="btn button-edit-password button_connexion">
+          <a href="{{ path('user_password') }}">Modifier le mot de passe</a>
+          </button>
+        </div>
     {{ form_end(form) }}
-    
+  </section>
 {% endblock %}

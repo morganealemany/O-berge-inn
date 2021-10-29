@@ -4,36 +4,86 @@
 
 {% block body %}
 <main class="container">
-    <section class="title col-12 col-lg-12 text-center mb-5">
-        <a class="d-flex align-self-end ms-4 color-four text-decoration-none"href="{{ path('event_index')}}">Retour</a>
-        <h2 class="color-one text-uppercase fw-bold">Résultats de la recherche</h2>
-        <div class="border d-flex flex-column align-items-center mx-auto pt-5 pb-5 rounded-3">
+    <section class="title mb-5">
+         <button class="button-link d-flex align-self-end ms-4 bg-one rounded p-1">
+            <a class="text-decoration-none link color-four" href="{{ path('event_index') }}">Retour</a>
+        </button>
+        <h1>Résultats de la recherche</h2>
+        <h4>"{{query}}"</h4>
+    </section>
+    <section class="search">
+        <div class="mx-auto">
+            <table class="search-table fs-3">
+            <thead>
+                <tr>
+                <th class="search-event"scope="col">Evenement</th>
+                <th class="search-date"scope="col">Date</th>
+                <th class="search-city"scope="col">Ville</th>
+                <th class="search-organizer"scope="col">Organisateur</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in results %}
+                    {% if app.user == event.user %}
+                        <tr id="myevent" class="organizer
+                        {% if event.status == 0 %}
+                        archived
+                        {% endif %}
+                        ">
+                    {% else %}
+                        <tr id="myevent" class="invited
+                        {% if event.status == 0 %}
+                        archived
+                        {% endif %}
+                        ">
+                    {% endif %}                    
+                        <td data-label="Evénement" class="table-title
 
-            <table class="table fs-3">
-                <thead>
-                    <tr>
-                    <th scope="col">Evenement</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Ville</th>
-                    <th scope="col">Organisateur</th>
-                    <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr id="myevent" class="organizer">
+                        {% if event.status == 0 %}
+                            color-five
+                        {% endif %}
+                        
+                        " scope="row">{{event.title}}</td>
+                        <td data-label="Date"
 
-                    {% for event in results %}
-                    <th scope="row">{{event.title}}</th>
-                        <td>{{event.date ? event.date|date('d-m-Y')}}</td>
+                        {% if (event.status == 0) %}
+                            class="color-five"
+                        {% endif %}
+
+                        >{{event.date ? event.date|date('d-m-Y')}}</td>
                         {# Use the twig filter 'split' to cut the adress #}
                         {% set adressData = event.adress|split(' ')%}
                         {# use the twig filter 'last' to select the last element (the city) and twig filter 'capitalize' to uppercase the first character #}
-                        <td>{{(adressData|last)|capitalize}}</td>
-                        <td>{{event.user.pseudo}}</td>
-                        <td><a href="{{ path('event_show', {'id': event.id}) }}"><i class="bi bi-eye-fill"></i></a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
+                        <td data-label="Ville"
+                        
+                        {% if (event.status == 0) %}
+                            class="color-five"
+                        {% endif %}
+            
+                        >{{(adressData|last)|capitalize}}</td>
+                        <td data-label="Organisateur"
+                        
+                        {% if (event.status == 0) %}
+                            class="color-five"
+                        {% endif %}
+                        
+                        >{{event.user.pseudo}}</td>
+                        <td>
+                            <a href="{{ path('event_show', {'id': event.id}) }}" title="Voir"><i class="bi bi-eye-fill color-three"></i></a>
+                            <a href="{{ path('event_edit', {'id' : event.id}) }}" title="Modifier"><i class="bi bi-pencil-square color-two"></i></a>
+                            <a href="{{ path('event_archiving', {'id': event.id}) }}" title="
+                            {% if (event.status == 1) %}
+                                {{'Archiver"><i class="bi bi-archive-fill color-five'}}
+                            {% else %}
+                                {{'Sortir de l\'archive"><i class="bi bi-archive-fill color-four'}}
+                            {% endif %}
+                            
+                            "></i></a>
+                        </td>
+                </tr>
+            {% endfor %}
+            </tbody>
             </table>
         </div>
     </section>

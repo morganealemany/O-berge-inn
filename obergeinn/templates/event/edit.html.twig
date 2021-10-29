@@ -1,18 +1,23 @@
 {% extends "base.html.twig" %}
 {% form_theme formView 'bootstrap_5_layout.html.twig' %}
+{% block title %}Modification de l'événement {{event.title}}{% endblock %}
 
 {% block body %}
 
-<div class="d-flex flex-column align-items-center color-one ">
-    <h1>Modifier l'événement {{event.title}}</h1>
+<button class="button-link d-flex align-self-start ms-4 bg-one rounded p-1">
+    <a class="text-decoration-none link color-four" href="{{ path('user_index') }}">Retour</a>
+</button>
+<section class="event-edit">
+    <h1>Modifier l'événement <span>"{{event.title}}"<span></h1>
 
     {{ form_start(formView) }}
         {{ form_row(formView.title) }}
         {{ form_row(formView.adress) }}
         {{ form_row(formView.description) }}
         {{ form_row(formView.date) }}
-
-    <button type="submit" class="btn button_inscription text-center">Valider</button>
+    <div class="edit-event-button">
+        <button type="submit" class="btn button_inscription text-center">Valider</button>
+    </div>
 
     {{ form_end(formView) }}
     

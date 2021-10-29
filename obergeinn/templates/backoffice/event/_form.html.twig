@@ -3,7 +3,9 @@
         {{ form_row(eventView.adress) }}
         {{ form_row(eventView.description) }}
         {{ form_row(eventView.date) }}
-        <button class="btn button_inscription">{{ button_label|default('Save') }}</button>
+        <div class="admin-event-edit-button">
+            <button class="btn btn-dark">{{ button_label|default('Save') }}</button>
+        </div>
     {{ form_end(eventView) }}
 
     

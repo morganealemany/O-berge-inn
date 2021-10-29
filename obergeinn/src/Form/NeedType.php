@@ -15,15 +15,27 @@ class NeedType extends AbstractType
         $builder
             ->add('name', null, [
                 'label' => 'Nom du besoin',
+                'row_attr' => [
+                    'class' => 'need-create-form-label'
+                ],
             ])
             ->add('quantity', IntegerType::class, [
-                'label' => 'Quantité'
+                'label' => 'Quantité',
+                'row_attr' => [
+                    'class' => 'need-create-form-label'
+                ],
             ] )
             ->add('measureUnit', null, [
-                'label' => 'Unité de mesure'
+                'label' => 'Unité de mesure',
+                'row_attr' => [
+                    'class' => 'need-create-form-label'
+                ],
             ])
             ->add('type', null, [
-                'label' => 'Type de besoin'
+                'label' => 'Type de besoin',
+                'row_attr' => [
+                    'class' => 'need-create-form-label'
+                ],
             ]);
     }
 
