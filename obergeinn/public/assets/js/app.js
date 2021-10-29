@@ -11,6 +11,7 @@
         cloneInput.init();
         filter.init();
         needForm.init();
+        ranking.init();
         app.displayInputNeedsInModal();
         app.getGeolocalisation();
         

@@ -18,7 +18,7 @@
 
     addFormToCollection: function(e) {
         const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-        console.log(collectionHolder);
+        // console.log(collectionHolder);
         const item = document.createElement('li');
       
         item.innerHTML = collectionHolder

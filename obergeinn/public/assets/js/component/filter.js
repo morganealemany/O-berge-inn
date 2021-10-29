@@ -88,7 +88,7 @@ const filter = {
      */
     showOnlyEventsArchived: function() {
         const allEvents = document.querySelectorAll('#myevent');
-        console.log(allEvents);
+        // console.log(allEvents);
         for (const event of allEvents) {
             if(event.classList.contains('archived')){
                 event.classList.remove('visually-hidden');
