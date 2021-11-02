@@ -29,7 +29,8 @@
         {% if app.user.firstname is defined %}
             <div class="d-flex flex-column justify-content-center align-items-center">
              {# If the connected user has an image use it to generate thumbnail avatar #}
-                {% if app.user.image is defined %}
+             {# {{dump(app.user.image)}} #}
+                {% if app.user.image is not null %}
                     <img alt="icon" src="{{ asset('uploads/' ~ app.user.image)}}" class="header-user-icon rounded-circle" title="Vous êtes connecté en tant que {{app.user.pseudo}}" >
                 {% else %} {# Else use the default user icon for thumbnail #}
                     <img alt="icon" src="{{ asset('assets/images/user-icon.png')}}" class="header-user-icon" title="Vous êtes connecté en tant que {{app.user.pseudo}}">
