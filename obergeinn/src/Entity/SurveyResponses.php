@@ -40,6 +40,16 @@ class SurveyResponses
      */
     private $surveyChoices;
 
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->surveyChoices = new ArrayCollection();
@@ -112,6 +122,30 @@ class SurveyResponses
                 $surveyChoice->setSurveyResponses(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
