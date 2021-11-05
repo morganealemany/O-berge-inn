@@ -21,9 +21,9 @@
 
         <h1 class="h3 mb-3 font-weight-normal login color-one">Connexion</h1>
         <label class="login" for="inputEmail">Email</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control login mb-4" autocomplete="email" required autofocus>
+        <input type="email" placeholder="Votre adresse mail" value="{{ last_username }}" name="email" id="inputEmail" class="form-control login mb-4" autocomplete="email" required autofocus>
         <label class="login" for="inputPassword">Mot de Passe</label>
-        <input type="password" name="password" id="inputPassword" class="form-control login" autocomplete="current-password" required>
+        <input type="password" name="password" id="inputPassword" class="form-control login" placeholder="Votre mot de passe" autocomplete="current-password" required>
 
         <input type="hidden" name="_csrf_token"
             value="{{ csrf_token('authenticate') }}"

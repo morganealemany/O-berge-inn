@@ -23,25 +23,57 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('lastname', TextType::class, [
                 'label' => 'Nom',
+                'attr' => [
+                    'placeholder' => 'Votre nom'
+                ],
                 'row_attr' => [
                     'class' => 'registration-label'
-                ]
+                ],
+                'required' => 'required',
+                'trim' => true,
+                 'constraints' => new NotBlank([
+                    'message' => 'Merci de saisir votre nom',
+                ]),
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
+                'attr' => [
+                    'placeholder' => 'Votre prénom'
+                ],
                 'row_attr' => [
                     'class' => 'registration-label'
-                ]
+                ],
+                'required' => 'required',
+                'trim' => true,
+                'constraints' => new NotBlank([
+                    'message' => 'Merci de saisir votre prénom',
+                ]),
             ])
             ->add('pseudo', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Votre pseudo'
+                ],
                 'row_attr' => [
                     'class' => 'registration-label'
-                ]
+                ],
+                'required' => 'required',
+                'trim' => true,
+                'constraints' => new NotBlank([
+                    'message' => 'Merci de saisir un pseudo',
+                ]),
             ])
             ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'Votre email'
+                ],
                 'row_attr' => [
                     'class' => 'registration-label'
-                ]
+                ],
+                'required' => 'required',
+                'trim' => true,
+                'constraints' => new NotBlank([
+                    'message' => 'Merci de saisir une adresse mail valide',
+                ]),
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'J\'accepte les conditions',
@@ -51,7 +83,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter les conditions',
                     ]),
                 ],
             ])
@@ -59,17 +91,20 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => [
+                    'autocomplete' => 'new-password',
+                    'placeholder' => 'Votre mot de passe'
+                ],
                 'row_attr' => [
                     'class' => 'registration-label'
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Merci de saisir un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

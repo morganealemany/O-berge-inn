@@ -14,7 +14,7 @@
 <section class="register-form">
     <h1>Inscription</h1>
 
-    {{ form_start(registrationForm) }}
+    {{ form_start(registrationForm, {'attr': { 'novalidate': 'novalidate'}}) }}
         {{ form_row(registrationForm.lastname) }}
         {{ form_row(registrationForm.firstname) }}
         {{ form_row(registrationForm.pseudo) }}
