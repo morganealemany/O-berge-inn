@@ -160,7 +160,7 @@ class EventController extends AbstractController
         $event->setUser($this->getUser());
         $event->setStatus(1);
         // 5th stage : we check if we are in the case of submission of form before saving
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             
             // we will save the datas and create the new event.
             $em = $this->getDoctrine()->getManager();

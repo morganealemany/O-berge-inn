@@ -21,6 +21,7 @@ class SearchController extends AbstractController
     public function index(Request $request, EventRepository $eventRepository): Response
     {
         $userId = $this->getUser()->getId();
+        
         // We retrieve the keyword entered in the search form
         $query = $request->query->get('search');
 

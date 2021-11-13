@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EventCreateType extends AbstractType
 {
@@ -22,30 +23,53 @@ class EventCreateType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Titre',
+                'trim' => true,
+                'attr' => [
+                    'placeholder' => 'Titre de l\'événement'
+                ],
                 'row_attr' => [
                     'class' => 'event-create-form-label'
                 ],
-                // In the parameter of the add method (the property, the type of poperty, an array)
-                // It allows us to modify the label of the input in the form
-                // Labels are by défautl in English in the Event entity
+                'required' => 'required',
+                'constraints' => new NotBlank([
+                    'message' => 'Merci de saisir un titre pour l\'événement',
+                ]),
             ])
             ->add('adress', TextType::class, [
                 'label' => 'Adresse',
+                'trim' => true,
+                'attr' => [
+                    'placeholder' => 'Adresse de l\'événement'
+                ],
                 'row_attr' => [
                     'class' => 'event-create-form-label'
                 ],
+                'required' => 'required',
+
+                'constraints' => new NotBlank([
+                    'message' => 'Merci de saisir une adresse',
+                ]),
             ])
             ->add('description', null, [
                 'label' => 'Description',
+                'trim' => true,
+                'attr' => [
+                    'placeholder' => 'Description de l\'événement'
+                ],
                 'row_attr' => [
                     'class' => 'event-create-form-label'
                 ],
+                'required' => 'required',
+                'constraints' => new NotBlank([
+                    'message' => 'Merci de saisir une description',
+                ]),
             ])
             ->add('date', DateTimeType::class, [
                 'required' => false,
                 'label' => 'Date',
                 'widget'=> 'single_text',
                 'input' => 'datetime_immutable',
+                'trim' => true,
                 'row_attr' => [
                     'class' => 'event-create-form-label'
                 ],

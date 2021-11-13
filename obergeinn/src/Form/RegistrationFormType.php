@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => 'required',
                 'trim' => true,
-                 'constraints' => new NotBlank([
+                'constraints' => new NotBlank([
                     'message' => 'Merci de saisir votre nom',
                 ]),
             ])

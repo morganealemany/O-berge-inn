@@ -12,7 +12,7 @@
     <section class="event-create-form">
         <h1>Créer un évènement</h1>
 
-        {{ form_start(formView) }}
+        {{ form_start(formView, {'attr': { 'novalidate': 'novalidate'}}) }}
             {{ form_row(formView.title) }}
             {{ form_row(formView.adress) }}
             {{ form_row(formView.description) }}

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ParticipationRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -107,6 +108,11 @@ class Participation
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
     }
 
 }
