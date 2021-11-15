@@ -51,7 +51,7 @@
 
                         <form action="{{path('survey_answered', {'id': event.id})}}" method="post" class="form-check d-flex flex-column align-items-center fs-4 justify-content-around ps-0">
                             <div>
-                                <input class="form-check-input" type="checkbox" value="{{responses.response|date('d-M-Y')}}" id="flexCheck1" name="dateChoice{{dateChoiceNumber}}" 
+                                <input class="form-check-input" type="checkbox" value="{{responses.response|date('d-M-Y')}}" id="date{{dateChoiceNumber}}" name="dateChoice{{dateChoiceNumber}}" 
 
                                 {% for choices in responses.surveyChoices %}
                                     {# If the user connected has already answered the survey #}
@@ -61,7 +61,7 @@
                                     {% endif %}
                                 {% endfor %}
                                 >
-                                <label class="form-check-label" for="flexCheck1">
+                                <label class="form-check-label" for="date{{dateChoiceNumber}}">
                                     {{responses.response|date('d-M-Y')}}
                                 </label>
                             </div>
