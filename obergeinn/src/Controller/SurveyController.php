@@ -22,6 +22,8 @@ use Symfony\Component\HttpFoundation\Request;
 class SurveyController extends AbstractController
 {
     /**
+     * Method to display the user connected survey list
+     * 
      * @Route("/", name="index")
      * @IsGranted("ROLE_USER")
      */
@@ -53,7 +55,6 @@ class SurveyController extends AbstractController
             }
             $totalGuestsList[$survey->getEvent()->getTitle()] = $totalGuests;
             $totalConfirmedGuestsList[$survey->getEvent()->getTitle()] = $totalConfirmedGuests;
-            // dump($totalGuestsList);
         }
 
         // // We will calculate the percent oof responses for each choices
@@ -82,6 +83,8 @@ class SurveyController extends AbstractController
     }
 
     /**
+     * Method to create a new survey
+     * 
      * @Route("/creer", name="create")
      *
      * @param Request $request
@@ -109,21 +112,18 @@ class SurveyController extends AbstractController
             $surveyResponses1->setResponse($firstDate);
             $surveyResponses1->setSurvey($survey);
             $em->persist($surveyResponses1);
-            // dump($surveyResponses1);
     
             $secondDate = DateTime::createFromFormat('Y-m-d',$_POST['survey']['response2']);
             $surveyResponses2 = new SurveyResponses();
             $surveyResponses2->setResponse($secondDate);
             $surveyResponses2->setSurvey($survey);
             $em->persist($surveyResponses2);
-            // dump($surveyResponses2);
 
             $thirdDate = DateTime::createFromFormat('Y-m-d',$_POST['survey']['response3']);
             $surveyResponses3 = new SurveyResponses();
             $surveyResponses3->setResponse($thirdDate);
             $surveyResponses3->setSurvey($survey);
             $em->persist($surveyResponses3);
-            // dump($surveyResponses3);
 
             $em->flush();
 

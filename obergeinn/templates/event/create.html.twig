@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 {% form_theme formView 'bootstrap_5_layout.html.twig' %}
-{% block title %}Créer ton évenement{% endblock %}
 
 {% block body %}
 {# Do not forget to add a link in the dashboard in order to display the Event create page #}
@@ -12,7 +11,7 @@
     <section class="event-create-form">
         <h1>Créer un évènement</h1>
 
-        {{ form_start(formView) }}
+        {{ form_start(formView, {'attr': { 'novalidate': 'novalidate'}}) }}
             {{ form_row(formView.title) }}
             {{ form_row(formView.adress) }}
             {{ form_row(formView.description) }}
