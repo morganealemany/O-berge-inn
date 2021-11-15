@@ -43,11 +43,8 @@ class MailerController extends AbstractController
                         ->context([
                             'event' => $event,
                         ]));
-
-                        // $mailer->send($email2);
                 }
                 else {
-                    dump($userFindByEmail);
                     // 1. Create an entrance in the Participation table
                     $participation = new Participation();
                     $participation->setUser($userFindByEmail);
@@ -66,66 +63,9 @@ class MailerController extends AbstractController
                         ->context([
                             'event' => $event,
                     ]));
-
-                    // $mailer->send($email1);
                 }
             }
-          
 
-
-
-
-
-            // foreach ($sentEmailArray as $guestEmail) {
-            //     // If the inform adress email is the same as a current adress email present in the DB
-            //     foreach ($allUserList as $user) {
-            //         if ($guestEmail === $user->getEmail()) {
-            //             dump($guestEmail, 'user exist');
-            //             // 1. Create an entrance in the Participation table
-            //             $participation = new Participation();
-            //             $participation->setUser($user);
-            //             $participation->setEvent($event);
-            //             $participation->setStatus(0);
-            //             $em = $this->getDoctrine()->getManager();
-            //             $em->persist($participation);
-            //             $em->flush();
-                        
-            //             // 2. We send an invitation mail with the link towards the event.
-            //             $email1 = (new TemplatedEmail())
-            //             ->from(new Address('obergeinn.officiel@gmail.com', 'O\'Berge\'Inn team'))
-            //             ->to(new Address($guestEmail, $user->getFirstname()))
-            //             ->subject('Vous êtes invité!')
-            //             ->htmlTemplate('mailer/invitation.html.twig')
-            //             ->context([
-            //                 'event' => $event,
-            //             ]);
-
-            //             $mailer->send($email1);
-
-            //         } else {
-            //             dump($guestEmail, 'user doesn\'t exist');
-            //             // Otherwise, it is because the email isn't suscribed on the website.
-            //             // Send a mail proposing to register
-            //             $email2 = (new TemplatedEmail())
-            //             ->from(new Address('obergeinn.officiel@gmail.com', 'O\'Berge\'Inn team'))
-            //             ->to(new Address($guestEmail, 'Invité'))
-            //             ->subject('Vous êtes invité!')
-            //             ->htmlTemplate('mailer/invitation_inscription.html.twig')
-            //             ->context([
-            //                 'event' => $event,
-            //             ]);
-
-            //             $mailer->send($email2);
-            //         }
-            //     }
-            //     // if (isset($email1)) {
-            //     //     $mailer->send($email1);
-            //     // }
-            //     // elseif(isset($email2)) {
-            //     //     $mailer->send($email2);
-            //     // };
-                
-            // }
             // Add a flash message to inform the user of the successing creation
             $this->addFlash('success', 'Vos invitations ont bien été envoyées.' );
             

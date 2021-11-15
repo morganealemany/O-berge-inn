@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SurveyRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -49,6 +50,7 @@ class Survey
     public function __construct()
     {
         $this->survey_responses = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int

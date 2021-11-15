@@ -145,7 +145,7 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function create(Request $request, TypeRepository $typeRepository, MeasureUnitRepository $measureUnitRepository) 
+    public function create(Request $request) 
     {
         // 1st step : we will "instance" an empty object
         $event = new Event();
@@ -185,7 +185,9 @@ class EventController extends AbstractController
         ]);
     }
 
-/**
+    /**
+     * Method to edit an event
+     * 
      * @Route("/{id}/modifier", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Event $event): Response
@@ -228,7 +230,6 @@ class EventController extends AbstractController
         foreach ($userConnectedParticipation as $userParticipation) {
 
             if ($event->getId() === $userParticipation->getEvent()->getId()) {
-                // dump($userParticipation->getStatus());
                 if ($userParticipation->getStatus() == false) {
                     $userParticipation->setStatus(true);
                     $entityManager->flush();

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AssignationRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,6 +44,11 @@ class Assignation
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updatedAt;
+
+    public function __construct() 
+    {
+        $this->createdAt = new DateTimeImmutable();   
+    }
 
     public function getId(): ?int
     {

@@ -49,6 +49,7 @@ class EventCreateType extends AbstractType
                 'constraints' => new NotBlank([
                     'message' => 'Merci de saisir une adresse',
                 ]),
+                'help' => 'Format : adresse - code postal - ville',
             ])
             ->add('description', null, [
                 'label' => 'Description',

@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SurveyController!{% endblock %}
-
 {% block body %}
 <main class="container">
     <section class="title mb-5">
@@ -28,18 +26,14 @@
                 </tr>
             </thead>
             <tbody>
-            {# {{dump(totalGuestsList)}}
-            {{dump(totalConfirmedGuestsList)}} #}
             {% set choice = 0 %}
             {% for survey in surveyList %}
-            {# {{dump(survey.event.participation)}} #}
                 <tr>
                     <td data-label="Evénement" class="table-title" scope="row">{{survey.event.title}}</td>
                     {% for responses in survey.surveyResponses %}
                     {% set choice = choice + 1 %}
                         <td data-label="Choix {{choice}}">{{responses.response|date('d-m-Y')}} 
                         {# If the total number of confirmedGuests is up to 0 #}
-                        {# {{dump(responses.nbResponses)}} #}
                         {% if totalConfirmedGuestsList[survey.event.title] > 0 %}
                             <p>
                                 {{((responses.nbResponses * 100) / totalConfirmedGuestsList[survey.event.title])|number_format(0) }} %
