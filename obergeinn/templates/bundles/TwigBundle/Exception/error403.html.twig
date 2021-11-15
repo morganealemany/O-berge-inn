@@ -1,21 +1,19 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Permission refusé {% endblock %}
 {% block body %}
 
 <div class="text-center ms-5 me-5 mt-4 mb-5 pb-5">
 
-
     <h1 class='color-four fw-bold'> Pas si vite </h1>
     <h1 class='color-three fw-bold'>Vous ne passerez pas ! </h1>
 
-        <div style="">
-            <img src="{{asset('assets/images/gandalf.png')}}" style= "width: 500;" alt="...">
-        </div>
+    <div style="">
+        <img src="{{asset('assets/images/gandalf.png')}}" style= "width: 500;" alt="...">
+    </div>
 
-            <h3 class="color-four fw-bold ml-5 mt-3 mb-4"> {{ status_code }}, {{ status_text }} </h3>
-            <h4 class="color-one fw-bold mb-4">Retournez dans les ténèbres qui vous ont vu naître ! </h4>
-            <p> <a class="color-four align-self-end me-5 link" href="{{ path('dashboard') }}">Retour au tableau de bord </p>
+    <h3 class="color-four fw-bold ml-5 mt-3 mb-4"> {{ status_code }}, {{ status_text }} </h3>
+    <h4 class="color-one fw-bold mb-4">Retournez dans les ténèbres qui vous ont vu naître ! </h4>
+    <p> <a class="color-four align-self-end me-5 link" href="{{ path('dashboard') }}">Retour au tableau de bord </p>
 </div>       
 
 {% endblock %}

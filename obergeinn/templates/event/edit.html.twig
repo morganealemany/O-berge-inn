@@ -1,6 +1,5 @@
 {% extends "base.html.twig" %}
 {% form_theme formView 'bootstrap_5_layout.html.twig' %}
-{% block title %}Modification de l'événement {{event.title}}{% endblock %}
 
 {% block body %}
 
@@ -10,7 +9,7 @@
 <section class="event-edit">
     <h1>Modifier l'événement <span>"{{event.title}}"<span></h1>
 
-    {{ form_start(formView) }}
+    {{ form_start(formView, {'attr': { 'novalidate': 'novalidate'}}) }}
         {{ form_row(formView.title) }}
         {{ form_row(formView.adress) }}
         {{ form_row(formView.description) }}

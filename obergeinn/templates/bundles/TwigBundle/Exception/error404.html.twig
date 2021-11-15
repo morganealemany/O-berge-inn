@@ -1,9 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %} Page non trouvée {% endblock %}
 {% block body %}
-
-
 
 <div class="text-center ms-5 me-5 mt-4 mb-5 pb-5">
 
@@ -11,13 +8,13 @@
     <h1 class='color-four fw-bold'> OUPS ! </h1>
     <h1 class='color-three fw-bold'>La page recherchée n'a pas été trouvée</h1>
 
-        <div style="">
-            <img src="{{asset('assets/images/404.png')}}" style= "width: 400;" alt="...">
-        </div>
+    <div style="">
+        <img src="{{asset('assets/images/404.png')}}" style= "width: 400;" alt="...">
+    </div>
 
-            <h3 class="color-four fw-bold ml-5 mt-3 mb-4"> {{ status_code }}, {{ status_text }} </h3>
-            <h4 class="color-one fw-bold mb-4">Ne vous en faites pas, il suffit de cliquer sur le lien ci dessous pour ne pas finir comme l'Aubergine</h4>
-            <p> <a class="color-four align-self-end me-5 link" href="{{ path('dashboard') }}">Retour au tableau de bord </p>
+    <h3 class="color-four fw-bold ml-5 mt-3 mb-4"> {{ status_code }}, {{ status_text }} </h3>
+    <h4 class="color-one fw-bold mb-4">Ne vous en faites pas, il suffit de cliquer sur le lien ci dessous pour ne pas finir comme l'Aubergine</h4>
+    <p> <a class="color-four align-self-end me-5 link" href="{{ path('dashboard') }}">Retour au tableau de bord </p>
 </div>       
 
 {% endblock %}

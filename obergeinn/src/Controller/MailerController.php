@@ -29,54 +29,43 @@ class MailerController extends AbstractController
             $sentEmailArray = filter_input(INPUT_POST, 'mail', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
             
             $event = $eventRepository->find($sentEventId);
-            
-            $allUserList = $userRepository->findAll();
-
-            foreach ($sentEmailArray as $guestEmail) {
-                // If the inform adress email is the same as the current adress email present in the DB
-                foreach ($allUserList as $user) {
-
-                    if ($guestEmail === $user->getEmail()) {
-                        // 1. Create an entrance in the Participation table
-                        $participation = new Participation();
-                        $participation->setUser($user);
-                        $participation->setEvent($event);
-                        $participation->setStatus(0);
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($participation);
-                        $em->flush();
                         
-                        // 2. We send an invitation mail with the link towards the event.
-                        $email1 = (new TemplatedEmail())
-                        ->from(new Address('obergeinn.officiel@gmail.com', 'O\'Berge\'Inn team'))
-                        ->to(new Address($guestEmail, $user->getFirstname()))
-                        ->subject('Vous êtes invité!')
-                        ->htmlTemplate('mailer/invitation.html.twig')
-                        ->context([
-                            'event' => $event,
-                        ]);
+            foreach ($sentEmailArray as $guestEmail) {
 
-                    } else {
-                        // Otherwise, it is because the email isn't suscribed on the website.
-                        // Send a mail proposing to register
-                        $email2 = (new TemplatedEmail())
+                $userFindByEmail = $userRepository->findByEmail($guestEmail);
+
+                if (empty($userFindByEmail)) {
+                    $mailer->send((new TemplatedEmail())
                         ->from(new Address('obergeinn.officiel@gmail.com', 'O\'Berge\'Inn team'))
                         ->to(new Address($guestEmail, 'Invité'))
                         ->subject('Vous êtes invité!')
                         ->htmlTemplate('mailer/invitation_inscription.html.twig')
                         ->context([
                             'event' => $event,
-                        ]);
-                    }
+                        ]));
                 }
-                if (isset($email1)) {
-                    $mailer->send($email1);
-                }
-                elseif(isset($email2)) {
-                    $mailer->send($email2);
-                };
+                else {
+                    // 1. Create an entrance in the Participation table
+                    $participation = new Participation();
+                    $participation->setUser($userFindByEmail);
+                    $participation->setEvent($event);
+                    $participation->setStatus(0);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($participation);
+                    $em->flush();
                 
+                    // 2. We send an invitation mail with the link towards the event.
+                    $mailer->send((new TemplatedEmail())
+                        ->from(new Address('obergeinn.officiel@gmail.com', 'O\'Berge\'Inn team'))
+                        ->to(new Address($guestEmail, $userFindByEmail->getFirstname()))
+                        ->subject('Vous êtes invité!')
+                        ->htmlTemplate('mailer/invitation.html.twig')
+                        ->context([
+                            'event' => $event,
+                    ]));
+                }
             }
+
             // Add a flash message to inform the user of the successing creation
             $this->addFlash('success', 'Vos invitations ont bien été envoyées.' );
             
