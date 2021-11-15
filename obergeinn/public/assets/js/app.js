@@ -13,7 +13,8 @@
         needForm.init();
         ranking.init();
         app.displayInputNeedsInModal();
-        app.getGeolocalisation();
+        // app.getGeolocalisation();
+        app.displayMapForEvent();
         
     },
 
@@ -50,28 +51,29 @@
     },
     
 
-    /**
-     * Method retrieving the localisation of the user connected
-     */
-    getGeolocalisation: function() 
-    {
-        if ("geolocation" in navigator) {
-            // console.log('la géolocalisation est disponible')
+    // TODO method deprecated using on http. Search for some other way to find the geolocation or switch to https. 
+    // /**
+    //  * Method retrieving the localisation of the user connected
+    //  */
+    // getGeolocalisation: function() 
+    // {
+    //     if ("geolocation" in navigator) {
+    //         // console.log('la géolocalisation est disponible')
             
-            navigator.geolocation.getCurrentPosition(function(position) {
-                // console.log(position.coords.latitude, position.coords.longitude);
-                app.displayMapForEvent(position.coords.latitude, position.coords.longitude);
-                });
-        } else {
-            // console.log('la géolocalisation est indisponible')
-        };
+    //         navigator.geolocation.getCurrentPosition(function(position) {
+    //             // console.log(position.coords.latitude, position.coords.longitude);
+    //             app.displayMapForEvent(position.coords.latitude, position.coords.longitude);
+    //             });
+    //     } else {
+    //         // console.log('la géolocalisation est indisponible')
+    //     };
 
-    },
+    // },
 
     /**
      * Method allowed the display of an event map
      */
-    displayMapForEvent: function(latitude, longitude)
+    displayMapForEvent: function()
     {
         // First we will transfom the adress of the event into coordinates
         // ========= MapBox Search API ==============
@@ -106,7 +108,10 @@
             const marker = L.marker([destinationCoordinates[1],destinationCoordinates[0]]).addTo(map);
             
             // Then use the current position coordinates transfered in parameters and link the itinerary from the current position and the destination
-            marker.bindPopup('<a target="_blank" href="https://www.google.com/maps/dir/' + latitude + ','  + longitude + '/' + destinationCoordinates[1] + ',' + destinationCoordinates[0] + '" ><h3>Y aller</h3></a>');
+            marker.bindPopup('<a target="_blank" href="https://www.google.com/maps/search/' + destinationCoordinates[1] + ',' + destinationCoordinates[0] + '" ><h3>Y aller</h3></a>');
+
+            // TODO For directions with a geolocation
+            // marker.bindPopup('<a target="_blank" href="https://www.google.com/maps/dir/' + latitude + ','  + longitude + '/' + destinationCoordinates[1] + ',' + destinationCoordinates[0] + '" ><h3>Y aller</h3></a>');
         })
     },
 }
