@@ -7,12 +7,18 @@
     </button>
 
         {# Title section #}
-
         <section class="title">
         {#redirect to eventlist not dashboard #}  
             <h1 class="text-uppercase fw-bold">{{event.title}}</h1>
-            <h3 id="by-pseudo"class="fw-bold color-three mb-5">by {{event.user.pseudo}}</h3>
-            
+            <p class="event-details-date fs-4">
+            {% if event.date %}
+            {# we have create a condition for display the Date of the event if it's defined, else show "ND" for "non définie"#}
+            le {{ event.date ? event.date|date('d-M-Y') : 'NC' }} 
+            {% else %}
+            Date non communiquée
+            {% endif %}
+            </p>
+            <h3 id="by-pseudo"class="fw-bold color-three mb-5">par {{event.user.pseudo}}</h3>          
         </section>
     <div class="event-details-content">
         {# Description section #}
@@ -37,12 +43,12 @@
 
         </section>
 
+                {# If a survey exists for this event, display the survey #}
+                {% if event.survey and event.survey.status == true %}
         {# Survey section #}            
         <section class="survey">
             <div class="mx-auto">
               
-                {# If a survey exists for this event, display the survey #}
-                {% if event.survey and event.survey.status == true %}
                 <h2>Sondage</h2>
                 <div class="survey-list">
 
@@ -79,17 +85,10 @@
                                     {% endfor %}
                                 {% endfor %}
                                 >
-                            </form> 
-
-                {% else %}
-                <p class="event-details-date fs-4">Date :
-                {# we have create a condition for display the Date of the event if it's defined, else show "ND" for "non définie"#}
-                {{ event.date ? event.date|date('d-m-Y') : 'NC' }}
-                </p>                
-                {% endif %}    
-                </div>
+                            </form>    
             </div>
         </section> 
+                {% endif %}    
 
         {# Need section #}
         <section class="need-section">
@@ -98,6 +97,7 @@
                 <button type="button" class="btn btn-lg button-needs" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Liste des besoins
                 </button>
+                            {# {{dump(event.user, app.user)}} #}
 
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -140,7 +140,9 @@
                         <div class="modal-footer">
                             <p class="text-center color-five"
                             {% for participation in app.user.participation %}
-                                {% if participation.event == event and participation.status == true %}
+                                {% if (participation.event == event and (participation.status == true)) %}
+                                    hidden
+                                    {% elseif ( event.user == app.user) %}
                                     hidden
                                 {% endif %}
                             {% endfor %}
