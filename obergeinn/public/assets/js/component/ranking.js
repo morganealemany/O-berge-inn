@@ -13,7 +13,6 @@
                 ranking.sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
             });
         });
-        // ranking.sortTableByColumn(document.querySelector(".table-sortable"), 1, false);
     },
     
     /**
@@ -42,8 +41,7 @@
                 const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
 
                 return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
-            }
-                
+            }    
         });
         
         // Remove all existing TRs from the table

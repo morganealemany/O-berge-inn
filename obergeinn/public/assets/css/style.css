@@ -61,6 +61,9 @@ nav{
     position: sticky;
     top: 0px;
 }
+.header-user-icon {
+    width: 5rem;
+}
 .container-nav{
     position: absolute;
     width: 100%;
@@ -140,7 +143,6 @@ nav a{
 }
 @media screen and (min-width: 600px){
     nav {
-        /* border-top: 3px solid var(--color-one); */
         border-bottom: 3px solid var(--color-one);
     }
     footer > div {
@@ -221,10 +223,6 @@ nav a{
         width: 150%;
         background: no-repeat center/500px url(../images/logo1.png);
     }
-}
-
-.header-user-icon {
-    width: 5rem;
 }
 
 /* ============================= Home ================================ */
@@ -586,10 +584,7 @@ footer > div > a {
 }
 
 /* ========================== Event details ========================== */
-.event-details-content {
-    display: flex;
-    flex-direction: column;
-}
+
 /* Title section */
 .title {
     font-family: 'Raleway', sans-serif;
@@ -623,7 +618,6 @@ footer > div > a {
     padding: 10px 0 15px 0;
 }
 .description p {
-    /* background-color: white; */
     color: var(--color-one);
     padding: 0 10px 0 10px;
 }
@@ -680,7 +674,6 @@ footer > div > a {
     border-color: var(--color-four);
 }
 .event-details-date {
-    background-color: var(--color-one);
     color: var(--color-four);
     margin: 0;
     padding: 10px;
@@ -789,6 +782,7 @@ footer > div > a {
 
 @media screen and (min-width: 600px) {
     .event-details-content {
+        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
@@ -799,19 +793,17 @@ footer > div > a {
     }
     .description {
         order: 1;
-        max-width: 400px;
+        width: 400px;
         height: 444px;
-        /* margin-bottom: 0; */
     }
     .adress {
         order: 2;
-        max-width: 400px;
+        width: 400px;
     }
     .guest {
         order: 3;
+        min-width: 400px;
         max-width: 450px;
-        margin-top: 0;
-        justify-content: flex-start;
     }
     .guest > div {
         height: 444px;
@@ -827,6 +819,22 @@ footer > div > a {
     }
     .participation {
         order: 6;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .guest {
+        margin-top: 0;
+        justify-content: normal;
+    }
+    .guest div {
+        width: 300px;
+    }
+    .description {
+        min-width: 300px;
+    }
+    .adress {
+        min-width: 300px;
+        margin-left: 1.5em;
     }
 }
 /* =========================== Event edition =========================== */
